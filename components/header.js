@@ -3,13 +3,15 @@ import Link from 'next/link'
 import Image from 'next/image'
 import Container from './container'
 import ThemeSwitch from "./themeSwitch";
+import Logo from "@/public/logo.svg";
 
 export default function Header() {
   return (
-    <header class="sticky top-0 z-40 w-full backdrop-blur flex-none transition-colors duration-500 lg:z-50 lg:border-b lg:border-slate-900/10 dark:border-slate-50/[0.06] bg-white/95 supports-backdrop-blur:bg-white/60 dark:bg-transparent">
+    <header className="w-full transition-colors duration-500">
       <Container className="flex justify-between py-5" as="nav">
         <Link href="/">
-          <Image src={VercelLogo} alt="Family Guy" />
+          <Image className="hidden dark:invert dark:block" src={Logo} alt="TOD.GG"/>
+          <Image className="dark:invert-0 dark:hidden" src={Logo} alt="TOD.GG"/>
         </Link>
         <ThemeSwitch />
       </Container>
