@@ -1,30 +1,17 @@
 import VercelLogo from "@/public/vercel.svg";
-
-/**
-Renders a navigation component with a sticky header, containing a logo and a link to take a quiz.
-@component
-@returns {JSX.Element} The rendered navigation component.
-*/
-
 import Link from 'next/link'
 import Image from 'next/image'
 import Container from './container'
+import ThemeSwitch from "./themeSwitch";
 
 export default function Header() {
   return (
-    <header>
+    <header class="sticky top-0 z-40 w-full backdrop-blur flex-none transition-colors duration-500 lg:z-50 lg:border-b lg:border-slate-900/10 dark:border-slate-50/[0.06] bg-white/95 supports-backdrop-blur:bg-white/60 dark:bg-transparent">
       <Container className="flex justify-between py-5" as="nav">
         <Link href="/">
-          <Image src={VercelLogo} alt="Family Guy" width={70} height={50} />
+          <Image src={VercelLogo} alt="Family Guy" />
         </Link>
-        <Link
-          href="/quiz"
-          className="flex items-center justify-center gap-1 px-5 font-semibold text-black transition-colors bg-green-500 rounded-md duration-600 hover:bg-green-600"
-        >
-          <div className="text-lg">
-            Take a Quiz
-          </div>
-        </Link>
+        <ThemeSwitch />
       </Container>
     </header>
   )
