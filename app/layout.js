@@ -2,6 +2,7 @@ import Header from '@/components/header'
 import Footer from '@/components/footer'
 import './globals.css'
 import Providers from './providers'
+import Container from '@/components/container'
 
 export const metadata = {
   title: 'TOD.GG',
@@ -14,9 +15,9 @@ export default function RootLayout({ children }) {
       <body>
         <Providers>
           <Header />
-          <main>
-            {children}
-          </main>
+
+          <Container large>{children}</Container>
+
           <Footer />
         </Providers>
       </body>

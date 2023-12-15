@@ -1,6 +1,5 @@
 import Container from "@/components/container";
 import Image from "next/image";
-import { myLoader } from "@/utils/all";
 import VercelLogo from "@/public/vercel.svg";
 
 export default function Footer(props) {
