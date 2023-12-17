@@ -16,8 +16,6 @@ export default function Header() {
         <SearchCharcter />
         <ThemeSwitch />
       </Container>
-      <Container className="flex justify-between py-5">
-      </Container>
     </header >
   )
 }
