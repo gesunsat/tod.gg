@@ -6,7 +6,7 @@ import MoonIcon from "@/public/moon.svg";
 import SunIcon from "@/public/sun.svg";
 import { useEffect, useState } from "react";
 
-export default function ThemeSwitch() {
+export default function ThemeSwitch({ className, ...props }) {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false)
 
@@ -18,20 +18,20 @@ export default function ThemeSwitch() {
   if (!mounted) return null;
 
   return (
-    <div>
+    <div className={className}>
       <Image
-        className="hidden dark:invert dark:block"
+        className="shakeAnime cursor-pointer hidden dark:invert dark:block"
         src={MoonIcon}
         alt="테마 변경"
         onClick={() => setTheme("light")}
-        width={40}
+        width={props.height}
       />
       <Image
-        className="invert-0 dark:hidden"
+        className="shakeAnime cursor-pointer invert-0 dark:hidden"
         src={SunIcon}
         alt="테마 변경"
         onClick={() => setTheme("dark")}
-        width={40}
+        width={props.height}
       />
     </div>
   );
