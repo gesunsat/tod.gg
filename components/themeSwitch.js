@@ -24,14 +24,14 @@ export default function ThemeSwitch() {
         src={MoonIcon}
         alt="테마 변경"
         onClick={() => setTheme("light")}
-        width={50}
+        width={40}
       />
       <Image
         className="invert-0 dark:hidden"
         src={SunIcon}
         alt="테마 변경"
         onClick={() => setTheme("dark")}
-        width={50}
+        width={40}
       />
     </div>
   );
