@@ -13,8 +13,8 @@ export default function Footer(props) {
         </div>
         <div className="text-center text-sm">
           <ul className="flex mx-auto justify-center">
-            <li><Link href={"#"}>개인정보처리방침</Link></li>
-            <li><Link href={"#"}>문의</Link></li>
+            <li><Link href={"policy"}>개인정보처리방침</Link></li>
+            <li><Link href={"contact"}>문의</Link></li>
           </ul>
         </div>
       </Container>
