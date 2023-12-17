@@ -12,7 +12,6 @@ export const metadata = {
   description: '메이플 캐릭터 조회',
 }
 
-//TODO: 다크 모드 씨발것 오류 없애기
 export default function RootLayout({ children }) {
   return (
     <html lang="kr">
