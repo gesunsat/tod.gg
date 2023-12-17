@@ -9,7 +9,7 @@ export default function Footer(props) {
           This site is not associated with Nexon Korea & Nexon.
         </div>
         <div className="text-center text-sm">
-          Copyright © {new Date().getFullYear()} {props?.copyright}. All rights reserved.
+          Copyright © 2023-{new Date().getFullYear()} GE. All rights reserved.
         </div>
         <div className="text-center text-sm">
           <ul className="flex mx-auto justify-center">
