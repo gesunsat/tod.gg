@@ -4,8 +4,8 @@ import Link from "next/link";
 export default function Footer(props) {
   return (
     <footer>
-      <Container className="mt-10 border-t border-gray-100 dark:border-gray-800">
-        <div className="text-center text-sm">
+      <Container className="mt-10 border-t border-gray-100 dark:border-gray-700">
+        <div className="mt-2 text-center text-sm">
           This site is not associated with Nexon Korea & Nexon.
         </div>
         <div className="text-center text-sm">
