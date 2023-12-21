@@ -1,5 +1,7 @@
 import Container from "@/components/container";
 import Link from "next/link";
+import Style from "./footer.module.css";
+import { cx } from "@/utils/all";
 
 export default function Footer(props) {
   return (
@@ -13,8 +15,8 @@ export default function Footer(props) {
         </div>
         <div className="text-center text-sm">
           <ul className="flex mx-auto justify-center">
-            <li><Link href={"policy"}>개인정보처리방침</Link></li>
-            <li><Link href={"contact"}>문의</Link></li>
+            <li className={cx("flex justify-center items-center", Style.itemSeparator)}><Link href={"policy"}>개인정보처리방침</Link></li>
+            <li className={cx("flex justify-center items-center", Style.itemSeparator)}><Link href={"contact"}>문의</Link></li>
           </ul>
         </div>
       </Container>
