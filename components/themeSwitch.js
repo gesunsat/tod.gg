@@ -6,7 +6,7 @@ import MoonIcon from "@/public/moon.svg";
 import SunIcon from "@/public/sun.svg";
 import { useEffect, useState } from "react";
 import Style from './themeSwitch.module.css';
-import { cx } from "@/utils/all";
+import { cn } from "@/lib/utils"
 
 export default function ThemeSwitch({ className, ...props }) {
   const { theme, setTheme } = useTheme();
@@ -17,20 +17,18 @@ export default function ThemeSwitch({ className, ...props }) {
   useEffect(() => {
     setMounted(true)
   }, [])
-  if (!mounted) return null;
 
+  if (!mounted) return null;
   return (
     <div className={className}>
-      <Image
-        className={cx("shakeAnime cursor-pointer hidden dark:invert dark:block", Style.shakeAnime)}
-        src={MoonIcon}
+      <MoonIcon
+        className={cn("shakeAnime cursor-pointer fill-dark hidden dark:block", Style.shakeAnime)}
         alt="테마 변경"
         onClick={() => setTheme("light")}
         width={props.height}
       />
-      <Image
-        className={cx("shakeAnime cursor-pointer invert-0 dark:hidden", Style.shakeAnime)}
-        src={SunIcon}
+      <SunIcon
+        className={cn("shakeAnime cursor-pointer fill-dark block dark:hidden", Style.shakeAnime)}
         alt="테마 변경"
         onClick={() => setTheme("dark")}
         width={props.height}
