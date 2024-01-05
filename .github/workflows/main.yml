@@ -30,6 +30,6 @@ jobs:
       
     - name: Build, tag, and push image to Amazon ECR
       run: |
-        push command 1.
-        push command 2.
-        push command 3.
+        docker build -t todfront .
+        docker tag todfront:latest 809044699895.dkr.ecr.ap-northeast-2.amazonaws.com/todfront:latest
+        docker push 809044699895.dkr.ecr.ap-northeast-2.amazonaws.com/todfront:latest
