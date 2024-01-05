@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import MagnifyingGlassIcon from "@/public/magnifyingGlass.svg";
-import Image from "next/image";
 import InputGroup from "../ui/inputGroup";
 
 export default function SearchCharcter() {
@@ -13,7 +12,7 @@ export default function SearchCharcter() {
   const handleSubmit = e => {
     e.preventDefault()
     if (value === "") return;
-    router.push(`/character/${value}`)
+    router.push(`/char/${value}`)
     setValue("");
   }
 
