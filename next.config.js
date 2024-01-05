@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+	output: "standalone",
 	webpack: (config) => {
 		config.module.rules.push({
 			test: /\.svg$/,
@@ -11,9 +12,9 @@ const nextConfig = {
 	images: {
 		remotePatterns: [
 			{
-				protocol: 'https',
-				hostname: 'open.api.nexon.com',
-				pathname: '**',
+				protocol: "https",
+				hostname: "open.api.nexon.com",
+				pathname: "**",
 			},
 		],
 	},
