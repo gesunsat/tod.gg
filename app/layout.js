@@ -4,12 +4,22 @@ import './globals.css'
 import Providers from './providers'
 import { Noto_Sans_KR } from 'next/font/google';
 import { cn } from "@/lib/utils"
+import LogoWithBackgroundIcon from "@/public/logoWithBackground.svg";
 
 const interNotoSansKR = Noto_Sans_KR({ subsets: ["latin"] });
 
 export const metadata = {
   title: 'TOD.GG',
-  description: '메이플 캐릭터 조회',
+  description: '메이플스토리 캐릭터 검색 서비스 TOD.GG!',
+  keywords: ['넥슨', '메이플', '스토리', '캐릭터', '조회', '검색', '본캐', '부캐', '유니온'],
+  metadataBase: new URL('https://tod.gg'),
+  openGraph: {
+    siteName: 'TOD.GG',
+    images: LogoWithBackgroundIcon,
+    url: 'https://tod.gg',
+    title: 'TOD.GG',
+    description: '메이플스토리 캐릭터 검색 서비스 TOD.GG!',
+  },
 }
 
 export default function RootLayout({ children }) {

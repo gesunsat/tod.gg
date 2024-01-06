@@ -3,7 +3,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 const notice = [
   {
     title: "2023.01.01",
-    content: ["첫 오픈"],
+    content: ["첫 오픈 할려했던것"],
   }
 ]
 
