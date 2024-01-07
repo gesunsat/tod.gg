@@ -8,6 +8,7 @@ import LogoWithBackgroundIcon from "@/public/logoWithBackground.svg";
 
 const interNotoSansKR = Noto_Sans_KR({ subsets: ["latin"] });
 
+//TODO: image 안나오는거 수정
 export const metadata = {
   title: 'TOD.GG',
   description: '메이플스토리 캐릭터 검색 서비스 TOD.GG!',

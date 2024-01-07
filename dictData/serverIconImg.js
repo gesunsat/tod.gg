@@ -22,6 +22,7 @@ export const serverIconImg = {
     "루나": LunaServerIcon,
     "노바": NovaServerIcon,
     "리부트": RebootServerIcon,
+    "리부트2": RebootServerIcon,
     "레드": RedServerIcon,
     "스카니아": ScaniaServerIcon,
     "유니온": UnionServerIcon,

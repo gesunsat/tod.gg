@@ -35,8 +35,14 @@ export const itemInfo = {
     "울프스 그린 펜던트": {
         starforceMax: 8
     },
+    "피콕스 레드 펜던트": {
+        starforceMax: 8
+    },
     "피콕스 그린 펜던트": {
         starforceMax: 8
+    },
+    "피콕스 퍼플 펜던트": {
+        starforceMax: 20
     },
     "베어스 퍼플 펜던트": {
         starforceMax: 20
@@ -45,9 +51,6 @@ export const itemInfo = {
         starforceMax: 20
     },
     "울프스 퍼플 펜던트": {
-        starforceMax: 20
-    },
-    "피콕스 퍼플 펜던트": {
         starforceMax: 20
     },
     "블랙 하트": {
@@ -66,6 +69,9 @@ export const itemInfo = {
         starforceMax: 15
     },
     "미카엘라의 새 안경": {
+        starforceMax: 5
+    },
+    "미카엘의 새 안경": {
         starforceMax: 5
     },
     "레드 워리어 마이스터 심볼": {
@@ -124,5 +130,11 @@ export const itemInfo = {
     },
     "페어리 하트": {
         starforceMax: 8
+    },
+    "티타늄 하트": {
+        starforceMax: 8
+    },
+    "마이스터 올마이티링": {
+        starforceMax: 5
     },
 };
