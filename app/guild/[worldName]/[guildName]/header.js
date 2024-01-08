@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 import BossKillingMachineIcon from "@/public/bossKillingMachine.png"
 import BigBlowIcon from "@/public/bigBlow.png"
 import DefenseJustNumberIcon from "@/public/defenseJustNumber.png"
@@ -11,6 +10,12 @@ export default async function GuildHeader(props) {
     const guildRankingFlag = props.guildRankingFlag;
     const guildRankingSuro = props.guildRankingSuro;
 
+    const noblesseSkill = guildBasic?.guild_noblesse_skill;
+    guildBasic.guild_noblesse_skill = {};
+    noblesseSkill.map((skill, index) => {
+        guildBasic.guild_noblesse_skill[skill.skill_name] = skill;
+    })
+
     return (
         <>
             <div className="rounded-lg border bg-card text-card-foreground shadow-sm">
@@ -21,32 +26,48 @@ export default async function GuildHeader(props) {
                             <div className="flex justify-center gap-1">
                                 {
                                     (guildBasic.guild_mark || guildBasic.guild_mark_custom) &&
-                                    <Image width={50} height={50} className="my-auto mr-1" alt="길드 이미지" src={guildBasic.guild_mark || `data:image/jpeg;base64,${guildBasic.guild_mark_custom}`}></Image>
+                                    <Image width={50} height={50} className="my-auto mr-1" alt="길드 이미지" src={guildBasic.guild_mark || `data:image/png;base64,${guildBasic.guild_mark_custom}`}></Image>
                                 }
                                 <div className="text-5xl">{guildBasic.guild_name}</div>
                             </div>
                             <div className="flex justify-center mt-5 gap-5">
-                                <span>수로 : {guildRankingSuro?.ranking?.[0]?.ranking} 위</span>
+                                <span>수로 : {guildRankingSuro?.ranking?.[0]?.ranking || "-"} 위</span>
                                 <span> | </span>
-                                <span>플래그 : {guildRankingFlag?.ranking?.[0]?.ranking} 위</span>
+                                <span>플래그 : {guildRankingFlag?.ranking?.[0]?.ranking || "-"} 위</span>
                             </div>
 
                             <div className="flex justify-center mt-10 gap-3">
                                 <div className="flex flex-col">
                                     <Image width={54} height={54} src={BossKillingMachineIcon} alt="보스 킬링 머신" />
-                                    <div>{guildBasic.guild_noblesse_skill.map((skill) => skill.skill_name == "보스 킬링 머신" ? skill.skill_level : "")}</div>
+                                    <div>
+                                        {
+                                            guildBasic.guild_noblesse_skill["보스 킬링 머신"]?.skill_level || "0"
+                                        }
+                                    </div>
                                 </div>
                                 <div className="flex flex-col">
                                     <Image width={54} height={54} src={DefenseJustNumberIcon} alt="방어력은 숫자일 뿐" />
-                                    <div>{guildBasic.guild_noblesse_skill.map((skill) => skill.skill_name == "방어력은 숫자일 뿐" ? skill.skill_level : "")}</div>
+                                    <div>
+                                        {
+                                            guildBasic.guild_noblesse_skill["방어력은 숫자일 뿐"]?.skill_level || "0"
+                                        }
+                                    </div>
                                 </div>
                                 <div className="flex flex-col">
                                     <Image width={54} height={54} src={NameOfTheGuildIcon} alt="길드의 이름으로" />
-                                    <div>{guildBasic.guild_noblesse_skill.map((skill) => skill.skill_name == "길드의 이름으로" ? skill.skill_level : "")}</div>
+                                    <div>
+                                        {
+                                            guildBasic.guild_noblesse_skill["길드의 이름으로"]?.skill_level || "0"
+                                        }
+                                    </div>
                                 </div>
                                 <div className="flex flex-col">
                                     <Image width={54} height={54} src={BigBlowIcon} alt="크게 한방" />
-                                    <div>{guildBasic.guild_noblesse_skill.map((skill) => skill.skill_name == "크게 한방" ? skill.skill_level : "")}</div>
+                                    <div>
+                                        {
+                                            guildBasic.guild_noblesse_skill["크게 한방"]?.skill_level || "0"
+                                        }
+                                    </div>
                                 </div>
                             </div>
 

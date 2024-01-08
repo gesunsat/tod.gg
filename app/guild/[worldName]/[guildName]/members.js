@@ -18,11 +18,13 @@ export default async function GuildMembers(props) {
                     {
                         guildBasic?.guild_member.map((member, memberIndex) => {
                             return (
-                                <Link key={memberIndex} href={`/char/${member}`}>
-                                    <div className="col-span-4 lg:col-span-1 bg-muted bg-opacity-20 flex justify-center py-5 relative rounded">
-                                        {member}(링크)
-                                    </div>
-                                </Link>
+                                <div key={memberIndex} className="col-span-4 lg:col-span-1">
+                                    <Link href={`/char/${member}`}>
+                                        <div className="bg-muted bg-opacity-20 flex justify-center py-5 relative rounded">
+                                            {member}(링크)
+                                        </div>
+                                    </Link>
+                                </div>
                             )
                         })
                     }

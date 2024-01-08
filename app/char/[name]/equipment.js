@@ -36,34 +36,24 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 const interVT323 = VT323({ subsets: ["latin"], weight: ["400"] });
 
-export default function StatAndEquipment(props) {
-    // const [user, setUser] = useState(null);
-    // setUser(props.character);
-    const user = props.character;
-    const [loading, setLoading] = useState(false);
-    console.log(user);
-
+export default function Equipment(props) {
+    const [user, setUser] = useState(null);
     useEffect(() => {
         if (localStorage.getItem("itemMorooShapeView")) setItemMorooShapeView(JSON.parse(localStorage.getItem("itemMorooShapeView")));
+
+        setUser(props.character);
+        console.log(user)
     }, []);
-
-    const isSameDate = (date1, date2) => {
-        return date1.getFullYear() === date2.getFullYear()
-            && date1.getMonth() === date2.getMonth()
-            && date1.getDate() === date2.getDate();
-    }
-
 
     const [itemImageSrcs, setItemImageSrcs] = useState({});
     const [itemEquipments, setItemEquipments] = useState({});
     const [itemMorooShapeView, setItemMorooShapeView] = useState(false);
     const [currentViewingItemEquipmentTab, setCurrentViewingItemEquipmentTab] = useState("item_equipment");
     useEffect(() => {
-        localStorage.setItem("itemMorooShapeView", itemMorooShapeView);
-    }, [itemMorooShapeView]);
-    useEffect(() => {
         if (!user) return;
-        if (!user.characterItemEquipment) return;
+        if (!user?.characterItemEquipment) return;
+
+        localStorage.setItem("itemMorooShapeView", itemMorooShapeView);
 
         let itemImageSrcs = {};
         let itemEquipments = {};
@@ -99,9 +89,9 @@ export default function StatAndEquipment(props) {
     const [additionalCashitemTabViewing, setAdditionalCashitemTabViewing] = useState(false);
     useEffect(() => {
         if (!user) return;
-        if (!user.characterCashitemEquipment) return;
+        if (!user?.characterCashitemEquipment) return;
 
-        const currentPresetNo = currentCashitemPresetNo || user.characterCashitemEquipment.preset_no;
+        const currentPresetNo = currentCashitemPresetNo || user?.characterCashitemEquipment.preset_no;
 
         let cashitemImageSrcs = {};
         let cashitemEquipments = {};
@@ -122,7 +112,7 @@ export default function StatAndEquipment(props) {
             cashitemEquipments[slot] = cashitem;
         });
         if (additionalCashitemTabViewing) {
-            user?.characterCashitemEquipment[`cash_item_equipment_preset_${user.characterCashitemEquipment.preset_no}`]?.map((cashitem) => {
+            user?.characterCashitemEquipment[`cash_item_equipment_preset_${user?.characterCashitemEquipment.preset_no}`]?.map((cashitem) => {
                 const slot = cashitem.cash_item_equipment_slot;
                 if (cashitemEquipments[slot]) return;
                 if (!["무기", "반지4", "반지3", "반지2", "반지1"].includes(slot)) return;
@@ -135,19 +125,19 @@ export default function StatAndEquipment(props) {
         cashitemImageSrcs["성형"] = FaceIcon;
         cashitemImageSrcs["피부"] = SkinIcon;
         cashitemEquipments["헤어"] = {
-            name: user.characterBeautyEquipment[`${additionalCashitemTabViewing ? "additional_" : ""}character_hair`]["hair_name"],
-            base_color: user.characterBeautyEquipment[`${additionalCashitemTabViewing ? "additional_" : ""}character_hair`]["base_color"],
-            mix_color: user.characterBeautyEquipment[`${additionalCashitemTabViewing ? "additional_" : ""}character_hair`]["mix_color"],
-            mix_rate: user.characterBeautyEquipment[`${additionalCashitemTabViewing ? "additional_" : ""}character_hair`]["mix_rate"],
+            name: user?.characterBeautyEquipment[`${additionalCashitemTabViewing ? "additional_" : ""}character_hair`]["hair_name"],
+            base_color: user?.characterBeautyEquipment[`${additionalCashitemTabViewing ? "additional_" : ""}character_hair`]["base_color"],
+            mix_color: user?.characterBeautyEquipment[`${additionalCashitemTabViewing ? "additional_" : ""}character_hair`]["mix_color"],
+            mix_rate: user?.characterBeautyEquipment[`${additionalCashitemTabViewing ? "additional_" : ""}character_hair`]["mix_rate"],
         }
         cashitemEquipments["성형"] = {
-            name: user.characterBeautyEquipment[`${additionalCashitemTabViewing ? "additional_" : ""}character_face`]["face_name"],
-            base_color: user.characterBeautyEquipment[`${additionalCashitemTabViewing ? "additional_" : ""}character_face`]["base_color"],
-            mix_color: user.characterBeautyEquipment[`${additionalCashitemTabViewing ? "additional_" : ""}character_face`]["mix_color"],
-            mix_rate: user.characterBeautyEquipment[`${additionalCashitemTabViewing ? "additional_" : ""}character_face`]["mix_rate"],
+            name: user?.characterBeautyEquipment[`${additionalCashitemTabViewing ? "additional_" : ""}character_face`]["face_name"],
+            base_color: user?.characterBeautyEquipment[`${additionalCashitemTabViewing ? "additional_" : ""}character_face`]["base_color"],
+            mix_color: user?.characterBeautyEquipment[`${additionalCashitemTabViewing ? "additional_" : ""}character_face`]["mix_color"],
+            mix_rate: user?.characterBeautyEquipment[`${additionalCashitemTabViewing ? "additional_" : ""}character_face`]["mix_rate"],
         }
         cashitemEquipments["피부"] = {
-            name: user.characterBeautyEquipment[`${additionalCashitemTabViewing ? "additional_" : ""}character_skin_name`],
+            name: user?.characterBeautyEquipment[`${additionalCashitemTabViewing ? "additional_" : ""}character_skin_name`],
         }
 
         // console.log("cashitem", cashitemImageSrcs);
@@ -161,7 +151,7 @@ export default function StatAndEquipment(props) {
     const [androidCashitemEquipments, setAndroidCashitemEquipments] = useState({});
     useEffect(() => {
         if (!user) return;
-        if (!user.characterAndroidEquipment) return;
+        if (!user?.characterAndroidEquipment) return;
 
         let androidCashitemImageSrcs = {};
         let androidCashitemEquipments = {};
@@ -174,19 +164,19 @@ export default function StatAndEquipment(props) {
         androidCashitemImageSrcs["성형"] = FaceIcon;
         androidCashitemImageSrcs["피부"] = SkinIcon;
         androidCashitemEquipments["헤어"] = {
-            name: user.characterAndroidEquipment[`android_hair`][`hair_name`],
-            base_color: user.characterAndroidEquipment[`android_hair`][`base_color`],
-            mix_color: user.characterAndroidEquipment[`android_hair`][`mix_color`],
-            mix_rate: user.characterAndroidEquipment[`android_hair`][`mix_rate`],
+            name: user?.characterAndroidEquipment[`android_hair`][`hair_name`],
+            base_color: user?.characterAndroidEquipment[`android_hair`][`base_color`],
+            mix_color: user?.characterAndroidEquipment[`android_hair`][`mix_color`],
+            mix_rate: user?.characterAndroidEquipment[`android_hair`][`mix_rate`],
         }
         androidCashitemEquipments["성형"] = {
-            name: user.characterAndroidEquipment[`android_face`][`face_name`],
-            base_color: user.characterAndroidEquipment[`android_face`][`base_color`],
-            mix_color: user.characterAndroidEquipment[`android_face`][`mix_color`],
-            mix_rate: user.characterAndroidEquipment[`android_face`][`mix_rate`],
+            name: user?.characterAndroidEquipment[`android_face`][`face_name`],
+            base_color: user?.characterAndroidEquipment[`android_face`][`base_color`],
+            mix_color: user?.characterAndroidEquipment[`android_face`][`mix_color`],
+            mix_rate: user?.characterAndroidEquipment[`android_face`][`mix_rate`],
         }
         androidCashitemEquipments["피부"] = {
-            name: user.characterAndroidEquipment[`android_skin_name`],
+            name: user?.characterAndroidEquipment[`android_skin_name`],
         }
 
         // console.log("cashitem", androidCashitemImageSrcs);
@@ -200,7 +190,7 @@ export default function StatAndEquipment(props) {
     const [arcaneSymbolEquipments, setArcaneSymbolEquipments] = useState({});
     useEffect(() => {
         if (!user) return;
-        if (!user.characterSymbolEquipment) return;
+        if (!user?.characterSymbolEquipment) return;
 
         let arcaneSymbolImageSrcs = {};
         let arcaneSymbolEquipments = {};
@@ -222,7 +212,7 @@ export default function StatAndEquipment(props) {
     const [authenticSymbolEquipments, setAuthenticSymbolEquipments] = useState({});
     useEffect(() => {
         if (!user) return;
-        if (!user.characterSymbolEquipment) return;
+        if (!user?.characterSymbolEquipment) return;
 
         let authenticSymbolImageSrcs = {};
         let authenticSymbolEquipments = {};
@@ -238,22 +228,6 @@ export default function StatAndEquipment(props) {
 
         setAuthenticSymbolImageSrcs(authenticSymbolImageSrcs);
         setAuthenticSymbolEquipments(authenticSymbolEquipments);
-    }, [user]);
-
-    const [characterStat, setCharacterStat] = useState({});
-    useEffect(() => {
-        if (!user) return;
-        if (!user.characterStat) return;
-
-        let characterStat = {};
-
-        user?.characterStat.final_stat?.map((stat) => {
-            characterStat[stat.stat_name] = stat.stat_value;
-        });
-
-        // console.log("characterStat", characterStat);
-
-        setCharacterStat(characterStat);
     }, [user]);
 
     const itemEquipmentSlotArrangement = [
@@ -308,12 +282,9 @@ export default function StatAndEquipment(props) {
     }
 
     const [openHoverCard, setOpenHoverCard] = useState({});
-    const openHoverCardHandleClick = (slot, setOpen) => {
-        setOpenHoverCard({ [slot]: setOpen });
-    };
 
     return (
-        <div className="grid grid-cols-3 gap-2">
+        <>
             <div className="col-span-3 lg:col-span-1">
                 <Tabs defaultValue="itemEquipment" activationMode="manual" className="w-full">
                     <TabsList className="justify-start w-full overflow-x-scroll hidden-scroll grid grid-cols-5">
@@ -323,7 +294,7 @@ export default function StatAndEquipment(props) {
                         <TabsTrigger value="androidEquipment">안드</TabsTrigger>
                         <TabsTrigger
                             value="symbolEquipment"
-                            disabled={user.characterSymbolEquipment.date ? false : true}
+                            disabled={user?.characterSymbolEquipment?.date ? false : true}
                         >
                             심볼
                         </TabsTrigger>
@@ -331,7 +302,7 @@ export default function StatAndEquipment(props) {
 
                     <TabsContent value="itemEquipment">
                         {
-                            (user.characterItemEquipment?.dragon_equipment.length >= 1 || user.characterItemEquipment?.mechanic_equipment.length >= 1) &&
+                            (user?.characterItemEquipment?.dragon_equipment.length >= 1 || user?.characterItemEquipment?.mechanic_equipment.length >= 1) &&
                             <>
                                 <Tabs defaultValue={currentViewingItemEquipmentTab} activationMode="manual" className="w-full" onValueChange={(value) => setCurrentViewingItemEquipmentTab(value)}>
                                     <TabsList className="justify-start w-full overflow-x-scroll hidden-scroll grid grid-cols-2">
@@ -340,12 +311,12 @@ export default function StatAndEquipment(props) {
                                         </TabsTrigger>
                                         <TabsTrigger
                                             value={
-                                                user.characterBasic.character_class == "메카닉" && "mechanic_equipment" ||
-                                                user.characterBasic.character_class == "에반" && "dragon_equipment"
+                                                user?.characterBasic.character_class == "메카닉" && "mechanic_equipment" ||
+                                                user?.characterBasic.character_class == "에반" && "dragon_equipment"
                                             }
                                         >
-                                            {user.characterBasic.character_class == "메카닉" && "메카닉"}
-                                            {user.characterBasic.character_class == "에반" && "드래곤"}
+                                            {user?.characterBasic.character_class == "메카닉" && "메카닉"}
+                                            {user?.characterBasic.character_class == "에반" && "드래곤"}
                                         </TabsTrigger>
                                     </TabsList>
                                 </Tabs>
@@ -539,56 +510,56 @@ export default function StatAndEquipment(props) {
                                                                     </div>
                                                                     <div className="border-dotted border-b-[1px] border-gray-600 w-full mt-2"></div>
                                                                     {
-                                                                        (user.characterAndroidEquipment && slot == "안드로이드") &&
+                                                                        (user?.characterAndroidEquipment && slot == "안드로이드") &&
                                                                         <>
                                                                             <div className="px-2 mt-2 text-sm">
                                                                                 <div className="mb-2">
                                                                                     <span>별명 :</span>
-                                                                                    <span> {user.characterAndroidEquipment.android_nickname}</span>
+                                                                                    <span> {user?.characterAndroidEquipment.android_nickname}</span>
                                                                                 </div>
                                                                                 {
-                                                                                    user.characterAndroidEquipment.android_skin_name &&
+                                                                                    user?.characterAndroidEquipment.android_skin_name &&
                                                                                     <>
                                                                                         <div>
                                                                                             {
-                                                                                                user.characterAndroidEquipment.android_hair?.mix_color ?
-                                                                                                    <span>믹스 {user.characterAndroidEquipment.android_hair?.hair_name.replace(user.characterAndroidEquipment.android_hair?.base_color, "")}</span> :
-                                                                                                    <span> {(user.characterAndroidEquipment.android_hair?.hair_name).includes(user.characterAndroidEquipment.android_hair?.base_color) ? user.characterAndroidEquipment.android_hair?.hair_name : user.characterAndroidEquipment.android_hair?.base_color + user.characterAndroidEquipment.android_hair?.hair_name}</span>
+                                                                                                user?.characterAndroidEquipment.android_hair?.mix_color ?
+                                                                                                    <span>믹스 {user?.characterAndroidEquipment.android_hair?.hair_name.replace(user?.characterAndroidEquipment.android_hair?.base_color, "")}</span> :
+                                                                                                    <span> {(user?.characterAndroidEquipment.android_hair?.hair_name).includes(user?.characterAndroidEquipment.android_hair?.base_color) ? user?.characterAndroidEquipment.android_hair?.hair_name : user?.characterAndroidEquipment.android_hair?.base_color + user?.characterAndroidEquipment.android_hair?.hair_name}</span>
                                                                                             }
                                                                                             {
-                                                                                                user.characterAndroidEquipment.android_hair?.mix_color &&
+                                                                                                user?.characterAndroidEquipment.android_hair?.mix_color &&
                                                                                                 <>
                                                                                                     <span> ( </span>
-                                                                                                    <span>{user.characterAndroidEquipment.android_hair?.base_color}</span>
-                                                                                                    <span> {100 - user.characterAndroidEquipment.android_hair?.mix_rate}</span>
+                                                                                                    <span>{user?.characterAndroidEquipment.android_hair?.base_color}</span>
+                                                                                                    <span> {100 - user?.characterAndroidEquipment.android_hair?.mix_rate}</span>
                                                                                                     <span> : </span>
-                                                                                                    <span>{user.characterAndroidEquipment.android_hair?.mix_color}</span>
-                                                                                                    <span> {user.characterAndroidEquipment.android_hair?.mix_rate}</span>
+                                                                                                    <span>{user?.characterAndroidEquipment.android_hair?.mix_color}</span>
+                                                                                                    <span> {user?.characterAndroidEquipment.android_hair?.mix_rate}</span>
                                                                                                     <span> )</span>
                                                                                                 </>
                                                                                             }
                                                                                         </div>
                                                                                         <div>
                                                                                             {
-                                                                                                user.characterAndroidEquipment.android_face?.mix_color ?
-                                                                                                    <span>믹스 {user.characterAndroidEquipment.android_face?.face_name.replace(user.characterAndroidEquipment.android_face?.base_color, "")}</span> :
-                                                                                                    <span> {(user.characterAndroidEquipment.android_face?.face_name).includes(user.characterAndroidEquipment.android_face?.base_color) ? user.characterAndroidEquipment.android_face?.face_name : user.characterAndroidEquipment.android_face?.base_color + " " + user.characterAndroidEquipment.android_face?.face_name}</span>
+                                                                                                user?.characterAndroidEquipment.android_face?.mix_color ?
+                                                                                                    <span>믹스 {user?.characterAndroidEquipment.android_face?.face_name.replace(user?.characterAndroidEquipment.android_face?.base_color, "")}</span> :
+                                                                                                    <span> {(user?.characterAndroidEquipment.android_face?.face_name).includes(user?.characterAndroidEquipment.android_face?.base_color) ? user?.characterAndroidEquipment.android_face?.face_name : user?.characterAndroidEquipment.android_face?.base_color + " " + user?.characterAndroidEquipment.android_face?.face_name}</span>
                                                                                             }
                                                                                             {
-                                                                                                user.characterAndroidEquipment.android_face?.mix_color &&
+                                                                                                user?.characterAndroidEquipment.android_face?.mix_color &&
                                                                                                 <>
                                                                                                     <span> ( </span>
-                                                                                                    <span>{user.characterAndroidEquipment.android_face?.base_color}</span>
-                                                                                                    <span> {100 - user.characterAndroidEquipment.android_face?.mix_rate}</span>
+                                                                                                    <span>{user?.characterAndroidEquipment.android_face?.base_color}</span>
+                                                                                                    <span> {100 - user?.characterAndroidEquipment.android_face?.mix_rate}</span>
                                                                                                     <span> : </span>
-                                                                                                    <span>{user.characterAndroidEquipment.android_face?.mix_color}</span>
-                                                                                                    <span> {user.characterAndroidEquipment.android_face?.mix_rate}</span>
+                                                                                                    <span>{user?.characterAndroidEquipment.android_face?.mix_color}</span>
+                                                                                                    <span> {user?.characterAndroidEquipment.android_face?.mix_rate}</span>
                                                                                                     <span> )</span>
                                                                                                 </>
                                                                                             }
                                                                                         </div>
                                                                                         <div>
-                                                                                            <span> {user.characterAndroidEquipment.android_skin_name}</span>
+                                                                                            <span> {user?.characterAndroidEquipment.android_skin_name}</span>
                                                                                         </div>
                                                                                     </>
                                                                                 }
@@ -781,7 +752,6 @@ export default function StatAndEquipment(props) {
                                                                             </div>
                                                                         </>
                                                                     }
-                                                                    {/* TODO: 오전 1시 지나서 싹찍 캐릭터 모자 에디셔널 확인 */}
                                                                     {
                                                                         itemEquipments[slot].additional_potential_option_grade &&
                                                                         <>
@@ -959,7 +929,7 @@ export default function StatAndEquipment(props) {
                                 </div>
                                 <div className="items-center mt-2 py-2 bg-muted bg-opacity-20 justify-between flex flex-col flex-1 p-1 relative select-none rounded-md shadow-md">
                                     <div className="flex space-x-2">
-                                        <Checkbox id="terms" checked={itemMorooShapeView} onCheckedChange={setItemMorooShapeView} />
+                                        <Checkbox id="terms" aria-label="모루 외형 끄기 체크버튼" checked={itemMorooShapeView} onCheckedChange={setItemMorooShapeView} />
                                         <Label htmlFor="terms">모루 외형 끄기</Label>
                                     </div>
                                 </div>
@@ -1157,17 +1127,17 @@ export default function StatAndEquipment(props) {
 
                     <TabsContent value="cashitemEquipment">
                         {
-                            user.characterCashitemEquipment?.additional_cash_item_equipment_preset_1.length != 0 &&
+                            user?.characterCashitemEquipment?.additional_cash_item_equipment_preset_1.length != 0 &&
                             <>
                                 <Tabs defaultValue="normalCashitem" activationMode="manual" className="w-full" onValueChange={(value) => setAdditionalCashitemTabViewing(value == "additionalCashitem" ? true : false)}>
                                     <TabsList className="justify-start w-full overflow-x-scroll hidden-scroll grid grid-cols-2">
                                         <TabsTrigger value="normalCashitem">
-                                            {user.characterBasic.character_class == "제로" && "알파(남)"}
-                                            {user.characterBasic.character_class == "엔젤릭버스터" && "일반"}
+                                            {user?.characterBasic.character_class == "제로" && "알파(남)"}
+                                            {user?.characterBasic.character_class == "엔젤릭버스터" && "일반"}
                                         </TabsTrigger>
                                         <TabsTrigger value="additionalCashitem">
-                                            {user.characterBasic.character_class == "제로" && "베타(여)"}
-                                            {user.characterBasic.character_class == "엔젤릭버스터" && "드레스 업"}
+                                            {user?.characterBasic.character_class == "제로" && "베타(여)"}
+                                            {user?.characterBasic.character_class == "엔젤릭버스터" && "드레스 업"}
                                         </TabsTrigger>
                                     </TabsList>
                                 </Tabs>
@@ -1493,16 +1463,16 @@ export default function StatAndEquipment(props) {
                                 variant="outline"
                                 type="single"
                                 rovingFocus={false}
-                                defaultValue={currentCashitemPresetNo || user.characterCashitemEquipment?.preset_no || 1}
+                                defaultValue={currentCashitemPresetNo || user?.characterCashitemEquipment?.preset_no || 1}
                                 onValueChange={(value) => setCurrentCashitemPresetNo(value)}
                             >
                                 <ToggleGroupItem className="dark:data-[state=on]:bg-background data-[state=on]:pointer-events-none" value={1} aria-label="cashitemPreset1">
                                     <div className="h-auto w-4">1</div>
                                 </ToggleGroupItem>
-                                <ToggleGroupItem className="dark:data-[state=on]:bg-background data-[state=on]:pointer-events-none" value={2} aria-label="cashitemPreset2" disabled={user.characterCashitemEquipment?.cash_item_equipment_preset_2.length ? false : true}>
+                                <ToggleGroupItem className="dark:data-[state=on]:bg-background data-[state=on]:pointer-events-none" value={2} aria-label="cashitemPreset2" disabled={user?.characterCashitemEquipment?.cash_item_equipment_preset_2.length ? false : true}>
                                     <div className="h-auto w-4">2</div>
                                 </ToggleGroupItem>
-                                <ToggleGroupItem className="dark:data-[state=on]:bg-background data-[state=on]:pointer-events-none" value={3} aria-label="cashitemPreset3" disabled={user.characterCashitemEquipment?.cash_item_equipment_preset_3.length ? false : true}>
+                                <ToggleGroupItem className="dark:data-[state=on]:bg-background data-[state=on]:pointer-events-none" value={3} aria-label="cashitemPreset3" disabled={user?.characterCashitemEquipment?.cash_item_equipment_preset_3.length ? false : true}>
                                     <div className="h-auto w-4">3</div>
                                 </ToggleGroupItem>
                             </ToggleGroup>
@@ -1528,14 +1498,14 @@ export default function StatAndEquipment(props) {
                                         <div key={index} className="flex flex-row w-full pt-1 px-1">
                                             <div className="basis-1/2 relative items-center aspect-square m-[2.5px] bg-background rounded">
                                                 {
-                                                    user.characterPetEquipment[`pet_${index + 1}_name`] &&
+                                                    user?.characterPetEquipment[`pet_${index + 1}_name`] &&
                                                     <div className="absolute bottom-1 right-1 pointer-events-none z-10">
                                                         <Image
                                                             alt={"아이템 분류 아이콘"}
                                                             src={
-                                                                user.characterPetEquipment[`pet_${index + 1}_type`] == "루나 쁘띠" && LunaPetitIcon ||
-                                                                user.characterPetEquipment[`pet_${index + 1}_type`] == "루나 스윗" && LunaSweetIcon ||
-                                                                user.characterPetEquipment[`pet_${index + 1}_type`] == "루나 드림" && LunaDreamIcon ||
+                                                                user?.characterPetEquipment[`pet_${index + 1}_type`] == "루나 쁘띠" && LunaPetitIcon ||
+                                                                user?.characterPetEquipment[`pet_${index + 1}_type`] == "루나 스윗" && LunaSweetIcon ||
+                                                                user?.characterPetEquipment[`pet_${index + 1}_type`] == "루나 드림" && LunaDreamIcon ||
                                                                 CashitemCoinIcon
                                                             }
                                                             height={20}
@@ -1544,7 +1514,7 @@ export default function StatAndEquipment(props) {
                                                     </div>
                                                 }
                                                 {
-                                                    user.characterPetEquipment[`pet_${index + 1}_name`] &&
+                                                    user?.characterPetEquipment[`pet_${index + 1}_name`] &&
                                                     <>
                                                         <HoverCard
                                                             openDelay={0}
@@ -1559,7 +1529,7 @@ export default function StatAndEquipment(props) {
                                                                 <Image
                                                                     className="object-contain mx-auto transition-all scale-75 hover:scale-100"
                                                                     alt={"펫"}
-                                                                    src={user.characterPetEquipment[`pet_${index + 1}_icon`]}
+                                                                    src={user?.characterPetEquipment[`pet_${index + 1}_icon`]}
                                                                     fill
                                                                     sizes="50px"
                                                                 />
@@ -1572,28 +1542,28 @@ export default function StatAndEquipment(props) {
                                                             >
                                                                 <div className="gap-1 mx-auto flex flex-wrap justify-center font-semibold">
                                                                     {
-                                                                        user.characterPetEquipment[`pet_${index + 1}_nickname`] != user.characterPetEquipment[`pet_${index + 1}_name`] ?
+                                                                        user?.characterPetEquipment[`pet_${index + 1}_nickname`] != user?.characterPetEquipment[`pet_${index + 1}_name`] ?
                                                                             <>
-                                                                                <span>{user.characterPetEquipment[`pet_${index + 1}_nickname`]}</span>
-                                                                                <span>({user.characterPetEquipment[`pet_${index + 1}_name`]})</span>
+                                                                                <span>{user?.characterPetEquipment[`pet_${index + 1}_nickname`]}</span>
+                                                                                <span>({user?.characterPetEquipment[`pet_${index + 1}_name`]})</span>
                                                                             </> :
                                                                             <>
-                                                                                <span>{user.characterPetEquipment[`pet_${index + 1}_name`]}</span>
+                                                                                <span>{user?.characterPetEquipment[`pet_${index + 1}_name`]}</span>
                                                                             </>
                                                                     }
                                                                 </div>
                                                                 {
-                                                                    user.characterPetEquipment[`pet_${index + 1}_type`] &&
+                                                                    user?.characterPetEquipment[`pet_${index + 1}_type`] &&
                                                                     <>
                                                                         <div
                                                                             className={cn(
-                                                                                user.characterPetEquipment[`pet_${index + 1}_type`] == "루나 쁘띠" && "text-violet-400",
-                                                                                user.characterPetEquipment[`pet_${index + 1}_type`] == "루나 스윗" && "text-pink-400",
-                                                                                user.characterPetEquipment[`pet_${index + 1}_type`] == "루나 드림" && "text-cyan-400",
+                                                                                user?.characterPetEquipment[`pet_${index + 1}_type`] == "루나 쁘띠" && "text-violet-400",
+                                                                                user?.characterPetEquipment[`pet_${index + 1}_type`] == "루나 스윗" && "text-pink-400",
+                                                                                user?.characterPetEquipment[`pet_${index + 1}_type`] == "루나 드림" && "text-cyan-400",
                                                                                 "text-xs mx-auto flex flex-wrap justify-center"
                                                                             )}
                                                                         >
-                                                                            <span>{user.characterPetEquipment[`pet_${index + 1}_type`]}</span>
+                                                                            <span>{user?.characterPetEquipment[`pet_${index + 1}_type`]}</span>
                                                                         </div>
                                                                     </>
                                                                 }
@@ -1601,13 +1571,13 @@ export default function StatAndEquipment(props) {
                                                                     <span>교환 불가</span>
                                                                 </div>
                                                                 {
-                                                                    user.characterPetEquipment[`pet_${index + 1}_date_expire`] &&
+                                                                    user?.characterPetEquipment[`pet_${index + 1}_date_expire`] &&
                                                                     <div className="text-sm mx-auto flex justify-center">
                                                                         <span>마법의시간 :</span>
-                                                                        <span className="ml-1">{new Date(user.characterPetEquipment[`pet_${index + 1}_date_expire`]).getFullYear()}년</span>
-                                                                        <span className="ml-1">{String(new Date(user.characterPetEquipment[`pet_${index + 1}_date_expire`]).getMonth() + 1).padStart(2, "0")}월</span>
-                                                                        <span className="ml-1">{String(new Date(user.characterPetEquipment[`pet_${index + 1}_date_expire`]).getDate()).padStart(2, "0")}일 </span>
-                                                                        <span className="ml-1">{String(new Date(user.characterPetEquipment[`pet_${index + 1}_date_expire`]).getHours()).padStart(2, "0")}시 </span>
+                                                                        <span className="ml-1">{new Date(user?.characterPetEquipment[`pet_${index + 1}_date_expire`]).getFullYear()}년</span>
+                                                                        <span className="ml-1">{String(new Date(user?.characterPetEquipment[`pet_${index + 1}_date_expire`]).getMonth() + 1).padStart(2, "0")}월</span>
+                                                                        <span className="ml-1">{String(new Date(user?.characterPetEquipment[`pet_${index + 1}_date_expire`]).getDate()).padStart(2, "0")}일 </span>
+                                                                        <span className="ml-1">{String(new Date(user?.characterPetEquipment[`pet_${index + 1}_date_expire`]).getHours()).padStart(2, "0")}시 </span>
                                                                         <span>까지</span>
                                                                     </div>
                                                                 }
@@ -1615,18 +1585,18 @@ export default function StatAndEquipment(props) {
                                                                     <div className="w-auto">
                                                                         <div className="relative flex items-center w-[80px] h-[80px] rounded bg-gradient-to-b from-gray-500 to-neutral-300">
                                                                             {
-                                                                                user.characterPetEquipment[`pet_${index + 1}_icon`] &&
-                                                                                <Image alt="펫 아이콘" src={user.characterPetEquipment[`pet_${index + 1}_icon`]} className="object-contain scale-75 mx-auto" fill sizes="50px"></Image>
+                                                                                user?.characterPetEquipment[`pet_${index + 1}_icon`] &&
+                                                                                <Image alt="펫 아이콘" src={user?.characterPetEquipment[`pet_${index + 1}_icon`]} className="object-contain scale-75 mx-auto" fill sizes="50px"></Image>
                                                                             }
                                                                             {
-                                                                                user.characterPetEquipment[`pet_${index + 1}_icon`] &&
+                                                                                user?.characterPetEquipment[`pet_${index + 1}_icon`] &&
                                                                                 <div className="absolute bottom-1 right-1 pointer-events-none z-10">
                                                                                     <Image
                                                                                         alt={"아이템 분류 아이콘"}
                                                                                         src={
-                                                                                            user.characterPetEquipment[`pet_${index + 1}_type`] == "루나 쁘띠" && LunaPetitIcon ||
-                                                                                            user.characterPetEquipment[`pet_${index + 1}_type`] == "루나 스윗" && LunaSweetIcon ||
-                                                                                            user.characterPetEquipment[`pet_${index + 1}_type`] == "루나 드림" && LunaDreamIcon ||
+                                                                                            user?.characterPetEquipment[`pet_${index + 1}_type`] == "루나 쁘띠" && LunaPetitIcon ||
+                                                                                            user?.characterPetEquipment[`pet_${index + 1}_type`] == "루나 스윗" && LunaSweetIcon ||
+                                                                                            user?.characterPetEquipment[`pet_${index + 1}_type`] == "루나 드림" && LunaDreamIcon ||
                                                                                             CashitemCoinIcon
                                                                                         }
                                                                                         height={20}
@@ -1638,22 +1608,22 @@ export default function StatAndEquipment(props) {
                                                                     </div>
                                                                     <div>
                                                                         {
-                                                                            user.characterPetEquipment[`pet_${index + 1}_description`] &&
+                                                                            user?.characterPetEquipment[`pet_${index + 1}_description`] &&
                                                                             <div className="w-auto">
-                                                                                <span className="whitespace-pre-line">{(user.characterPetEquipment[`pet_${index + 1}_description`]).replace(/\\n/g, "</br>")}</span>
+                                                                                <span className="whitespace-pre-line">{(user?.characterPetEquipment[`pet_${index + 1}_description`]).replace(/\\n/g, "</br>")}</span>
                                                                             </div>
                                                                         }
                                                                         {
-                                                                            user.characterPetEquipment[`pet_${index + 1}_skill`].length != 0 &&
+                                                                            user?.characterPetEquipment[`pet_${index + 1}_skill`].length != 0 &&
                                                                             <>
                                                                                 <div className="text-orange-400">
                                                                                     <span>스킬 : </span>
                                                                                     {
-                                                                                        Object.keys(user.characterPetEquipment[`pet_${index + 1}_skill`]).map((key, skillIndex) => {
-                                                                                            if (!user.characterPetEquipment[`pet_${index + 1}_skill`][key]) return;
+                                                                                        Object.keys(user?.characterPetEquipment[`pet_${index + 1}_skill`]).map((key, skillIndex) => {
+                                                                                            if (!user?.characterPetEquipment[`pet_${index + 1}_skill`][key]) return;
 
                                                                                             return (
-                                                                                                <span className="after:content-[','] last-of-type:after:content-[''] mr-2 last-of-type:mr-0" key={skillIndex}>{user.characterPetEquipment[`pet_${index + 1}_skill`][key]}</span>
+                                                                                                <span className="after:content-[','] last-of-type:after:content-[''] mr-2 last-of-type:mr-0" key={skillIndex}>{user?.characterPetEquipment[`pet_${index + 1}_skill`][key]}</span>
                                                                                             )
                                                                                         })
                                                                                     }
@@ -1670,7 +1640,7 @@ export default function StatAndEquipment(props) {
                                             <div className="w-5"></div>
                                             <div className="basis-1/2 relative items-center aspect-square m-[2.5px] bg-background rounded">
                                                 {
-                                                    user.characterPetEquipment[`pet_${index + 1}_equipment`]?.item_icon &&
+                                                    user?.characterPetEquipment[`pet_${index + 1}_equipment`]?.item_icon &&
                                                     <div className="absolute bottom-1 right-1 pointer-events-none z-10">
                                                         <Image
                                                             alt={"펫 아이템"}
@@ -1681,7 +1651,7 @@ export default function StatAndEquipment(props) {
                                                     </div>
                                                 }
                                                 {
-                                                    user.characterPetEquipment[`pet_${index + 1}_equipment`]?.item_icon &&
+                                                    user?.characterPetEquipment[`pet_${index + 1}_equipment`]?.item_icon &&
                                                     <HoverCard
                                                         openDelay={0}
                                                         closeDelay={0}
@@ -1692,7 +1662,7 @@ export default function StatAndEquipment(props) {
                                                             asChild
                                                             onClick={() => setOpenHoverCard({ ["펫 아이템" + index]: true })}
                                                         >
-                                                            <Image alt="펫 아이템" src={user.characterPetEquipment[`pet_${index + 1}_equipment`].item_icon} className="object-contain mx-auto transition-all scale-75 hover:scale-100" fill sizes="50px"></Image>
+                                                            <Image alt="펫 아이템" src={user?.characterPetEquipment[`pet_${index + 1}_equipment`].item_icon} className="object-contain mx-auto transition-all scale-75 hover:scale-100" fill sizes="50px"></Image>
                                                         </HoverCardTrigger>
                                                         <HoverCardContent
                                                             className="text-white w-80 py-3 px-1 bg-neutral-800 dark:bg-popover"
@@ -1702,16 +1672,16 @@ export default function StatAndEquipment(props) {
                                                         >
                                                             <div
                                                                 className={cn(
-                                                                    parseInt(user.characterPetEquipment[`pet_${index + 1}_equipment`].scroll_upgrade) >= 1 && "text-amber-500",
+                                                                    parseInt(user?.characterPetEquipment[`pet_${index + 1}_equipment`].scroll_upgrade) >= 1 && "text-amber-500",
                                                                     "gap-1 mx-auto flex flex-wrap justify-center font-semibold"
                                                                 )}
                                                             >
-                                                                <span>{user.characterPetEquipment[`pet_${index + 1}_equipment`].item_name}</span>
+                                                                <span>{user?.characterPetEquipment[`pet_${index + 1}_equipment`].item_name}</span>
                                                                 {
-                                                                    parseInt(user.characterPetEquipment[`pet_${index + 1}_equipment`].scroll_upgrade) >= 1 &&
+                                                                    parseInt(user?.characterPetEquipment[`pet_${index + 1}_equipment`].scroll_upgrade) >= 1 &&
                                                                     <>
                                                                         <span className="ml-1">(</span>
-                                                                        <span>+{user.characterPetEquipment[`pet_${index + 1}_equipment`].scroll_upgrade}</span>
+                                                                        <span>+{user?.characterPetEquipment[`pet_${index + 1}_equipment`].scroll_upgrade}</span>
                                                                         <span>)</span>
                                                                     </>
                                                                 }
@@ -1724,7 +1694,7 @@ export default function StatAndEquipment(props) {
                                                                 <div className="flex gap-1">
                                                                     <div className="w-auto">
                                                                         <div className={"relative flex items-center w-[80px] h-[80px] mt-2 rounded bg-gradient-to-b from-gray-500 to-neutral-300"}>
-                                                                            <Image alt="펫 아이템" src={user.characterPetEquipment[`pet_${index + 1}_equipment`].item_icon} className="object-contain scale-75 mx-auto" fill sizes="50px"></Image>
+                                                                            <Image alt="펫 아이템" src={user?.characterPetEquipment[`pet_${index + 1}_equipment`].item_icon} className="object-contain scale-75 mx-auto" fill sizes="50px"></Image>
                                                                             <div className="absolute bottom-1 right-1 pointer-events-none z-10">
                                                                                 <Image
                                                                                     alt={"캐시 아이템"}
@@ -1770,7 +1740,7 @@ export default function StatAndEquipment(props) {
                                                                     <span>장비분류 : 펫장비</span>
                                                                 </div>
                                                                 {
-                                                                    user.characterPetEquipment[`pet_${index + 1}_equipment`]?.item_option?.map((option, optionIndex) => {
+                                                                    user?.characterPetEquipment[`pet_${index + 1}_equipment`]?.item_option?.map((option, optionIndex) => {
                                                                         return (
                                                                             <div key={optionIndex} className="text-cyan-300">
                                                                                 <span>{option.option_type} : </span>
@@ -1780,19 +1750,19 @@ export default function StatAndEquipment(props) {
                                                                     })
                                                                 }
                                                                 {
-                                                                    user.characterPetEquipment[`pet_${index + 1}_equipment`]?.scroll_upgradable != null &&
+                                                                    user?.characterPetEquipment[`pet_${index + 1}_equipment`]?.scroll_upgradable != null &&
                                                                     <div>
                                                                         <span>업그레이드 가능 횟수 : </span>
-                                                                        <span>{user.characterPetEquipment[`pet_${index + 1}_equipment`]?.scroll_upgradable}</span>
+                                                                        <span>{user?.characterPetEquipment[`pet_${index + 1}_equipment`]?.scroll_upgradable}</span>
                                                                     </div>
                                                                 }
                                                             </div>
                                                             {
-                                                                user.characterPetEquipment[`pet_${index + 1}_equipment`][`pet_${index + 1}_description`] &&
+                                                                user?.characterPetEquipment[`pet_${index + 1}_equipment`][`pet_${index + 1}_description`] &&
                                                                 <>
                                                                     <div className="border-dotted border-b-[1px] border-gray-600 w-full mt-2"></div>
                                                                     <div className="px-2 mt-2 text-sm">
-                                                                        <span className="whitespace-pre-line">{(user.characterPetEquipment[`pet_${index + 1}_equipment`][`pet_${index + 1}_description`]).replace(/\\n/g, "</br>")}</span>
+                                                                        <span className="whitespace-pre-line">{(user?.characterPetEquipment[`pet_${index + 1}_equipment`][`pet_${index + 1}_description`]).replace(/\\n/g, "</br>")}</span>
                                                                     </div>
                                                                 </>
                                                             }
@@ -1803,7 +1773,7 @@ export default function StatAndEquipment(props) {
                                             <div className="w-16"></div>
                                             <div className="basis-1/2 relative items-center aspect-square m-[2.5px] bg-background rounded">
                                                 {
-                                                    user.characterPetEquipment[`pet_${index + 1}_auto_skill`]?.skill_1 &&
+                                                    user?.characterPetEquipment[`pet_${index + 1}_auto_skill`]?.skill_1 &&
                                                     <div className="relative items-center aspect-square m-[2.5px] bg-background rounded">
                                                         <HoverCard
                                                             openDelay={0}
@@ -1815,7 +1785,7 @@ export default function StatAndEquipment(props) {
                                                                 asChild
                                                                 onClick={() => setOpenHoverCard({ ["펫스킬1_" + index]: true })}
                                                             >
-                                                                <Image alt={"펫스킬1_" + index} src={user.characterPetEquipment[`pet_${index + 1}_auto_skill`]?.skill_1_icon} className="object-contain mx-auto transition-all scale-75 hover:scale-100" fill sizes="50px"></Image>
+                                                                <Image alt={"펫스킬1_" + index} src={user?.characterPetEquipment[`pet_${index + 1}_auto_skill`]?.skill_1_icon} className="object-contain mx-auto transition-all scale-75 hover:scale-100" fill sizes="50px"></Image>
                                                             </HoverCardTrigger>
                                                             <HoverCardContent
                                                                 className="text-white w-auto p-3 bg-neutral-800 dark:bg-popover"
@@ -1824,7 +1794,7 @@ export default function StatAndEquipment(props) {
                                                                 onClick={() => setOpenHoverCard({ ["펫스킬1_" + index]: false })}
                                                             >
                                                                 <div>
-                                                                    <span>{user.characterPetEquipment[`pet_${index + 1}_auto_skill`]?.skill_1}</span>
+                                                                    <span>{user?.characterPetEquipment[`pet_${index + 1}_auto_skill`]?.skill_1}</span>
                                                                 </div>
                                                             </HoverCardContent>
                                                         </HoverCard>
@@ -1834,7 +1804,7 @@ export default function StatAndEquipment(props) {
                                             {/* TODO: 넥슨 십쌔들 일 개같이 안해서 스킬1 아이콘이랑 스킬2 아이콘 똑같음 추후 확인 */}
                                             <div className="basis-1/2 relative items-center aspect-square m-[2.5px] bg-background rounded">
                                                 {
-                                                    user.characterPetEquipment[`pet_${index + 1}_auto_skill`]?.skill_2 &&
+                                                    user?.characterPetEquipment[`pet_${index + 1}_auto_skill`]?.skill_2 &&
                                                     <div className="relative items-center aspect-square m-[2.5px] bg-background rounded">
                                                         <HoverCard
                                                             openDelay={0}
@@ -1846,7 +1816,7 @@ export default function StatAndEquipment(props) {
                                                                 asChild
                                                                 onClick={() => setOpenHoverCard({ ["펫스킬2_" + index]: true })}
                                                             >
-                                                                <Image alt={"펫스킬2_" + index} src={user.characterPetEquipment[`pet_${index + 1}_auto_skill`]?.skill_2_icon} className="object-contain mx-auto transition-all scale-75 hover:scale-100" fill sizes="50px"></Image>
+                                                                <Image alt={"펫스킬2_" + index} src={user?.characterPetEquipment[`pet_${index + 1}_auto_skill`]?.skill_2_icon} className="object-contain mx-auto transition-all scale-75 hover:scale-100" fill sizes="50px"></Image>
                                                             </HoverCardTrigger>
                                                             <HoverCardContent
                                                                 className="text-white w-auto p-3 bg-neutral-800 dark:bg-popover"
@@ -1855,7 +1825,7 @@ export default function StatAndEquipment(props) {
                                                                 onClick={() => setOpenHoverCard({ ["펫스킬2_" + index]: false })}
                                                             >
                                                                 <div>
-                                                                    <span>{user.characterPetEquipment[`pet_${index + 1}_auto_skill`]?.skill_2}</span>
+                                                                    <span>{user?.characterPetEquipment[`pet_${index + 1}_auto_skill`]?.skill_2}</span>
                                                                 </div>
                                                             </HoverCardContent>
                                                         </HoverCard>
@@ -2533,185 +2503,6 @@ export default function StatAndEquipment(props) {
                     </TabsContent>
                 </Tabs>
             </div>
-            <div className="col-span-3 lg:col-span-2 bg-muted bg-opacity-20 justify-between flex flex-col flex-1 p-2 relative rounded-md shadow-md">
-                {
-                    characterStat &&
-                    <div className="flex flex-col">
-                        <div className="bg-background rounded">
-                            <div className="text-3xl text-center my-2">
-                                <span>전투력 : </span>
-                                <span>{parseInt(characterStat["전투력"] || 0).toLocaleString()}</span>
-                            </div>
-                        </div>
-                        <div className="flex flex-col lg:flex-row mt-2 gap-2">
-                            <div className="text-lg basis-full lg:basis-1/3 bg-background rounded py-2">
-                                <div className="basis-auto space-y-2 px-5 lg:px-12 flex flex-col h-full justify-center">
-                                    <div className="flex justify-between">
-                                        <div className="text-start">STR</div>
-                                        <div className="text-end">{parseInt(characterStat["STR"] || 0).toLocaleString()}</div>
-                                    </div>
-                                    <div className="flex justify-between">
-                                        <div className="text-start">DEX</div>
-                                        <div className="text-end">{parseInt(characterStat["DEX"] || 0).toLocaleString()}</div>
-                                    </div>
-                                    <div className="flex justify-between">
-                                        <div className="text-start">INT</div>
-                                        <div className="text-end">{parseInt(characterStat["INT"] || 0).toLocaleString()}</div>
-                                    </div>
-                                    <div className="flex justify-between">
-                                        <div className="text-start">LUK</div>
-                                        <div className="text-end">{parseInt(characterStat["LUK"] || 0).toLocaleString()}</div>
-                                    </div>
-                                    <div className="flex justify-between">
-                                        <div className="text-start">HP</div>
-                                        <div className="text-end">{parseInt(characterStat["HP"] || 0).toLocaleString()}</div>
-                                    </div>
-                                    <div className="flex justify-between">
-                                        <div className="text-start">MP</div>
-                                        <div className="text-end">{parseInt(characterStat["MP"] || 0).toLocaleString()}</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="text-lg basis-full lg:basis-2/3 bg-background rounded py-2">
-                                <div className="basis-auto space-y-2 px-5 lg:px-20 flex flex-col h-full justify-center">
-                                    <div className="flex justify-between">
-                                        <div className="text-start">보스 몬스터 데미지</div>
-                                        <div className="text-end">{parseFloat(characterStat["보스 몬스터 데미지"] || 0).toLocaleString()}%</div>
-                                    </div>
-                                    <div className="flex justify-between">
-                                        <div className="text-start">방어율 무시</div>
-                                        <div className="text-end">{parseFloat(characterStat["방어율 무시"] || 0).toLocaleString()}%</div>
-                                    </div>
-                                    <div className="flex justify-between">
-                                        <div className="text-start">크리티컬 확률</div>
-                                        <div className="text-end">{parseFloat(characterStat["크리티컬 확률"] || 0).toLocaleString()}%</div>
-                                    </div>
-                                    <div className="flex justify-between">
-                                        <div className="text-start">크리티컬 데미지</div>
-                                        <div className="text-end">{parseFloat(characterStat["크리티컬 데미지"] || 0).toLocaleString()}%</div>
-                                    </div>
-                                    <div className="flex justify-between">
-                                        <div className="text-start">재사용 대기시간 감소</div>
-                                        <div className="text-end">{parseInt(characterStat["재사용 대기시간 감소 (초)"] || 0).toLocaleString()}초/{parseFloat(characterStat["재사용 대기시간 감소 (%)"] || 0).toLocaleString()}%</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="text-lg basis-full bg-background rounded py-2 mt-2">
-                            <div className="flex flex-col lg:flex-row gap-2">
-                                <div className="basis-1/2 flex flex-col lg:flex-ro gap-2">
-                                    <div className="basis-auto space-y-2 pl-5 lg:pl-12 pr-5 lg:pr-6 flex flex-col h-full justify-center">
-                                        <div className="flex justify-between">
-                                            <div className="text-start">최대 스탯 공격력</div>
-                                            <div className="text-end">{parseInt(characterStat["최대 스탯공격력"] || 0).toLocaleString()}</div>
-                                        </div>
-                                        <div className="flex justify-between">
-                                            <div className="text-start">최소 스탯 공격력</div>
-                                            <div className="text-end">{parseInt(characterStat["최소 스탯공격력"] || 0).toLocaleString()}</div>
-                                        </div>
-                                        <div className="flex justify-between">
-                                            <div className="text-start">최종 데미지</div>
-                                            <div className="text-end">{parseInt(characterStat["최종 데미지"] || 0).toLocaleString()}%</div>
-                                        </div>
-                                        <div className="flex justify-between">
-                                            <div className="text-start">데미지</div>
-                                            <div className="text-end">{parseInt(characterStat["데미지"] || 0).toLocaleString()}%</div>
-                                        </div>
-                                        <div className="flex justify-between">
-                                            <div className="text-start">공격력</div>
-                                            <div className="text-end">{parseInt(characterStat["공격력"] || 0).toLocaleString()}</div>
-                                        </div>
-                                        <div className="flex justify-between">
-                                            <div className="text-start">마력</div>
-                                            <div className="text-end">{parseInt(characterStat["마력"] || 0).toLocaleString()}</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="basis-1/2 flex flex-col lg:flex-ro gap-2">
-                                    <div className="basis-auto space-y-2 pr-5 lg:pr-12 pl-5 lg:pl-6 flex flex-col h-full justify-center">
-                                        <div className="flex justify-between">
-                                            <div className="text-start">재사용 대기시간 미적용</div>
-                                            <div className="text-end">{parseFloat(characterStat["재사용 대기시간 미적용"] || 0).toLocaleString()}%</div>
-                                        </div>
-                                        <div className="flex justify-between">
-                                            <div className="text-start">일반 몬스터 데미지</div>
-                                            <div className="text-end">{parseFloat(characterStat["일반 몬스터 데미지"] || 0).toLocaleString()}%</div>
-                                        </div>
-                                        <div className="flex justify-between">
-                                            <div className="text-start">소환수 지속시간</div>
-                                            <div className="text-end">{parseFloat(characterStat["소환수 지속시간 증가"] || 0).toLocaleString()}%</div>
-                                        </div>
-                                        <div className="flex justify-between">
-                                            <div className="text-start">버프 지속시간</div>
-                                            <div className="text-end">{parseFloat(characterStat["버프 지속시간"] || 0).toLocaleString()}%</div>
-                                        </div>
-                                        <div className="flex justify-between">
-                                            <div className="text-start">속성 내성 무시</div>
-                                            <div className="text-end">{parseFloat(characterStat["속성 내성 무시"] || 0).toLocaleString()}%</div>
-                                        </div>
-                                        <div className="flex justify-between">
-                                            <div className="text-start">상태이상 추가 데미지</div>
-                                            <div className="text-end">{parseFloat(characterStat["상태이상 추가 데미지"] || 0).toLocaleString()}%</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="text-lg basis-full bg-background rounded py-2 mt-2">
-                            <div className="flex flex-col lg:flex-row gap-2">
-                                <div className="basis-1/2 flex flex-col lg:flex-ro gap-2">
-                                    <div className="basis-auto space-y-2 pl-5 lg:pl-12 pr-5 lg:pr-6 flex flex-col h-full justify-center">
-                                        <div className="flex justify-between">
-                                            <div className="text-start">아케인포스</div>
-                                            <div className="text-end">{parseInt(characterStat["아케인포스"] || 0).toLocaleString()}</div>
-                                        </div>
-                                        <div className="flex justify-between">
-                                            <div className="text-start">어센틱포스</div>
-                                            <div className="text-end">{parseInt(characterStat["어센틱포스"] || 0).toLocaleString()}</div>
-                                        </div>
-                                        <div className="flex justify-between">
-                                            <div className="text-start">스타포스</div>
-                                            <div className="text-end">{parseInt(characterStat["스타포스"] || 0).toLocaleString()}</div>
-                                        </div>
-                                        <div className="flex justify-between">
-                                            <div className="text-start">공격속도</div>
-                                            <div className="text-end">{parseInt(characterStat["공격 속도"] || 0).toLocaleString()}단계</div>
-                                        </div>
-                                        <div className="flex justify-between">
-                                            <div className="text-start">스탠스</div>
-                                            <div className="text-end">{parseFloat(characterStat["스탠스"] || 0).toLocaleString()}%</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="basis-1/2 flex flex-col lg:flex-ro gap-2">
-                                    <div className="basis-auto space-y-2 pr-5 lg:pr-12 pl-5 lg:pl-6 flex flex-col h-full justify-center">
-                                        <div className="flex justify-between">
-                                            <div className="text-start">메소 획득량</div>
-                                            <div className="text-end">{parseFloat(characterStat["메소 획득량"] || 0).toLocaleString()}%</div>
-                                        </div>
-                                        <div className="flex justify-between">
-                                            <div className="text-start">아이템 드롭률</div>
-                                            <div className="text-end">{parseFloat(characterStat["아이템 드롭률"] || 0).toLocaleString()}%</div>
-                                        </div>
-                                        <div className="flex justify-between">
-                                            <div className="text-start">추가 경험치 획득</div>
-                                            <div className="text-end">{parseFloat(characterStat["추가 경험치 획득"] || 0).toLocaleString()}%</div>
-                                        </div>
-                                        <div className="flex justify-between">
-                                            <div className="text-start">상태이상 내성</div>
-                                            <div className="text-end">{parseInt(characterStat["상태이상 내성"] || 0).toLocaleString()}</div>
-                                        </div>
-                                        <div className="flex justify-between">
-                                            <div className="text-start">방어력</div>
-                                            <div className="text-end">{parseInt(characterStat["방어력"] || 0).toLocaleString()}</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                }
-            </div>
-        </div>
+        </>
     )
 }

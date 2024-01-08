@@ -4,11 +4,10 @@ import './globals.css'
 import Providers from './providers'
 import { Noto_Sans_KR } from 'next/font/google';
 import { cn } from "@/lib/utils"
-import LogoWithBackgroundIcon from "@/public/logoWithBackground.svg";
+import { Toaster } from '@/components/ui/toaster';
 
 const interNotoSansKR = Noto_Sans_KR({ subsets: ["latin"] });
 
-//TODO: image 안나오는거 수정
 export const metadata = {
   title: 'TOD.GG',
   description: '메이플스토리 캐릭터 검색 서비스 TOD.GG!',
@@ -16,7 +15,6 @@ export const metadata = {
   metadataBase: new URL('https://tod.gg'),
   openGraph: {
     siteName: 'TOD.GG',
-    images: LogoWithBackgroundIcon,
     url: 'https://tod.gg',
     title: 'TOD.GG',
     description: '메이플스토리 캐릭터 검색 서비스 TOD.GG!',
@@ -46,6 +44,7 @@ export default function RootLayout({ children }) {
             <Footer />
           </div>
         </Providers>
+        <Toaster />
       </body>
     </html>
   )

@@ -28,9 +28,8 @@ export async function generateMetadata({ params }) {
         `레벨 : ${guildBasic.guild_level} | ` +
         `인원 : ${guildBasic.guild_member_count}`,
       openGraph: {
-        images: guildBasic.guild_mark || `data:image/jpeg;base64,${guildBasic.guild_mark_custom}`,
         url: `https://tod.gg/guild/${guildBasic.world_name}/${guildBasic.guild_name}`,
-        title: `#${guildBasic.character_name} #${guildBasic.world_name} 길드 정보 | TOD.GG`,
+        title: `#${guildBasic.guild_name} #${guildBasic.world_name} 길드 정보 | TOD.GG`,
         description:
           `월드 : ${guildBasic.world_name} | ` +
           `마스터 : ${guildBasic.guild_master_name} | ` +

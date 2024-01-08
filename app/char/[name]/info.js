@@ -28,8 +28,9 @@ import { getRankingUnion } from '@/lib/nexonAPI/getRankingUnion';
 import { getUserUnion } from '@/lib/nexonAPI/getUserUnion';
 import { getUserUnionRaider } from '@/lib/nexonAPI/getUserUnionRaider';
 import { getGuildID } from "@/lib/nexonAPI/getGuildID";
-import StatAndEquipment from "./statAndEquipment";
+import StatAndEquipment from "./equipment";
 import { getGuildBasic } from "@/lib/nexonAPI/getGuildBasic";
+import Stat from "./stat";
 
 export default async function CharacterInfo(props) {
     const OCID = await getCharOCID(props.characterName);
@@ -173,7 +174,7 @@ export default async function CharacterInfo(props) {
                                         <div className="flex items-center">
                                             {
                                                 (user.guildBasic.guild_mark || user.guildBasic.guild_mark_custom) &&
-                                                <Image width={20} height={20} className="my-auto mr-1" alt="길드 이미지" src={user.guildBasic.guild_mark || `data:image/jpeg;base64,${user.guildBasic.guild_mark_custom}`}></Image>
+                                                <Image width={20} height={20} className="my-auto mr-1" alt="길드 이미지" src={user.guildBasic.guild_mark || `data:image/png;base64,${user.guildBasic.guild_mark_custom}`}></Image>
                                             }
                                             <span className={user.guildBasic.guild_name && "underline underline-offset-4"}>{user.characterBasic.character_guild_name ? user.characterBasic.character_guild_name : "-"}</span>
                                         </div>
@@ -214,7 +215,10 @@ export default async function CharacterInfo(props) {
                     </TabsList>
 
                     <TabsContent value="stat/equipment">
-                        <StatAndEquipment character={user} />
+                        <div className="grid grid-cols-3 gap-2">
+                            <StatAndEquipment character={user} />
+                            <Stat character={user} />
+                        </div>
                     </TabsContent >
 
                     <TabsContent value="skill">content</TabsContent>
