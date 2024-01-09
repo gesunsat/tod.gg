@@ -15,6 +15,9 @@ export default function Home() {
   return (
     <div className="rounded-lg border bg-card text-card-foreground shadow-sm p-5">
       <div>
+        <div className="text-center text-xs opacity-50">
+          토드지지
+        </div>
         <div className="text-center text-xl">
           공지 / 업데이트
         </div>

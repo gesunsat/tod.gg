@@ -31,6 +31,7 @@ import { getGuildID } from "@/lib/nexonAPI/getGuildID";
 import StatAndEquipment from "./equipment";
 import { getGuildBasic } from "@/lib/nexonAPI/getGuildBasic";
 import Stat from "./stat";
+import { updateCharacterInfo } from "@/lib/todAPI/updateCharacterInfo";
 
 export default async function CharacterInfo(props) {
     const OCID = await getCharOCID(props.characterName);
@@ -140,7 +141,9 @@ export default async function CharacterInfo(props) {
         "userUnionRaider": userUnionRaider,
         "rankingUnion": rankingUnion,
         "guildBasic": guildBasic,
-    }
+    };
+
+    updateCharacterInfo(OCID.ocid, user);
 
     return (
         <>

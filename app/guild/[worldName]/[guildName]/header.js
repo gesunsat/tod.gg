@@ -12,7 +12,7 @@ export default async function GuildHeader(props) {
 
     const noblesseSkill = guildBasic?.guild_noblesse_skill;
     guildBasic.guild_noblesse_skill = {};
-    noblesseSkill.map((skill, index) => {
+    noblesseSkill.map((skill) => {
         guildBasic.guild_noblesse_skill[skill.skill_name] = skill;
     })
 

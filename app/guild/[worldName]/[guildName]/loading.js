@@ -1,4 +1,5 @@
 import { Skeleton } from "@/components/ui/skeleton";
+import MembersLoading from "./membersLoading";
 
 export default function Loading() {
     return (
@@ -17,20 +18,8 @@ export default function Loading() {
                     </div>
                 </div>
             </div>
-            <div className="rounded-lg border bg-card text-card-foreground shadow-sm mt-2">
-                <div className="grid grid-cols-4 gap-2 p-2">
-                    {
-                        Array(100).fill().map((member, memberIndex) => {
-                            return (
-                                <div key={memberIndex} className="col-span-4 lg:col-span-1">
-                                    <Skeleton className="py-5 rounded">
-                                        <div className="h-[24px]"></div>
-                                    </Skeleton>
-                                </div>
-                            )
-                        })
-                    }
-                </div>
+            <div className="rounded-lg border bg-card text-card-foreground shadow-sm mt-2 p-2">
+                <MembersLoading />
             </div>
         </>
     )
