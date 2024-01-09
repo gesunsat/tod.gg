@@ -2,11 +2,15 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 
 const notice = [
   {
-    title: "2023.01.09",
+    title: "2024.01.10",
+    content: ["길드 페이지 > 캐릭터 정보(이미지, 레벨, 직업, 전투력) 표시", "길드 페이지 > 검색, 정렬, 갱신 버튼 추가"],
+  },
+  {
+    title: "2024.01.09",
     content: ["길드 검색 지원", "길드 페이지 추가"],
   },
   {
-    title: "2023.01.07",
+    title: "2024.01.07",
     content: ["가오픈"],
   }
 ]
