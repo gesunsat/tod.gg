@@ -38,7 +38,7 @@ export default async function GuildInfo(props) {
             <div className="rounded-lg border bg-card text-card-foreground shadow-sm mt-2 p-2">
                 <GuildMembers guildBasic={guildBasic} guildID={guildID} />
             </div>
-            <Temp guildBasic={guildBasic} guildRankingFlag={guildRankingFlag} guildRankingSuro={guildRankingSuro} />
+            {/* <Temp guildBasic={guildBasic} guildRankingFlag={guildRankingFlag} guildRankingSuro={guildRankingSuro} /> */}
         </>
     );
 }

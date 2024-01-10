@@ -28,10 +28,14 @@ import { getRankingUnion } from '@/lib/nexonAPI/getRankingUnion';
 import { getUserUnion } from '@/lib/nexonAPI/getUserUnion';
 import { getUserUnionRaider } from '@/lib/nexonAPI/getUserUnionRaider';
 import { getGuildID } from "@/lib/nexonAPI/getGuildID";
-import StatAndEquipment from "./equipment";
+import Equipment from "./equipment";
 import { getGuildBasic } from "@/lib/nexonAPI/getGuildBasic";
 import Stat from "./stat";
+import AccountCharacters from "./accountCharacter";
 import { updateCharacterInfo } from "@/lib/todAPI/updateCharacterInfo";
+import { Suspense } from "react";
+import { Skeleton } from "@/components/ui/skeleton";
+import Skills from "./skills";
 
 export default async function CharacterInfo(props) {
     const OCID = await getCharOCID(props.characterName);
@@ -135,8 +139,8 @@ export default async function CharacterInfo(props) {
         "characterLinkSkill": charLinkSkill,
         "characterVMatrix": charVMatrix,
         "characterHexaMatrix": charHexaMatrix,
-        "charHexaMatrixStat": charHexaMatrixStat,
-        "charDojang": charDojang,
+        "characterHexaMatrixStat": charHexaMatrixStat,
+        "characterDojang": charDojang,
         "userUnion": userUnion,
         "userUnionRaider": userUnionRaider,
         "rankingUnion": rankingUnion,
@@ -158,7 +162,10 @@ export default async function CharacterInfo(props) {
                             <div className="mt-5 space-y-1.5">
                                 <div className="flex">
                                     <Badge className={"text-[14px] w-[65px] flex justify-center mr-2"}>레벨</Badge>
-                                    <span>Lv. {user.characterBasic.character_level}</span>
+                                    <div>
+                                        <span className="text-xs">Lv. </span>
+                                        <span>{user.characterBasic.character_level}</span>
+                                    </div>
                                 </div>
                                 <div className="flex">
                                     <Badge className={"text-[14px] w-[65px] flex justify-center mr-2"}>직업</Badge>
@@ -196,8 +203,11 @@ export default async function CharacterInfo(props) {
 
                         <div className="mt-3 lg:my-auto left-0 top-full lg:top-0 absolute lg:relative h-[230px] w-full lg:max-w-[410px]">
                             <div id="RichMidia" className="mx-auto border-[1px] h-full w-full max-w-[410px] rounded-lg border-neutral-500">
-                                <div className="flex h-full justify-center">
-                                    <PlayIcon width={50} />
+                                <div className="flex flex-col h-full justify-center">
+                                    <div className="mx-auto">
+                                        <div className="absolute right-1/2 translate-x-1/2 translate-y-[-18px] opacity-50">AD</div>
+                                        <PlayIcon width={50} />
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -208,26 +218,44 @@ export default async function CharacterInfo(props) {
             <div id="MobileRichMidaMargin" className="mt-3 lg:mt-0 w-full h-[230px] lg:h-0"></div>
 
             <div className="rounded-lg border bg-card text-card-foreground shadow-sm p-2 mt-2">
-                <Tabs defaultValue="stat/equipment" activationMode="manual" className="w-full">
+                <Tabs defaultValue="skills" activationMode="manual" className="w-full">
                     <TabsList className="justify-start w-full overflow-x-scroll hidden-scroll flex gap-x-[10px] sm:grid sm:grid-cols-5">
                         <TabsTrigger value="stat/equipment">스탯/장비</TabsTrigger>
-                        <TabsTrigger value="skill" disabled>스킬</TabsTrigger>
+                        <TabsTrigger value="skills">스킬</TabsTrigger>
                         <TabsTrigger value="union" disabled>유니온</TabsTrigger>
                         <TabsTrigger value="contents" disabled>콘텐츠</TabsTrigger>
                         <TabsTrigger value="accountCharacters">보유 캐릭터</TabsTrigger>
                     </TabsList>
 
+
                     <TabsContent value="stat/equipment">
                         <div className="grid grid-cols-3 gap-2">
-                            <StatAndEquipment character={user} />
+                            <Equipment character={user} />
                             <Stat character={user} />
                         </div>
                     </TabsContent >
 
-                    <TabsContent value="skill">content</TabsContent>
-                    <TabsContent value="union">content</TabsContent>
-                    <TabsContent value="contents">content</TabsContent>
-                    <TabsContent value="accountCharacters">content</TabsContent>
+
+                    <TabsContent value="skills">
+                        <Skills character={user} />
+                    </TabsContent>
+
+
+                    <TabsContent value="union">
+
+                    </TabsContent>
+
+
+                    <TabsContent value="contents">
+
+                    </TabsContent>
+
+
+                    <TabsContent value="accountCharacters">
+                        <Suspense fallback={<Skeleton className="min-h-[500px]" />}>
+                            <AccountCharacters rankingUnion={user.rankingUnion} />
+                        </Suspense>
+                    </TabsContent>
                 </Tabs >
             </div >
         </>

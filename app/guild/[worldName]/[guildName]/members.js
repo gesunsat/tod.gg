@@ -7,7 +7,7 @@ import BigBlowIcon from "@/public/bigBlow.png"
 import DefenseJustNumberIcon from "@/public/defenseJustNumber.png"
 import NameOfTheGuildIcon from "@/public/nameOfTheGuild.png"
 import NullCharacterIcon from "@/public/nullCharacter.png"
-import { LucidePersonStanding, Search, Sword, Swords, Users } from "lucide-react";
+import { Crown, CrownIcon, LucideCrown, LucidePersonStanding, Search, Sword, Swords, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useEffect, useRef, useState } from "react";
@@ -101,22 +101,21 @@ export default function GuildMembers(props) {
         if (memberSortOption.includes("characterBasic.")) {
             const option = memberSortOption.replace("characterBasic.", "");
             membersSort = membersSort.sort((a, b) => {
-                if (membersInfo[a]?.["characterBasic"]?.[option] > membersInfo[b]?.["characterBasic"]?.[option]) return -1;
-                if (membersInfo[a]?.["characterBasic"]?.[option] < membersInfo[b]?.["characterBasic"]?.[option]) return 1;
+                if ((membersInfo[a]?.["characterBasic"]?.[option] || 0) > (membersInfo[b]?.["characterBasic"]?.[option] || 0)) return -1;
+                if ((membersInfo[a]?.["characterBasic"]?.[option] || 0) < (membersInfo[b]?.["characterBasic"]?.[option] || 0)) return 1;
                 return 0;
             });
         } else if (memberSortOption.includes("name")) {
-            const option = memberSortOption;
             membersSort = membersSort.sort((a, b) => {
-                if (membersInfo[a]?.[option] < membersInfo[b]?.[option]) return -1;
-                if (membersInfo[a]?.[option] > membersInfo[b]?.[option]) return 1;
+                if (a < b) return -1;
+                if (a > b) return 1;
                 return 0;
             });
         } else {
             const option = memberSortOption;
             membersSort = membersSort.sort((a, b) => {
-                if (membersInfo[a]?.[option] > membersInfo[b]?.[option]) return -1;
-                if (membersInfo[a]?.[option] < membersInfo[b]?.[option]) return 1;
+                if ((membersInfo[a]?.[option] || 0) > (membersInfo[b]?.[option] || 0)) return -1;
+                if ((membersInfo[a]?.[option] || 0) < (membersInfo[b]?.[option] || 0)) return 1;
                 return 0;
             });
         }
@@ -160,9 +159,9 @@ export default function GuildMembers(props) {
                                 </SelectTrigger>
                                 <SelectContent>
                                     <SelectGroup>
-                                        <SelectItem value={"characterBasic.character_level"}>레벨</SelectItem>
                                         <SelectItem value={"name"}>이름</SelectItem>
-                                        <SelectItem value={"combat_power"}>전투력</SelectItem>
+                                        <SelectItem disabled={Object.keys(membersInfo) < 1} value={"combat_power"}>전투력</SelectItem>
+                                        <SelectItem disabled={Object.keys(membersInfo) < 1} value={"characterBasic.character_level"}>레벨</SelectItem>
                                     </SelectGroup>
                                 </SelectContent>
                             </Select>
@@ -218,26 +217,37 @@ export default function GuildMembers(props) {
                                             <div className="flex flex-1 gap-3">
                                                 <div className="min-h-[96px] min-w-[96px] flex items-center justify-center">
                                                     <div className="ps-2">
-                                                        <Image
-                                                            className={cn(
-                                                                membersInfo?.[member]?.characterBasic?.character_image || "brightness-50 dark:brightness-100",
-                                                                "mx-auto my-auto"
-                                                            )}
-                                                            src={membersInfo?.[member]?.characterBasic?.character_image || NullCharacterIcon}
-                                                            height={membersInfo?.[member]?.characterBasic?.character_image ? 96 : 72}
-                                                            width={membersInfo?.[member]?.characterBasic?.character_image ? 96 : 52}
-                                                            alt="캐릭터 이미지"
-                                                        />
+                                                        <div className="relative">
+                                                            {
+                                                                member == guildBasic?.guild_master_name &&
+                                                                <div className="absolute -translate-y-[80%] translate-x-1/2 right-1/2">
+                                                                    <Crown className="scale-100 scale-x-150 brightness-0 dark:brightness-100" stroke="yellow" />
+                                                                </div>
+                                                            }
+                                                            <Image
+                                                                className={cn(
+                                                                    membersInfo?.[member]?.characterBasic?.character_image || "brightness-50 dark:brightness-100",
+                                                                    "mx-auto my-auto"
+                                                                )}
+                                                                src={membersInfo?.[member]?.characterBasic?.character_image || NullCharacterIcon}
+                                                                height={membersInfo?.[member]?.characterBasic?.character_image ? 96 : 72}
+                                                                width={membersInfo?.[member]?.characterBasic?.character_image ? 96 : 52}
+                                                                priority={memberIndex <= 20 ? true : false}
+                                                                alt="캐릭터 이미지"
+                                                            />
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div className="flex-1 space-y-1 self-center">
                                                     <div>
                                                         <span>{member}</span>
-                                                        <span>{membersInfo?.[member]?.characterBasic?.character_level ? ` | ` : ""}</span>
+                                                    </div>
+                                                    <div>
                                                         <span className="text-xs">{membersInfo?.[member]?.characterBasic?.character_level ? `Lv.` : ""}</span>
                                                         <span>{membersInfo?.[member]?.characterBasic?.character_level ? `${membersInfo?.[member]?.characterBasic?.character_level}` : ""}</span>
+                                                        <span>{membersInfo?.[member]?.characterBasic?.character_level ? ` | ` : ""}</span>
+                                                        <span>{membersInfo?.[member]?.characterBasic?.character_class ? membersInfo?.[member]?.characterBasic?.character_class : ""}</span>
                                                     </div>
-                                                    <div>{membersInfo?.[member]?.characterBasic?.character_class ? membersInfo?.[member]?.characterBasic?.character_class : ""}</div>
                                                     <div className="flex gap-2">
                                                         {
                                                             membersInfo?.[member]?.combat_power &&

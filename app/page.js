@@ -2,6 +2,10 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 
 const notice = [
   {
+    title: "2024.01.11",
+    content: ["캐릭터 페이지 > 스탯/장비 탭 > 하이퍼 스탯, 어빌리티 표기", "캐릭터 페이지 > 보유 캐릭터 탭 활성화"],
+  },
+  {
     title: "2024.01.10",
     content: ["길드 페이지 > 캐릭터 정보(이미지, 레벨, 직업, 전투력) 표시", "길드 페이지 > 검색, 정렬, 갱신 버튼 추가"],
   },

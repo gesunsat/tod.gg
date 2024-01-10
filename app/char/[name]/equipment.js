@@ -37,17 +37,17 @@ import { Skeleton } from "@/components/ui/skeleton";
 const interVT323 = VT323({ subsets: ["latin"], weight: ["400"] });
 
 export default function Equipment(props) {
+    const [itemMorooShapeView, setItemMorooShapeView] = useState(false);
     const [user, setUser] = useState(null);
     useEffect(() => {
         if (localStorage.getItem("itemMorooShapeView")) setItemMorooShapeView(JSON.parse(localStorage.getItem("itemMorooShapeView")));
 
         setUser(props.character);
-        console.log(user)
+        // console.log(props.character)
     }, []);
 
     const [itemImageSrcs, setItemImageSrcs] = useState({});
     const [itemEquipments, setItemEquipments] = useState({});
-    const [itemMorooShapeView, setItemMorooShapeView] = useState(false);
     const [currentViewingItemEquipmentTab, setCurrentViewingItemEquipmentTab] = useState("item_equipment");
     useEffect(() => {
         if (!user) return;
@@ -517,52 +517,57 @@ export default function Equipment(props) {
                                                                                     <span>별명 :</span>
                                                                                     <span> {user?.characterAndroidEquipment.android_nickname}</span>
                                                                                 </div>
-                                                                                {
-                                                                                    user?.characterAndroidEquipment.android_skin_name &&
-                                                                                    <>
-                                                                                        <div>
+                                                                                <div>
+                                                                                    {
+                                                                                        user?.characterAndroidEquipment.android_hair?.hair_name &&
+                                                                                        <>
                                                                                             {
                                                                                                 user?.characterAndroidEquipment.android_hair?.mix_color ?
                                                                                                     <span>믹스 {user?.characterAndroidEquipment.android_hair?.hair_name.replace(user?.characterAndroidEquipment.android_hair?.base_color, "")}</span> :
                                                                                                     <span> {(user?.characterAndroidEquipment.android_hair?.hair_name).includes(user?.characterAndroidEquipment.android_hair?.base_color) ? user?.characterAndroidEquipment.android_hair?.hair_name : user?.characterAndroidEquipment.android_hair?.base_color + user?.characterAndroidEquipment.android_hair?.hair_name}</span>
                                                                                             }
-                                                                                            {
-                                                                                                user?.characterAndroidEquipment.android_hair?.mix_color &&
-                                                                                                <>
-                                                                                                    <span> ( </span>
-                                                                                                    <span>{user?.characterAndroidEquipment.android_hair?.base_color}</span>
-                                                                                                    <span> {100 - user?.characterAndroidEquipment.android_hair?.mix_rate}</span>
-                                                                                                    <span> : </span>
-                                                                                                    <span>{user?.characterAndroidEquipment.android_hair?.mix_color}</span>
-                                                                                                    <span> {user?.characterAndroidEquipment.android_hair?.mix_rate}</span>
-                                                                                                    <span> )</span>
-                                                                                                </>
-                                                                                            }
-                                                                                        </div>
-                                                                                        <div>
+                                                                                        </>
+                                                                                    }
+                                                                                    {
+                                                                                        user?.characterAndroidEquipment.android_hair?.mix_color &&
+                                                                                        <>
+                                                                                            <span> ( </span>
+                                                                                            <span>{user?.characterAndroidEquipment.android_hair?.base_color}</span>
+                                                                                            <span> {100 - user?.characterAndroidEquipment.android_hair?.mix_rate}</span>
+                                                                                            <span> : </span>
+                                                                                            <span>{user?.characterAndroidEquipment.android_hair?.mix_color}</span>
+                                                                                            <span> {user?.characterAndroidEquipment.android_hair?.mix_rate}</span>
+                                                                                            <span> )</span>
+                                                                                        </>
+                                                                                    }
+                                                                                </div>
+                                                                                <div>
+                                                                                    {
+                                                                                        user?.characterAndroidEquipment.android_face?.hair_name &&
+                                                                                        <>
                                                                                             {
                                                                                                 user?.characterAndroidEquipment.android_face?.mix_color ?
                                                                                                     <span>믹스 {user?.characterAndroidEquipment.android_face?.face_name.replace(user?.characterAndroidEquipment.android_face?.base_color, "")}</span> :
                                                                                                     <span> {(user?.characterAndroidEquipment.android_face?.face_name).includes(user?.characterAndroidEquipment.android_face?.base_color) ? user?.characterAndroidEquipment.android_face?.face_name : user?.characterAndroidEquipment.android_face?.base_color + " " + user?.characterAndroidEquipment.android_face?.face_name}</span>
                                                                                             }
-                                                                                            {
-                                                                                                user?.characterAndroidEquipment.android_face?.mix_color &&
-                                                                                                <>
-                                                                                                    <span> ( </span>
-                                                                                                    <span>{user?.characterAndroidEquipment.android_face?.base_color}</span>
-                                                                                                    <span> {100 - user?.characterAndroidEquipment.android_face?.mix_rate}</span>
-                                                                                                    <span> : </span>
-                                                                                                    <span>{user?.characterAndroidEquipment.android_face?.mix_color}</span>
-                                                                                                    <span> {user?.characterAndroidEquipment.android_face?.mix_rate}</span>
-                                                                                                    <span> )</span>
-                                                                                                </>
-                                                                                            }
-                                                                                        </div>
-                                                                                        <div>
-                                                                                            <span> {user?.characterAndroidEquipment.android_skin_name}</span>
-                                                                                        </div>
-                                                                                    </>
-                                                                                }
+                                                                                        </>
+                                                                                    }
+                                                                                    {
+                                                                                        user?.characterAndroidEquipment.android_face?.mix_color &&
+                                                                                        <>
+                                                                                            <span> ( </span>
+                                                                                            <span>{user?.characterAndroidEquipment.android_face?.base_color}</span>
+                                                                                            <span> {100 - user?.characterAndroidEquipment.android_face?.mix_rate}</span>
+                                                                                            <span> : </span>
+                                                                                            <span>{user?.characterAndroidEquipment.android_face?.mix_color}</span>
+                                                                                            <span> {user?.characterAndroidEquipment.android_face?.mix_rate}</span>
+                                                                                            <span> )</span>
+                                                                                        </>
+                                                                                    }
+                                                                                </div>
+                                                                                <div>
+                                                                                    <span> {user?.characterAndroidEquipment.android_skin_name}</span>
+                                                                                </div>
                                                                             </div>
                                                                             <div className="border-dotted border-b-[1px] border-gray-600 w-full mt-2 mb-2"></div>
                                                                         </>
@@ -1839,7 +1844,6 @@ export default function Equipment(props) {
                         </div>
 
                         <Alert className="mt-2">
-
                             <AlertTitle>
                                 알림
                             </AlertTitle>
