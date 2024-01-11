@@ -237,7 +237,6 @@ export default function GuildMembers(props) {
                                                 </div>
                                                 <div className="flex-1">
                                                     <div className="flex flex-col justify-between h-full">
-
                                                         <div>
                                                             <div className="text-lg font-semibold">
                                                                 <span>{member}</span>

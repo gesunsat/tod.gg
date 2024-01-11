@@ -24,7 +24,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="kr" className="flex w-full min-h-full">
+    <html lang="ko-KR" className="flex w-full min-h-full">
       <body className={cn(interNotoSansKR.className, "dark:bg-card w-full min-h-full")}>
         <Providers>
           <div className="flex flex-col h-full">

@@ -2,6 +2,10 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 
 const notice = [
   {
+    title: "2024.01.12",
+    content: ["캐릭터 페이지 > 스킬 탭 > 6차 스킬 작업", "버그 수정 및 성능 개선"],
+  },
+  {
     title: "2024.01.11",
     content: ["캐릭터 페이지 > 스탯/장비 탭 > 하이퍼 스탯, 어빌리티 표기", "캐릭터 페이지 > 보유 캐릭터 탭 활성화"],
   },

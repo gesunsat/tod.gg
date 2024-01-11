@@ -231,7 +231,7 @@ export default function Stat(props) {
                                             })
                                         }
                                     </div>
-                                    <div className="mt-2 py-1 bg-muted relative select-none rounded shadow-md w-auto">
+                                    <div className="mt-2 py-1 px-1 bg-muted relative select-none rounded shadow-md w-fit self-center">
                                         <ToggleGroup
                                             variant="outline"
                                             type="single"
