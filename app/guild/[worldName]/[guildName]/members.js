@@ -174,17 +174,18 @@ export default function GuildMembers(props) {
                                 </div>
                             }
                             {
-                                new Date(getYesterdayDate()) - dbGuildBasicDate > (1000 * 60 * 60 * 24) - 1000 ?
+                                new Date(getYesterdayDate()) - dbGuildBasicDate < (1000 * 60 * 60 * 24) - 1000 ?
+                                    <div>최신</div> :
                                     <>
                                         {
                                             dbGuildBasicDate.getFullYear() == "2000" ?
-                                                "" :
+                                                <></> :
                                                 <div>
                                                     {(new Date(getYesterdayDate()) - dbGuildBasicDate) / (1000 * 60 * 60 * 24)}일 전
                                                 </div>
                                         }
-                                    </> :
-                                    <div>최신</div>
+                                    </>
+
                             }
                             <Button
                                 variant="secondary"
