@@ -268,7 +268,7 @@ export default function Stat(props) {
                                                                 ability?.ability_grade == "레전드리" && "bg-green-500 dark:bg-lime-600",
                                                                 ability?.ability_grade == "유니크" && "bg-yellow-500 dark:bg-amber-600",
                                                                 ability?.ability_grade == "에픽" && "bg-violet-400 dark:bg-violet-600",
-                                                                ability?.ability_grade == "에픽" && "bg-sky-400 dark:bg-sky-600",
+                                                                ability?.ability_grade == "레어" && "bg-sky-400 dark:bg-sky-600",
                                                                 "rounded"
                                                             )}
                                                         >
