@@ -152,20 +152,16 @@ export default function GuildMembers(props) {
                         </div>
                     </div>
                     <div className="flex-1 items-center flex justify-between">
-                        <div>
-                            <Select onValueChange={e => setMemberSortOption(e)}>
-                                <SelectTrigger className="w-[120px]">
-                                    <SelectValue placeholder="정렬" />
-                                </SelectTrigger>
-                                <SelectContent>
-                                    <SelectGroup>
-                                        <SelectItem value={"name"}>이름</SelectItem>
-                                        <SelectItem disabled={Object.keys(membersInfo) < 1} value={"combat_power"}>전투력</SelectItem>
-                                        <SelectItem disabled={Object.keys(membersInfo) < 1} value={"characterBasic.character_level"}>레벨</SelectItem>
-                                    </SelectGroup>
-                                </SelectContent>
-                            </Select>
-                        </div>
+                        <Select onValueChange={e => setMemberSortOption(e)}>
+                            <SelectTrigger className="w-[120px]">
+                                <SelectValue placeholder="정렬" />
+                            </SelectTrigger>
+                            <SelectContent>
+                                <SelectItem value={"name"}>이름</SelectItem>
+                                <SelectItem disabled={Object.keys(membersInfo) < 1} value={"combat_power"}>전투력</SelectItem>
+                                <SelectItem disabled={Object.keys(membersInfo) < 1} value={"characterBasic.character_level"}>레벨</SelectItem>
+                            </SelectContent>
+                        </Select>
                         <div className="items-center flex gap-2">
                             {
                                 sec >= 1 &&
@@ -239,24 +235,29 @@ export default function GuildMembers(props) {
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div className="flex-1 space-y-1 self-center">
-                                                    <div>
-                                                        <span>{member}</span>
-                                                    </div>
-                                                    <div>
-                                                        <span className="text-xs">{membersInfo?.[member]?.characterBasic?.character_level ? `Lv.` : ""}</span>
-                                                        <span>{membersInfo?.[member]?.characterBasic?.character_level ? `${membersInfo?.[member]?.characterBasic?.character_level}` : ""}</span>
-                                                        <span>{membersInfo?.[member]?.characterBasic?.character_level ? ` | ` : ""}</span>
-                                                        <span>{membersInfo?.[member]?.characterBasic?.character_class ? membersInfo?.[member]?.characterBasic?.character_class : ""}</span>
-                                                    </div>
-                                                    <div className="flex gap-2">
-                                                        {
-                                                            membersInfo?.[member]?.combat_power &&
-                                                            <>
-                                                                <Swords />
-                                                                <span className="h-full">{parseInt(membersInfo?.[member]?.combat_power).toLocaleString()}</span>
-                                                            </>
-                                                        }
+                                                <div className="flex-1">
+                                                    <div className="flex flex-col justify-between h-full">
+
+                                                        <div>
+                                                            <div className="text-lg font-semibold">
+                                                                <span>{member}</span>
+                                                            </div>
+                                                            <div className="text-sm opacity-75">
+                                                                <span className="text-xs">{membersInfo?.[member]?.characterBasic?.character_level ? `Lv.` : ""}</span>
+                                                                <span>{membersInfo?.[member]?.characterBasic?.character_level ? `${membersInfo?.[member]?.characterBasic?.character_level}` : ""}</span>
+                                                                <span>{membersInfo?.[member]?.characterBasic?.character_level ? ` | ` : ""}</span>
+                                                                <span>{membersInfo?.[member]?.characterBasic?.character_class ? membersInfo?.[member]?.characterBasic?.character_class : ""}</span>
+                                                            </div>
+                                                        </div>
+                                                        <div className="flex gap-2">
+                                                            {
+                                                                membersInfo?.[member]?.combat_power &&
+                                                                <>
+                                                                    <Swords />
+                                                                    <span className="h-full">{parseInt(membersInfo?.[member]?.combat_power).toLocaleString()}</span>
+                                                                </>
+                                                            }
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
