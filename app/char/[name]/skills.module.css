@@ -113,7 +113,7 @@
   .hexagon5th:nth-of-type(11n + 7) {
     margin: 0px;
   }
-  .hexagon5th:nth-of-type(n + 7) {
+  .hexagon5th:nth-of-type(n + 10) {
     margin: 0px;
   }
   .hexagon5th:nth-of-type(17n + 10) {
@@ -137,7 +137,7 @@
   .hexagon5th:nth-of-type(9n + 6) {
     margin: 0px;
   }
-  .hexagon5th:nth-of-type(n + 7) {
+  .hexagon5th:nth-of-type(n + 10) {
     margin: 0px;
   }
   .hexagon5th:nth-of-type(17n + 10) {
@@ -168,7 +168,7 @@
     margin: 0px;
   }
 
-  .hexagon5th:nth-of-type(n + 7) {
+  .hexagon5th:nth-of-type(n + 10) {
     margin-top: -14px;
   }
   .hexagon5th:nth-of-type(17n + 10) {

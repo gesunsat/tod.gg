@@ -158,8 +158,8 @@ export default function GuildMembers(props) {
                             </SelectTrigger>
                             <SelectContent>
                                 <SelectItem value={"name"}>이름</SelectItem>
-                                <SelectItem disabled={Object.keys(membersInfo) < 1} value={"combat_power"}>전투력</SelectItem>
-                                <SelectItem disabled={Object.keys(membersInfo) < 1} value={"characterBasic.character_level"}>레벨</SelectItem>
+                                <SelectItem disabled={Object.keys(membersInfo || {}) < 1} value={"combat_power"}>전투력</SelectItem>
+                                <SelectItem disabled={Object.keys(membersInfo || {}) < 1} value={"characterBasic.character_level"}>레벨</SelectItem>
                             </SelectContent>
                         </Select>
                         <div className="items-center flex gap-2">
