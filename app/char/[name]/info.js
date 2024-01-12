@@ -31,7 +31,7 @@ import { getGuildID } from "@/lib/nexonAPI/getGuildID";
 import Equipment from "./equipment";
 import { getGuildBasic } from "@/lib/nexonAPI/getGuildBasic";
 import Stat from "./stat";
-import AccountCharacters from "./accountCharacter";
+import WorldCharacters from "./worldCharacters";
 import { updateCharacterInfo } from "@/lib/todAPI/updateCharacterInfo";
 import { Suspense } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -224,7 +224,7 @@ export default async function CharacterInfo(props) {
                         <TabsTrigger value="skills">스킬</TabsTrigger>
                         <TabsTrigger value="union" disabled>유니온</TabsTrigger>
                         <TabsTrigger value="contents" disabled>콘텐츠</TabsTrigger>
-                        <TabsTrigger value="accountCharacters">보유 캐릭터</TabsTrigger>
+                        <TabsTrigger value="worldCharacters">보유 캐릭터</TabsTrigger>
                     </TabsList>
 
 
@@ -251,13 +251,13 @@ export default async function CharacterInfo(props) {
                     </TabsContent>
 
 
-                    <TabsContent value="accountCharacters">
+                    <TabsContent value="worldCharacters">
                         <Suspense fallback={<Skeleton className="min-h-[500px]" />}>
-                            <AccountCharacters rankingUnion={user.rankingUnion} />
+                            <WorldCharacters characterName={user?.rankingUnion?.ranking?.[0]?.character_name} worldName={user?.rankingUnion?.ranking?.[0]?.world_name} />
                         </Suspense>
                     </TabsContent>
-                </Tabs >
-            </div >
+                </Tabs>
+            </div>
         </>
     );
 }

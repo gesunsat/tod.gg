@@ -10,7 +10,7 @@ import Script from 'next/script';
 const interNotoSansKR = Noto_Sans_KR({ subsets: ["latin"] });
 
 export const metadata = {
-  title: 'TOD.GG',
+  title: '메이플 정보 검색 - TOD.GG 토드지지',
   description: '메이플스토리 캐릭터 검색 서비스 TOD.GG!',
   keywords: ['넥슨', '메이플', '스토리', '캐릭터', '조회', '검색', '본캐', '부캐', '유니온'],
   metadataBase: new URL('https://tod.gg'),
