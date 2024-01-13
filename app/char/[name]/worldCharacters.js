@@ -8,10 +8,15 @@ import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Fragment } from "react";
 
 export default async function WorldCharacters(props) {
-    const worldCharacters = await getWorldCharacters(props.worldName, props.characterName);
+    let worldCharacters = await getWorldCharacters(props.worldName, props.characterName);
     // console.log(worldCharacters)
     const characters = [];
     const charactersInfo = [];
+    worldCharacters = worldCharacters.sort((a, b) => {
+        if (a.character_level > b.character_level) return -1;
+        if (a.character_level < b.character_level) return 1;
+        return 0;
+    });
     worldCharacters?.map((character) => {
         if (character?.world_head_character) characters.unshift(character.character_name);
         else characters.push(character.character_name);
