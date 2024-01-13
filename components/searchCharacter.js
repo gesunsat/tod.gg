@@ -2,9 +2,9 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import MagnifyingGlassIcon from "@/public/magnifyingGlass.svg";
-import InputGroup from "./ui/inputGroup";
 import { cn } from "@/lib/utils";
+import { Search } from "lucide-react";
+import { Input } from "./ui/input";
 
 export default function SearchCharcter({ className, ...props }) {
   const [value, setValue] = useState('')
@@ -20,15 +20,10 @@ export default function SearchCharcter({ className, ...props }) {
   return (
     <div className={cn("", className)} {...props}>
       <form onSubmit={handleSubmit}>
-        <InputGroup>
-          <input autoFocus className="relative flex-auto p-2 rounded-l-md focus:outline-none" placeholder="캐릭터 이름" type="text" value={value} onChange={e => setValue(e.target.value)} />
-          <button aria-label="검색버튼" className="pe-2 relative rounded-r-md" style={{ backgroundColor: "field" }}>
-            <MagnifyingGlassIcon
-              className="fill-black dark:fill-white"
-              width={20}
-            />
-          </button>
-        </InputGroup>
+        <div className="relative">
+          <Input autoFocus placeholder="캐릭터 이름" className="text-base pl-3 bg-white dark:bg-muted" value={value} onInput={e => setValue(e.target.value)} />
+          <Search className="absolute right-0 top-0 h-full w-9 px-2 text-muted-foreground cursor-pointer" onClick={handleSubmit} />
+        </div>
       </form>
     </div>
   )

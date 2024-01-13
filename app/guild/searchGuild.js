@@ -1,12 +1,12 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import MagnifyingGlassIcon from "@/public/magnifyingGlass.svg";
-import InputGroup from "../../components/ui/inputGroup";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
 import { useToast } from "@/components/ui/use-toast";
 import { ToastAction } from "@/components/ui/toast";
+import { Input } from "@/components/ui/input";
+import { Search } from "lucide-react";
 
 export default function SearchGuild({ className, ...props }) {
   const { replace } = useRouter();
@@ -30,22 +30,10 @@ export default function SearchGuild({ className, ...props }) {
   return (
     <div className={cn("", className)} {...props}>
       <form onSubmit={handleUrlChange}>
-        <InputGroup>
-          <input
-            autoFocus
-            className="relative flex-auto p-2 rounded-l-md focus:outline-none"
-            placeholder="길드 이름 (대소문자 구분)"
-            type="text"
-            value={value}
-            onInput={e => setValue(e.target.value)}
-          />
-          <button aria-label="검색버튼" className="pe-2 relative rounded-r-md" style={{ backgroundColor: "field" }}>
-            <MagnifyingGlassIcon
-              className="fill-black dark:fill-white"
-              width={20}
-            />
-          </button>
-        </InputGroup>
+        <div className="relative">
+          <Input autoFocus placeholder="길드 이름 (대소문자 구분)" className="text-base pl-3 bg-white dark:bg-muted" value={value} onInput={e => setValue(e.target.value)} />
+          <Search className="absolute right-0 top-0 h-full w-9 px-2 text-muted-foreground cursor-pointer" onClick={handleUrlChange} />
+        </div>
       </form>
     </div>
   )
