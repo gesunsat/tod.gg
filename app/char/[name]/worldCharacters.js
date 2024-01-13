@@ -4,8 +4,7 @@ import { Swords, Users } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import NullCharacterIcon from "@/public/nullCharacter.png"
-import { serverIconImg } from "@/dictData/serverIconImg";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Fragment } from "react";
 
 export default async function WorldCharacters(props) {
