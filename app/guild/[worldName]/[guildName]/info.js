@@ -4,7 +4,7 @@ import { getGuildID } from "@/lib/nexonAPI/getGuildID";
 import { getGuildBasic } from "@/lib/nexonAPI/getGuildBasic";
 import GuildHeader from "./header";
 import Temp from "./temp";
-import { getRankingGuildOne } from "@/lib/nexonAPI/getRankingGuildOne";
+import { getRankingGuild } from "@/lib/nexonAPI/getRankingGuild";
 import GuildMembers from "./members";
 
 export default async function GuildInfo(props) {
@@ -27,10 +27,8 @@ export default async function GuildInfo(props) {
             </div>
         )
     }
-    const guildRankingFlag = await getRankingGuildOne(props.worldName, props.guildName, 1);
-    const guildRankingSuro = await getRankingGuildOne(props.worldName, props.guildName, 2);
-
-    // console.log(guildBasic);
+    const guildRankingFlag = await getRankingGuild(1, props.worldName, 1, props.guildName);
+    const guildRankingSuro = await getRankingGuild(2, props.worldName, 1, props.guildName);
 
     return (
         <>

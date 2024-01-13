@@ -18,8 +18,8 @@ import { getCharLinkSkill } from '@/lib/nexonAPI/getCharLinkSkill';
 import { getCharOCID } from '@/lib/nexonAPI/getCharOCID';
 import { getCharPetEquipment } from '@/lib/nexonAPI/getCharPetEquipment';
 import { getCharPopularity } from '@/lib/nexonAPI/getCharPopularity';
-import { getCharPropensity } from '@/lib/nexonAPI/getCharPropensity';
-import { getCharSetEffect } from '@/lib/nexonAPI/getCharSetEffect';
+// import { getCharPropensity } from '@/lib/nexonAPI/getCharPropensity';
+// import { getCharSetEffect } from '@/lib/nexonAPI/getCharSetEffect';
 import { getCharSkill } from '@/lib/nexonAPI/getCharSkill';
 import { getCharStat } from '@/lib/nexonAPI/getCharStat';
 import { getCharSymbolEquipment } from '@/lib/nexonAPI/getCharSymbolEquipment';
@@ -36,6 +36,7 @@ import { updateCharacterInfo } from "@/lib/todAPI/updateCharacterInfo";
 import { Suspense } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
 import Skills from "./skills";
+import Contents from "./contents";
 
 export default async function CharacterInfo(props) {
     const OCID = await getCharOCID(props.characterName);
@@ -76,11 +77,11 @@ export default async function CharacterInfo(props) {
         charAbility,
         charStat,
         charHyperStat,
-        charPropensity,
+        // charPropensity,
         charItemEquipment,
         charCashitemEquipment,
         charSymbolEquipment,
-        charSetEffect,
+        // charSetEffect,
         charBeautyEquipment,
         charAndroidEquipment,
         charPetEquipment,
@@ -99,11 +100,11 @@ export default async function CharacterInfo(props) {
         getCharAbility(OCID.ocid),
         getCharStat(OCID.ocid),
         getCharHyperStat(OCID.ocid),
-        getCharPropensity(OCID.ocid),
+        // getCharPropensity(OCID.ocid),
         getCharItemEquipment(OCID.ocid),
         getCharCashitemEquipment(OCID.ocid),
         getCharSymbolEquipment(OCID.ocid),
-        getCharSetEffect(OCID.ocid),
+        // getCharSetEffect(OCID.ocid),
         getCharBeautyEquipment(OCID.ocid),
         getCharAndroidEquipment(OCID.ocid),
         getCharPetEquipment(OCID.ocid),
@@ -126,11 +127,11 @@ export default async function CharacterInfo(props) {
         "characterAbility": charAbility,
         "characterStat": charStat,
         "characterHyperStat": charHyperStat,
-        "characterPropensity": charPropensity,
+        // // "characterPropensity": charPropensity,
         "characterItemEquipment": charItemEquipment,
         "characterCashitemEquipment": charCashitemEquipment,
         "characterSymbolEquipment": charSymbolEquipment,
-        "characterSetEffect": charSetEffect,
+        // // "characterSetEffect": charSetEffect,
         "characterBeautyEquipment": charBeautyEquipment,
         "characterAndroidEquipment": charAndroidEquipment,
         "characterPetEquipment": charPetEquipment,
@@ -218,12 +219,12 @@ export default async function CharacterInfo(props) {
             <div id="MobileRichMidaMargin" className="mt-3 lg:mt-0 w-full h-[230px] lg:h-0"></div>
 
             <div className="rounded-lg border bg-card text-card-foreground shadow-sm p-2 mt-2">
-                <Tabs defaultValue="stat/equipment" activationMode="manual" className="w-full">
+                <Tabs defaultValue="contents" activationMode="manual" className="w-full">
                     <TabsList className="justify-start w-full overflow-x-scroll hidden-scroll flex gap-x-[10px] sm:grid sm:grid-cols-5">
                         <TabsTrigger value="stat/equipment">스탯/장비</TabsTrigger>
                         <TabsTrigger value="skills">스킬</TabsTrigger>
                         <TabsTrigger value="union" disabled>유니온</TabsTrigger>
-                        <TabsTrigger value="contents" disabled>콘텐츠</TabsTrigger>
+                        <TabsTrigger value="contents">컨텐츠</TabsTrigger>
                         <TabsTrigger value="worldCharacters">보유 캐릭터</TabsTrigger>
                     </TabsList>
 
@@ -247,7 +248,7 @@ export default async function CharacterInfo(props) {
 
 
                     <TabsContent value="contents">
-
+                        <Contents character={user} />
                     </TabsContent>
 
 

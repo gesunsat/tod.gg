@@ -14,7 +14,7 @@ export default function Footer(props) {
             <li className={cn("flex justify-center items-center", Style.itemSeparator)}><Link href={"/contact"}>문의</Link></li>
           </ul>
         </div>
-        <div className="text-xs opacity-50">토드지지</div>
+        <div className="text-xs text-gray-400">토드지지</div>
       </div>
     </footer>
   );

@@ -10,7 +10,7 @@ export default function Header() {
     <header className="w-full bg-card">
       <ThemeSwitch className="absolute top-5 right-3 block sm:hidden" height="20" />
       <div className="container mx-auto flex flex-col sm:flex-row">
-        <Link href={"/"}>
+        <Link href={"/"} className="self-center">
           <LogoIcon className="w-auto h-[20px] sm:h-[40px] m-5 sm:mx-0 self-center dark:fill-white dark:stroke-white " alt="TOD.GG" aria-label="TOD.GG" />
         </Link>
         <SearchCharcter className={"mx-0 sm:mx-4 flex-1 pb-5 sm:pt-5"} />
