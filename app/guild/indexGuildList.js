@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { serverIconImg } from "@/dictData/serverIconImg";
+import { serverIconImg } from "@/mapleData/serverIconImg";
 import { getGuildID } from "@/lib/nexonAPI/getGuildID";
 import { PlusCircleIcon } from "lucide-react";
 import Image from "next/image";

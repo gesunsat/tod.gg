@@ -26,8 +26,9 @@ import { updateCharacterInfo } from "@/lib/todAPI/updateCharacterInfo";
 import { PlayIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import Menu from "./menu";
-import { serverIconImg } from "@/dictData/serverIconImg";
+import Menu from "./mainTabs";
+import { serverIconImg } from "@/mapleData/serverIconImg";
+import { getWorldCharacters } from "@/lib/todAPI/getWorldCharacters";
 
 export async function generateMetadata({ params }) {
     try {
@@ -110,33 +111,32 @@ export default async function CharacterLayout({ params, children }) {
         )
     }
 
-    const guildName = charBasic?.character_guild_name;
     const worldName = charBasic?.world_name;
-    let guildBasic = {};
-    if (guildName) {
-        const guildID = await getGuildID(worldName, guildName);
-        guildBasic = await getGuildBasic(guildID.oguild_id);
-    }
-
+    const guildName = charBasic?.character_guild_name;
     const [
         charPopularity,
         charStat,
         userUnion,
         rankingUnion,
+        guildBasic,
     ] = await Promise.all([
         getCharPopularity(OCID.ocid),
         getCharStat(OCID.ocid),
         getUserUnion(OCID.ocid),
         getRankingUnion(OCID.ocid),
+        (async () => {
+            const guildID = await getGuildID(worldName, guildName);
+            return await getGuildBasic(guildID.oguild_id);
+        })(),
     ]);
 
     const user = {
-        "guildBasic": guildBasic,
         "characterBasic": charBasic,
         "characterPopularity": charPopularity,
         "characterStat": charStat,
         "userUnion": userUnion,
         "rankingUnion": rankingUnion,
+        "guildBasic": guildBasic,
     };
 
     updateCharacterInfo(OCID.ocid, user);
@@ -209,10 +209,12 @@ export default async function CharacterLayout({ params, children }) {
 
             <div id="MobileRichMidaMargin" className="mt-3 lg:mt-0 w-full h-[230px] lg:h-0"></div>
 
-            <Menu characterName={characterName} />
-
             <div className="rounded-lg border bg-card text-card-foreground shadow-sm p-2 mt-2">
-                {children}
+                <Menu characterName={characterName} />
+
+                <div className="mt-2">
+                    {children}
+                </div>
             </div>
         </>
     )

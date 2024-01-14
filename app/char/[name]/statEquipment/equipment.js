@@ -1,23 +1,17 @@
 "use client";
 
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { serverIconImg } from "@/dictData/serverIconImg";
 import Image from "next/image";
-import Link from "next/link";
 import { Fragment, useEffect, useState } from "react";
 import StarforceIcon from "@/public/starforce.svg";
 import FlagIcon from "@/public/flag.svg";
-import PlayIcon from "@/public/play.svg";
 import { cn } from "@/lib/utils";
-import { itemInfo } from "@/dictData/itemInfo";
+import { itemInfo } from "@/mapleData/itemInfo";
 import { VT323 } from "next/font/google";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
-import { Pagination, PaginationContent, PaginationItem, PaginationLink } from "@/components/ui/pagination";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import HairIcon from "@/public/hair.png"
 import FaceIcon from "@/public/face.png"
@@ -32,7 +26,6 @@ import LunaPetitIcon from "@/public/lunaPetit.png"
 import LunaSweetIcon from "@/public/lunaSweet.png"
 import LunaDreamIcon from "@/public/lunaDream.png"
 import { Progress } from "@/components/ui/progress";
-import { Skeleton } from "@/components/ui/skeleton";
 
 const interVT323 = VT323({ subsets: ["latin"], weight: ["400"] });
 
