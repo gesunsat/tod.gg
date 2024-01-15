@@ -276,6 +276,8 @@ export default function Equipment(props) {
 
     const [openHoverCard, setOpenHoverCard] = useState({});
 
+    // console.log(user)
+
     return (
         <>
             <div className="col-span-3 lg:col-span-1">
@@ -287,7 +289,7 @@ export default function Equipment(props) {
                         <TabsTrigger value="androidEquipment">안드</TabsTrigger>
                         <TabsTrigger
                             value="symbolEquipment"
-                            disabled={user?.characterSymbolEquipment?.date ? false : true}
+                            disabled={user?.characterSymbolEquipment?.symbol.length >= 1 ? false : true}
                         >
                             심볼
                         </TabsTrigger>
@@ -1814,7 +1816,10 @@ export default function Equipment(props) {
                                                                 asChild
                                                                 onClick={() => setOpenHoverCard({ ["펫스킬2_" + index]: true })}
                                                             >
-                                                                <Image alt={"펫스킬2_" + index} src={user?.characterPetEquipment[`pet_${index + 1}_auto_skill`]?.skill_2_icon} className="object-contain mx-auto transition-all scale-75 hover:scale-100" fill sizes="50px"></Image>
+                                                                {
+                                                                    user?.characterPetEquipment[`pet_${index + 1}_auto_skill`]?.skill_2_icon &&
+                                                                    <Image alt={"펫스킬2_" + index} src={user?.characterPetEquipment[`pet_${index + 1}_auto_skill`]?.skill_2_icon} className="object-contain mx-auto transition-all scale-75 hover:scale-100" fill sizes="50px"></Image>
+                                                                }
                                                             </HoverCardTrigger>
                                                             <HoverCardContent
                                                                 className="text-white w-auto p-3 bg-neutral-800 dark:bg-popover"

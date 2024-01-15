@@ -19,7 +19,7 @@ export default function MainTabs(props) {
                     <TabsTrigger asChild value="/skill">
                         <Link href={`/char/${characterName}/skill`}>스킬</Link>
                     </TabsTrigger>
-                    <TabsTrigger disabled value="/union">
+                    <TabsTrigger asChild value="/union">
                         <Link href={`/char/${characterName}/union`}>유니온</Link>
                     </TabsTrigger>
                     <TabsTrigger asChild value="/content">

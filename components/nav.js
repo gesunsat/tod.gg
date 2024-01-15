@@ -14,7 +14,7 @@ export default function Header() {
 
           <li className={cn("block relative border-black dark:border-white hover:border-b-4", pathname == "/guild" ? "border-b-4" : "")}>
             <Link href={"/guild"}>
-              <div className="flex text-center leading-5 py-3 text-black dark:text-white box-border whitespace-nowrap">길드</div>
+              <div className="flex text-center leading-5 p-3 text-black dark:text-white box-border whitespace-nowrap">길드</div>
             </Link>
           </li>
           {/* <li className={cn("block relative border-black dark:border-white hover:border-b-4", pathname == "/stat" ? "border-b-4" : "")}>

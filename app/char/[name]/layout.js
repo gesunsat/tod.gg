@@ -55,7 +55,7 @@ export async function generateMetadata({ params }) {
         }
 
         return {
-            title: `${characterBasic.character_name} 캐릭터 정보 | TOD.GG`,
+            title: `${characterBasic.character_name} 캐릭터 정보 | TOD.GG 토드지지`,
             description:
                 `${characterBasic.world_name} | ` +
                 `${characterBasic.character_class} | ` +
@@ -146,7 +146,13 @@ export default async function CharacterLayout({ params, children }) {
             <div className="rounded-lg border bg-card text-card-foreground shadow-sm">
                 <div className="grid grid-cols-4">
                     <div className="col-span-4 lg:col-span-1 text-center p-3">
-                        <div className={"relative h-56 lg:h-full overflow-hidden bg-negative-fixed-more text-positive-fixed bg-center bg-no-repeat bg-contain"} style={{ backgroundImage: `url(${user.characterBasic.character_image})` }}></div>
+                        {
+                            user?.characterBasic?.character_image &&
+                            <div
+                                style={{ '--image-url': `url(${user.characterBasic.character_image})` }}
+                                className={"relative h-56 lg:h-full overflow-hidden bg-negative-fixed-more text-positive-fixed bg-center bg-no-repeat bg-contain bg-[image:var(--image-url)]"}
+                            />
+                        }
                     </div>
                     <div className="col-span-4 lg:col-span-3 bg-muted bg-opacity-20 flex justify-between flex-1 p-3 relative rounded-md lg:rounded-s-none lg:rounded-e-md">
                         <div>

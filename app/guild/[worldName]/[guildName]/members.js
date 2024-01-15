@@ -191,7 +191,7 @@ export default function GuildMembers(props) {
                                 {
                                     loading ?
                                         <Icons.spinner className="h-4 w-4 animate-spin" /> :
-                                        "갱신하기"
+                                        "전체갱신"
                                 }
                             </Button>
                         </div>

@@ -11,27 +11,33 @@ import { getRankingDojang } from "@/lib/nexonAPI/getRankingDojang";
 import { getRankingTheseed } from "@/lib/nexonAPI/getRankingTheseed";
 
 const unionGradeImage = {
-    "노비스 I": "symbol.0.0",
-    "노비스 II": "symbol.0.1",
-    "노비스 III": "symbol.0.2",
-    "노비스 IV": "symbol.0.3",
-    "노비스 V": "symbol.0.4",
-    "마스터 I": "symbol.2.0",
-    "마스터 II": "symbol.2.1",
-    "마스터 III": "symbol.2.2",
-    "마스터 IV": "symbol.2.3",
-    "마스터 V": "symbol.2.4",
-    "그랜드마스터 I": "symbol.3.0",
-    "그랜드마스터 II": "symbol.3.1",
-    "그랜드마스터 III": "symbol.3.2",
-    "그랜드마스터 IV": "symbol.3.3",
-    "그랜드마스터 V": "symbol.3.4",
-    "슈프림 I": "symbol.4.0",
-    "슈프림 II": "symbol.4.1",
-    "슈프림 III": "symbol.4.2",
-    "슈프림 IV": "symbol.4.3",
-    "슈프림 V": "symbol.4.4",
+    "노비스 유니온 1": "symbol.0.0",
+    "노비스 유니온 2": "symbol.0.1",
+    "노비스 유니온 3": "symbol.0.2",
+    "노비스 유니온 4": "symbol.0.3",
+    "노비스 유니온 5": "symbol.0.4",
+    "베테랑 유니온 1": "symbol.1.0",
+    "베테랑 유니온 2": "symbol.1.1",
+    "베테랑 유니온 3": "symbol.1.2",
+    "베테랑 유니온 4": "symbol.1.3",
+    "베테랑 유니온 5": "symbol.1.4",
+    "마스터 유니온 1": "symbol.2.0",
+    "마스터 유니온 2": "symbol.2.1",
+    "마스터 유니온 3": "symbol.2.2",
+    "마스터 유니온 4": "symbol.2.3",
+    "마스터 유니온 5": "symbol.2.4",
+    "그랜드 마스터 유니온 1": "symbol.3.0",
+    "그랜드 마스터 유니온 2": "symbol.3.1",
+    "그랜드 마스터 유니온 3": "symbol.3.2",
+    "그랜드 마스터 유니온 4": "symbol.3.3",
+    "그랜드 마스터 유니온 5": "symbol.3.4",
+    "슈프림 유니온 1": "symbol.4.0",
+    "슈프림 유니온 2": "symbol.4.1",
+    "슈프림 유니온 3": "symbol.4.2",
+    "슈프림 유니온 4": "symbol.4.3",
+    "슈프림 유니온 5": "symbol.4.4",
 };
+
 const achievementGradeImage = {
     "브론즈": "emblem.bronze",
     "실버": "emblem.silver",
@@ -47,7 +53,6 @@ export default async function Content({ params }) {
     const charBasic = await getCharBasic(OCID.ocid);
 
     const worldName = charBasic?.world_name;
-    const guildName = charBasic?.character_guild_name;
     const character_class = charBasic?.character_class;
     const character_class_level = charBasic?.character_class_level;
 
@@ -56,6 +61,7 @@ export default async function Content({ params }) {
         rankingOverallCharacterWorld,
         rankingOverallAllWorldClass,
         rankingOverallCharacterWorldClass,
+        userUnion,
         rankingUnionAllWorld,
         rankingUnionCharacterWorld,
         rankingAchievement,
@@ -69,6 +75,7 @@ export default async function Content({ params }) {
         getRankingOverall(worldName, null, null, OCID.ocid),
         getRankingOverall(null, worldName.includes("리부트") ? 1 : 0, `${classLevel[character_class][0]}-${classLevel[character_class][character_class_level]}`, OCID.ocid),
         getRankingOverall(worldName, null, `${classLevel[character_class][0]}-${classLevel[character_class][character_class_level]}`, OCID.ocid),
+        getUserUnion(OCID.ocid),
         getRankingUnion(OCID.ocid, null),
         getRankingUnion(OCID.ocid, worldName),
         getRankingAchievement(OCID.ocid, null),
@@ -93,7 +100,6 @@ export default async function Content({ params }) {
         "rankingTheseedAllWorld": rankingTheseedAllWorld,
         "rankingTheseedCharacterWorld": rankingTheseedCharacterWorld,
     };
-    const userUnionGradeName = getUnionGradeName(parseInt(rankingUnionAllWorld?.ranking?.[0]?.union_level || 0));
 
     return (
         <>
@@ -157,13 +163,13 @@ export default async function Content({ params }) {
                                 <div className="relative w-full aspect-square">
                                     <Image
                                         alt="유니온 심볼"
-                                        src={`/union/${unionGradeImage[userUnionGradeName]}.png`}
+                                        src={`/union/${unionGradeImage[userUnion?.union_grade]}.png`}
                                         className="object-contain" fill sizes="256px" priority
                                     />
                                 </div>
                             </div>
                             <div className="mt-5 text-2xl">
-                                {userUnionGradeName}
+                                {userUnion?.union_grade.replace("1", "I").replace("2", "II").replace("3", "III").replace("4", "IV").replace("5", "V")}
                             </div>
                             <div className="text-neutral-500">
                                 <span className="text-xs">Lv. </span>
@@ -189,18 +195,25 @@ export default async function Content({ params }) {
                             <div className="text-2xl font-semibold">업적</div>
                             <div className="px-10 mt-5">
                                 <div className="relative w-full aspect-square">
-                                    <Image
-                                        alt="업적 뱃지"
-                                        src={`/achievement/${achievementGradeImage[rankingAchievement?.ranking?.[0]?.trophy_grade]}.png`}
-                                        className="object-contain" fill sizes="256px" priority
-                                    />
+                                    {
+                                        rankingAchievement?.ranking?.[0]?.trophy_grade &&
+                                        <Image
+                                            alt="업적 뱃지"
+                                            src={`/achievement/${achievementGradeImage[rankingAchievement?.ranking?.[0]?.trophy_grade]}.png`}
+                                            className="object-contain" fill sizes="256px" priority
+                                        />
+                                    }
                                 </div>
                             </div>
                             <div className="mt-5 text-2xl">
-                                {rankingAchievement?.ranking?.[0]?.trophy_grade}
+                                {
+                                    rankingAchievement?.ranking?.[0]?.trophy_grade ?
+                                        rankingAchievement?.ranking?.[0]?.trophy_grade :
+                                        "-"
+                                }
                             </div>
                             <div className="text-neutral-500">
-                                <span>{(rankingAchievement?.ranking?.[0]?.trophy_score || 0).toLocaleString()}점</span>
+                                <span>{rankingAchievement?.ranking?.[0]?.trophy_score ? rankingAchievement?.ranking?.[0]?.trophy_score + "점" : "-"}</span>
                             </div>
                             <div className="mt-5">
                                 <br />
@@ -301,14 +314,6 @@ export default async function Content({ params }) {
                             </div>
                         </div>
                     </div>
-
-
-
-
-
-
-
-
                 </div>
             </div >
         </>
@@ -339,75 +344,5 @@ function getTheseedMedalImage(floor) {
         return '45';
     } else {
         return '50';
-    }
-}
-
-function getUnionGradeName(level) {
-    if (level < 1000) {
-        return '노비스 I';
-    } else if (level < 1500) {
-        return '노비스 II';
-    } else if (level < 2000) {
-        return '노비스 III';
-    } else if (level < 2500) {
-        return '노비스 IV';
-    } else if (level < 3000) {
-        return '노비스 V';
-    } else if (level < 3500) {
-        return '베테랑 I';
-    } else if (level < 4000) {
-        return '베테랑 II';
-    } else if (level < 4500) {
-        return '베테랑 III';
-    } else if (level < 5000) {
-        return '베테랑 IV';
-    } else if (level < 5500) {
-        return '베테랑 V';
-    } else if (level < 6000) {
-        return '마스터 I';
-    } else if (level < 6500) {
-        return '마스터 II';
-    } else if (level < 7000) {
-        return '마스터 III';
-    } else if (level < 7500) {
-        return '마스터 IV';
-    } else if (level < 8000) {
-        return '마스터 V';
-    } else if (level < 8500) {
-        return '그랜드마스터 I';
-    } else if (level < 9000) {
-        return '그랜드마스터 II';
-    } else if (level < 9500) {
-        return '그랜드마스터 III';
-    } else if (level < 10000) {
-        return '그랜드마스터 IV';
-    } else if (level < 10500) {
-        return '그랜드마스터 V';
-    } else if (level < 11000) {
-        return '슈프림 I';
-    } else if (level < 11500) {
-        return '슈프림 II';
-    } else if (level < 12000) {
-        return '슈프림 III';
-    } else if (level < 12500) {
-        return '슈프림 IV';
-    } else {
-        return '슈프림 V';
-    }
-}
-
-function getAchieveGradeName(score, rank) {
-    if (score >= 30000 && rank <= 100) {
-        return '마스터';
-    } else if (score < 5000) {
-        return '브론즈';
-    } else if (score < 20000) {
-        return '실버';
-    } else if (score < 30000) {
-        return '골드';
-    } else if (score < 36000) {
-        return '플래티넘';
-    } else {
-        return '다이아몬드';
     }
 }
