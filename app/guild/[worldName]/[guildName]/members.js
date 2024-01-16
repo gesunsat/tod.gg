@@ -50,18 +50,21 @@ export default function GuildMembers(props) {
 
     const [loading, setLoading] = useState(false);
     const [membersInfo, setMembersInfo] = useState({});
-    const [dbGuildBasicDate, setDbGuildBasicDate] = useState(new Date("2000-01-01"));
+    const [memberMinDate, setMemberMinDate] = useState(new Date("2000-01-01"));
     const getMembersInfo = async () => {
         try {
             setLoading(true);
             if (!props?.guildID?.oguild_id) return;
 
-            const res = await getGuildMembersInfo(props.guildID.oguild_id, guildBasic.guild_member);
+            const res = await getGuildMembersInfo(guildBasic.guild_member);
             const membersInfo = res.guildMembersInfo;
-            const dbGuildBasicDate = res.guildBasicDate;
+            const memberMinDate = new Date(res.minDate);
+
+            // console.log(membersInfo);
+            // console.log(memberMinDate);
 
             setMembersInfo(membersInfo);
-            setDbGuildBasicDate(dbGuildBasicDate ? new Date(dbGuildBasicDate) : new Date("2000-01-01"));
+            setMemberMinDate(memberMinDate);
         } catch (err) {
             console.log(err);
         } finally {
@@ -75,12 +78,15 @@ export default function GuildMembers(props) {
             setLoading(true);
             setTime(5);
 
-            const res = await updateGuildMembersInfo(props.guildID.oguild_id);
+            const res = await updateGuildMembersInfo(guildBasic.guild_member, props?.guildID?.oguild_id);
             const membersInfo = res.guildMembersInfo;
-            const dbGuildBasicDate = res.guildBasicDate;
+            const memberMinDate = new Date(res.minDate);
+
+            // console.log(membersInfo);
+            // console.log(memberMinDate);
 
             setMembersInfo(membersInfo);
-            setDbGuildBasicDate(new Date(dbGuildBasicDate));
+            setMemberMinDate(memberMinDate);
         } catch (err) {
             console.log(err);
         } finally {
@@ -170,14 +176,14 @@ export default function GuildMembers(props) {
                                 </div>
                             }
                             {
-                                new Date(getYesterdayDate()) - dbGuildBasicDate < (1000 * 60 * 60 * 24) - 1000 ?
+                                new Date(getYesterdayDate()) - memberMinDate < (1000 * 60 * 60 * 24) - 1000 ?
                                     <div>최신</div> :
                                     <>
                                         {
-                                            dbGuildBasicDate.getFullYear() == "2000" ?
+                                            memberMinDate.getFullYear() == "2000" ?
                                                 <></> :
                                                 <div>
-                                                    {(new Date(getYesterdayDate()) - dbGuildBasicDate) / (1000 * 60 * 60 * 24)}일 전
+                                                    {(new Date(getYesterdayDate()) - memberMinDate) / (1000 * 60 * 60 * 24)}일 전
                                                 </div>
                                         }
                                     </>
@@ -186,7 +192,7 @@ export default function GuildMembers(props) {
                             <Button
                                 variant="secondary"
                                 onClick={handleUpdateGuildMembersInfo}
-                                disabled={new Date(getYesterdayDate()) - dbGuildBasicDate < (1000 * 60 * 60 * 24) - 1000}
+                                disabled={new Date(getYesterdayDate()) - memberMinDate < (1000 * 60 * 60 * 24) - 1000}
                             >
                                 {
                                     loading ?
@@ -204,11 +210,11 @@ export default function GuildMembers(props) {
             }
             {
                 !loading &&
-                <div className="grid grid-cols-3 xl:grid-cols-4 gap-2 mt-2">
+                <div className="grid max-[600px]:grid-cols-1 min-[600px]:grid-cols-2 lg:grid-cols-4 gap-2 mt-2">
                     {
                         members.map((member, memberIndex) => {
                             return (
-                                <div key={memberIndex} className="col-span-3 lg:col-span-1">
+                                <div key={memberIndex} className="col-span-1">
                                     <Link href={`/char/${member}`}>
                                         <div className="bg-muted bg-opacity-20 flex justify-center py-5 relative rounded">
                                             <div className="flex flex-1 gap-3">
