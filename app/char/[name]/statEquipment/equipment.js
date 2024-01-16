@@ -1503,9 +1503,9 @@ export default function Equipment(props) {
                                                         <Image
                                                             alt={"아이템 분류 아이콘"}
                                                             src={
-                                                                user?.characterPetEquipment[`pet_${index + 1}_type`] == "루나 쁘띠" && LunaPetitIcon ||
-                                                                user?.characterPetEquipment[`pet_${index + 1}_type`] == "루나 스윗" && LunaSweetIcon ||
-                                                                user?.characterPetEquipment[`pet_${index + 1}_type`] == "루나 드림" && LunaDreamIcon ||
+                                                                user?.characterPetEquipment[`pet_${index + 1}_pet_type`] == "루나 쁘띠" && LunaPetitIcon ||
+                                                                user?.characterPetEquipment[`pet_${index + 1}_pet_type`] == "루나 스윗" && LunaSweetIcon ||
+                                                                user?.characterPetEquipment[`pet_${index + 1}_pet_type`] == "루나 드림" && LunaDreamIcon ||
                                                                 CashitemCoinIcon
                                                             }
                                                             height={20}
@@ -1594,9 +1594,9 @@ export default function Equipment(props) {
                                                                                     <Image
                                                                                         alt={"아이템 분류 아이콘"}
                                                                                         src={
-                                                                                            user?.characterPetEquipment[`pet_${index + 1}_type`] == "루나 쁘띠" && LunaPetitIcon ||
-                                                                                            user?.characterPetEquipment[`pet_${index + 1}_type`] == "루나 스윗" && LunaSweetIcon ||
-                                                                                            user?.characterPetEquipment[`pet_${index + 1}_type`] == "루나 드림" && LunaDreamIcon ||
+                                                                                            user?.characterPetEquipment[`pet_${index + 1}_pet_type`] == "루나 쁘띠" && LunaPetitIcon ||
+                                                                                            user?.characterPetEquipment[`pet_${index + 1}_pet_type`] == "루나 스윗" && LunaSweetIcon ||
+                                                                                            user?.characterPetEquipment[`pet_${index + 1}_pet_type`] == "루나 드림" && LunaDreamIcon ||
                                                                                             CashitemCoinIcon
                                                                                         }
                                                                                         height={20}
