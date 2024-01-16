@@ -25,8 +25,8 @@ export default function MainTabs(props) {
                     <TabsTrigger asChild value="/content">
                         <Link href={`/char/${characterName}/content`}>컨텐츠/랭킹</Link>
                     </TabsTrigger>
-                    <TabsTrigger asChild value="/worldCharacter">
-                        <Link href={`/char/${characterName}/worldCharacter`}>보유 캐릭터</Link>
+                    <TabsTrigger asChild value="/characters">
+                        <Link href={`/char/${characterName}/characters`}>보유 캐릭터</Link>
                     </TabsTrigger>
                 </TabsList>
             </Tabs>

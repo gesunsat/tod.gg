@@ -10,7 +10,7 @@ import { getCharOCID } from "@/lib/nexonAPI/getCharOCID";
 import { getCharBasic } from "@/lib/nexonAPI/getCharBasic";
 import { getRankingUnion } from "@/lib/nexonAPI/getRankingUnion";
 
-export default async function WorldCharacter({ params }) {
+export default async function Characters({ params }) {
     const characterName = decodeURI(params.name);
     const OCID = await getCharOCID(characterName);
     const rankingUnion = await getRankingUnion(OCID.ocid);
