@@ -5,6 +5,7 @@ import { getUserUnionRaider } from "@/lib/nexonAPI/getUserUnionRaider";
 import { getUserUnion } from "@/lib/nexonAPI/getUserUnion";
 import Image from "next/image";
 import { Fragment } from "react";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 const unionGradeImage = {
     "노비스 유니온 1": "symbol.0.0",
@@ -175,16 +176,16 @@ export default async function Union({ params }) {
                         </div>
                     </div>
 
-                    <div className="basis-full lg:basis-1/3 ps-0 lg:ps-2 order-3 lg:order-2">
+                    <div className="basis-full lg:basis-1/3 ps-0 lg:ps-2 order-3 lg:order-2 h-auto">
                         <div className="flex flex-col gap-2 h-full">
                             <div className="hidden lg:block">
                                 <UnionSymbol />
                             </div>
-                            <div className="bg-background rounded h-full">
+                            <div className="bg-background rounded h-auto">
                                 <div className="font-semibold px-2 pt-2 pb-3">
                                     공격대 점령 효과
                                 </div>
-                                <div className="ms-0 sm:ms-2">
+                                <div className="ms-3">
                                     <div className="whitespace-pre-wrap">
                                         {
                                             userUnionRaider?.union_occupied_stat.sort().join("\n")
@@ -192,15 +193,19 @@ export default async function Union({ params }) {
                                     </div>
                                 </div>
                             </div>
-                            <div className="bg-background rounded h-full min-h-[200px] flex flex-col">
-                                <div className="font-semibold px-2 pt-2 pb-3">
-                                    공격대원 효과
-                                </div>
-                                <div className="ms-0 sm:ms-2 h-[150px] sm:h-full relative overflow-y-auto">
-                                    <div className="whitespace-pre-wrap absolute h-full">
-                                        {
-                                            userUnionRaider?.union_raider_stat.sort().join(`\n`)
-                                        }
+                            <div className="bg-background rounded h-full min-h-[200px]">
+                                <div className="relative h-full">
+                                    <div className="absolute h-full">
+                                        <ScrollArea type={"always"} className="h-full">
+                                            <div className="font-semibold px-2 pt-2 pb-3">
+                                                공격대원 효과
+                                            </div>
+                                            <div className="whitespace-pre-wrap ms-3">
+                                                {
+                                                    userUnionRaider?.union_raider_stat.sort().join(`\n`)
+                                                }
+                                            </div>
+                                        </ScrollArea>
                                     </div>
                                 </div>
                             </div>
