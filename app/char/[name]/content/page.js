@@ -233,12 +233,12 @@ export default async function Content({ params }) {
                         <div className="flex flex-col justify-center text-center m-2">
                             <div className="text-2xl font-semibold">무릉도장</div>
                             <div className="px-10 mt-5">
-                                <div className="relative w-full aspect-square">
+                                <div className="w-full aspect-square">
                                     {
                                         charDojang?.dojang_best_floor >= 1 &&
                                         <HoverCard openDelay={0} closeDelay={0}>
                                             <HoverCardTrigger asChild>
-                                                <Button variant="link" className="w-0 h-0 p-0 cursor-default">
+                                                <Button variant="link" className="relative w-full h-full p-0 cursor-default">
                                                     <Image
                                                         alt="무릉도장 몬스터"
                                                         src={`/dojang/${charDojang?.dojang_best_floor}.png`}
@@ -249,7 +249,6 @@ export default async function Content({ params }) {
                                             <HoverCardContent
                                                 className="text-white w-auto p-3 bg-neutral-800 dark:bg-popover"
                                                 side={"top"}
-                                                sideOffset={30}
                                             >
                                                 <div>
                                                     <span>{dojangFloorMonster[charDojang?.dojang_best_floor]}</span>
