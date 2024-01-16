@@ -9,6 +9,8 @@ import { getRankingUnion } from "@/lib/nexonAPI/getRankingUnion";
 import { getRankingAchievement } from "@/lib/nexonAPI/getRankingAchievement";
 import { getRankingDojang } from "@/lib/nexonAPI/getRankingDojang";
 import { getRankingTheseed } from "@/lib/nexonAPI/getRankingTheseed";
+import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
+import { Button } from "@/components/ui/button";
 
 const unionGradeImage = {
     "노비스 유니온 1": "symbol.0.0",
@@ -46,6 +48,8 @@ const achievementGradeImage = {
     "다이아몬드": "emblem.diamond",
     "마스터": "emblem.master",
 };
+
+const dojangFloorMonster = ["", "마노", "머쉬맘", "스텀피", "블루 머쉬맘", "좀비 머쉬맘", "킹슬라임", "다일", "킹크랑", "파우스트", "반 레온", "메탈 골렘", "포장마차", "주니어 발록", "엘리쟈", "크림슨 발록", "설산의 마녀", "세르프", "데우", "파파픽시", "힐라", "디트와 로이 + 네오 휴로이드", "키메라 + 호문스큘러", "프랑켄로이드 + 미스릴 뮤테", "차우 + 원시멧돼지", "에피네아 + 샤이닝 페어리", "롬바드 + 킹 블록골렘", "타이머 + 틱톡", "마스터 스펙터 + 사신 스펙터", "마스터 버크 + 듀얼 버크", "아카이럼", "마뇽 × 2", "그리프 × 2", "크세르크세스 × 2", "파풀라투스 × 2", "알리샤르 × 2", "스노우맨 × 2", "리치 × 2", "아니 × 3", "킹 오멘 × 3", "매그너스", "타르가", "스칼리온", "요괴선사", "데비존", "라바나", "레비아탄", "도도", "릴리노흐", "라이카", "핑크빈", "락 스피릿", "타란튤로스", "드래고니카", "드래곤 라이더", "호크아이", "이카르트", "이리나", "오즈", "미하일", "시그너스", "피아누스", "렉스", "카웅", "변형된 스텀피", "하늘 수호령", "게오르크", "타락마족 강화늑대기수", "아르마", "츄릅나무", "스우", "클리너", "악화된 조화의 정령", "증발하는 에르다스", "아랑", "봉선", "오공", "송달", "황룡", "적호", "무공", "아라네아", "빛의 집행자", "히아데스", "공허의 하수인", "데미안", "황혼의 하수인", "거대한 골렘", "리버스 다크 소울", "절망의 칼날", "윌", "안세스티온", "어센시온", "엠브리온", "각성한 아랑", "각성한 봉선", "각성한 오공", "각성한 송달", "각성한 황룡", "각성한 적호", "각성한 무공"];
 
 export default async function Content({ params }) {
     const characterName = decodeURI(params.name);
@@ -213,7 +217,7 @@ export default async function Content({ params }) {
                                 }
                             </div>
                             <div className="text-neutral-500">
-                                <span>{rankingAchievement?.ranking?.[0]?.trophy_score ? rankingAchievement?.ranking?.[0]?.trophy_score + "점" : "-"}</span>
+                                <span>{rankingAchievement?.ranking?.[0]?.trophy_score ? rankingAchievement?.ranking?.[0]?.trophy_score.toLocaleString() + "점" : "-"}</span>
                             </div>
                             <div className="mt-5">
                                 <br />
@@ -232,11 +236,26 @@ export default async function Content({ params }) {
                                 <div className="relative w-full aspect-square">
                                     {
                                         charDojang?.dojang_best_floor >= 1 &&
-                                        <Image
-                                            alt="무릉도장 몬스터"
-                                            src={`/dojang/${charDojang?.dojang_best_floor}.png`}
-                                            className="object-contain" fill sizes="256px" priority
-                                        />
+                                        <HoverCard openDelay={0} closeDelay={0}>
+                                            <HoverCardTrigger asChild>
+                                                <Button variant="link" className="w-0 h-0 p-0 cursor-default">
+                                                    <Image
+                                                        alt="무릉도장 몬스터"
+                                                        src={`/dojang/${charDojang?.dojang_best_floor}.png`}
+                                                        className="object-contain" fill sizes="256px" priority
+                                                    />
+                                                </Button>
+                                            </HoverCardTrigger>
+                                            <HoverCardContent
+                                                className="text-white w-auto p-3 bg-neutral-800 dark:bg-popover"
+                                                side={"top"}
+                                                sideOffset={30}
+                                            >
+                                                <div>
+                                                    <span>{dojangFloorMonster[charDojang?.dojang_best_floor]}</span>
+                                                </div>
+                                            </HoverCardContent>
+                                        </HoverCard>
                                     }
                                 </div>
                             </div>
