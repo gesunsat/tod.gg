@@ -146,7 +146,7 @@ export default async function Union({ params }) {
                 </div>
                 <div className="text-lg font-semibold self-center text-center relative">
                     <div>{userUnion?.union_grade.replace("1", "I").replace("2", "II").replace("3", "III").replace("4", "IV").replace("5", "V")}</div>
-                    <div className="absolute w-full text-neutral-500 text-sm">Lv.{userUnion?.union_level}</div>
+                    <div className="absolute left-1/2 -translate-x-1/2 text-neutral-500 text-sm">Lv.{userUnion?.union_level}</div>
                 </div>
             </div>
         )
@@ -195,7 +195,7 @@ export default async function Union({ params }) {
                             </div>
                             <div className="bg-background rounded h-full min-h-[200px]">
                                 <div className="relative h-full">
-                                    <div className="absolute h-full">
+                                    <div className="absolute h-full w-full">
                                         <ScrollArea type={"always"} className="h-full">
                                             <div className="font-semibold px-2 pt-2 pb-3">
                                                 공격대원 효과
