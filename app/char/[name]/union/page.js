@@ -217,7 +217,7 @@ export default async function Union({ params }) {
                             <div className="block lg:hidden">
                                 <UnionSymbol />
                             </div>
-                            <div className="grid min-[370px]:grid-cols-2 max-[370px]:grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-2">
+                            <div className="grid max-[370px]:grid-cols-1 min-[370px]:grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2">
                                 {
                                     classList.length >= 1 &&
                                     classList.map((block, block_index) => {
@@ -236,7 +236,7 @@ export default async function Union({ params }) {
                                                             className="object-contain rounded-full" fill sizes="256px"
                                                         />
                                                     </div>
-                                                    <div className="flex-1 self-center min-[370px]:text-xs max-[370px]:text-base sm:text-base">
+                                                    <div className="flex-1 self-center max-[370px]:text-base min-[370px]:text-xs sm:text-base">
                                                         <div>
                                                             {block[0].replace("모바일 캐릭터", "메이플M")}
                                                         </div>
