@@ -443,6 +443,16 @@ export default function Equipment(props) {
                                                                                         itemEquipments[slot]?.potential_option_grade == "레전드리" && "border-2 border-green-400",
                                                                                         "relative flex items-center w-[80px] h-[80px] mt-2 rounded bg-gradient-to-b from-gray-500 to-neutral-300")}
                                                                                 >
+                                                                                    <div className="absolute translate-y-1/3 h-full w-full">
+                                                                                        <Image alt={"아이템 그림자"} src={"/iconShadow.png"} className="object-contain scale-75" fill sizes="26px" />
+                                                                                    </div>
+                                                                                    {
+                                                                                        itemEquipments[slot]?.special_ring_level >= 1 &&
+                                                                                        <div className="absolute bottom-0 right-1 text-black">
+                                                                                            <span className="text-xs">Lv </span>
+                                                                                            <span className="font-bold">{itemEquipments[slot]?.special_ring_level}</span>
+                                                                                        </div>
+                                                                                    }
                                                                                     <Image alt={slot} src={itemImageSrcs[slot]} className="object-contain scale-75 mx-auto" fill sizes="50px"></Image>
                                                                                     {
                                                                                         itemEquipments[slot]?.special_ring_level >= 1 &&
@@ -982,6 +992,9 @@ export default function Equipment(props) {
                                                                                     itemEquipments[subItemSlot]?.potential_option_grade == "레전드리" && "border-2 border-green-400",
                                                                                     "relative flex items-center w-[80px] h-[80px] mt-2 rounded bg-gradient-to-b from-gray-500 to-neutral-300")}
                                                                             >
+                                                                                <div className="absolute translate-y-1/3 h-full w-full">
+                                                                                    <Image alt={"아이템 그림자"} src={"/iconShadow.png"} className="object-contain scale-75" fill sizes="26px" />
+                                                                                </div>
                                                                                 <Image alt={subItemSlot} src={itemImageSrcs[subItemSlot]} className="object-contain scale-75 mx-auto" fill sizes="50px"></Image>
                                                                                 <FlagIcon
                                                                                     alt="flag"
@@ -1365,6 +1378,9 @@ export default function Equipment(props) {
                                                                                     />
                                                                                 </div>
                                                                             }
+                                                                            <div className="absolute translate-y-1/3 h-full w-full">
+                                                                                <Image alt={"아이템 그림자"} src={"/iconShadow.png"} className="object-contain scale-75" fill sizes="26px" />
+                                                                            </div>
                                                                             <Image alt={slot} src={cashitemImageSrcs[slot]} className="object-contain scale-75 mx-auto" fill sizes="50px"></Image>
                                                                         </div>
                                                                     </div>
@@ -1586,7 +1602,12 @@ export default function Equipment(props) {
                                                                         <div className="relative flex items-center w-[80px] h-[80px] rounded bg-gradient-to-b from-gray-500 to-neutral-300">
                                                                             {
                                                                                 user?.characterPetEquipment[`pet_${index + 1}_icon`] &&
-                                                                                <Image alt="펫 아이콘" src={user?.characterPetEquipment[`pet_${index + 1}_icon`]} className="object-contain scale-75 mx-auto" fill sizes="50px"></Image>
+                                                                                <>
+                                                                                    <div className="absolute translate-y-1/3 h-full w-full">
+                                                                                        <Image alt={"아이템 그림자"} src={"/iconShadow.png"} className="object-contain scale-75" fill sizes="26px" />
+                                                                                    </div>
+                                                                                    <Image alt="펫 아이콘" src={user?.characterPetEquipment[`pet_${index + 1}_icon`]} className="object-contain scale-75 mx-auto" fill sizes="50px"></Image>
+                                                                                </>
                                                                             }
                                                                             {
                                                                                 user?.characterPetEquipment[`pet_${index + 1}_icon`] &&
@@ -1694,6 +1715,9 @@ export default function Equipment(props) {
                                                                 <div className="flex gap-1">
                                                                     <div className="w-auto">
                                                                         <div className={"relative flex items-center w-[80px] h-[80px] mt-2 rounded bg-gradient-to-b from-gray-500 to-neutral-300"}>
+                                                                            <div className="absolute translate-y-1/3 h-full w-full">
+                                                                                <Image alt={"아이템 그림자"} src={"/iconShadow.png"} className="object-contain scale-75" fill sizes="26px" />
+                                                                            </div>
                                                                             <Image alt="펫 아이템" src={user?.characterPetEquipment[`pet_${index + 1}_equipment`].item_icon} className="object-contain scale-75 mx-auto" fill sizes="50px"></Image>
                                                                             <div className="absolute bottom-1 right-1 pointer-events-none z-10">
                                                                                 <Image
@@ -2046,6 +2070,9 @@ export default function Equipment(props) {
                                                                 <div className="flex gap-1">
                                                                     <div className="w-auto">
                                                                         <div className={"relative flex items-center w-[80px] h-[80px] mt-2 rounded bg-gradient-to-b from-gray-500 to-neutral-300"}>
+                                                                            <div className="absolute translate-y-1/3 h-full w-full">
+                                                                                <Image alt={"아이템 그림자"} src={"/iconShadow.png"} className="object-contain scale-75" fill sizes="26px" />
+                                                                            </div>
                                                                             {
                                                                                 androidCashitemEquipments[slot]?.cash_item_coloring_prism &&
                                                                                 <div className="absolute bottom-1 left-1 pointer-events-none z-10">
@@ -2217,7 +2244,15 @@ export default function Equipment(props) {
                                                                             <div className="flex gap-1">
                                                                                 <div className="w-auto">
                                                                                     <div className={"relative flex items-center w-[80px] h-[80px] mt-2 rounded bg-gradient-to-b from-gray-500 to-neutral-300"}>
-                                                                                        <Image alt={symbolName} src={arcaneSymbolImageSrcs[symbolName]} className="object-contain scale-75 mx-auto" fill sizes="50px"></Image>
+                                                                                        {
+                                                                                            arcaneSymbolImageSrcs?.[symbolName] &&
+                                                                                            <>
+                                                                                                <div className="absolute translate-y-1/3 h-full w-full">
+                                                                                                    <Image alt={"아이템 그림자"} src={"/iconShadow.png"} className="object-contain scale-75" fill sizes="26px" />
+                                                                                                </div>
+                                                                                                <Image alt={symbolName} src={arcaneSymbolImageSrcs[symbolName]} className="object-contain scale-75 mx-auto" fill sizes="50px"></Image>
+                                                                                            </>
+                                                                                        }
                                                                                     </div>
                                                                                 </div>
                                                                                 <div className="w-full">
@@ -2380,7 +2415,12 @@ export default function Equipment(props) {
                                                                                     <div className={"relative flex items-center w-[80px] h-[80px] mt-2 rounded bg-gradient-to-b from-gray-500 to-neutral-300"}>
                                                                                         {
                                                                                             authenticSymbolImageSrcs?.[symbolName] &&
-                                                                                            <Image alt={symbolName} src={authenticSymbolImageSrcs[symbolName]} className="object-contain scale-75 mx-auto" fill sizes="50px"></Image>
+                                                                                            <>
+                                                                                                <div className="absolute translate-y-1/3 h-full w-full">
+                                                                                                    <Image alt={"아이템 그림자"} src={"/iconShadow.png"} className="object-contain scale-75" fill sizes="26px" />
+                                                                                                </div>
+                                                                                                <Image alt={symbolName} src={authenticSymbolImageSrcs[symbolName]} className="object-contain scale-75 mx-auto" fill sizes="50px"></Image>
+                                                                                            </>
                                                                                         }
                                                                                     </div>
                                                                                 </div>
