@@ -11,7 +11,7 @@ export default function MainTabs(props) {
 
     return (
         <>
-            <Tabs defaultValue={pathname}>
+            <Tabs defaultValue={pathname} value={pathname}>
                 <TabsList className="justify-start w-full overflow-x-scroll hidden-scroll flex gap-x-[10px] sm:grid sm:grid-cols-5">
                     <TabsTrigger asChild value="">
                         <Link href={`/char/${characterName}`}>스탯/장비</Link>
