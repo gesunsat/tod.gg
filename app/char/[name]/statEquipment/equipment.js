@@ -7,7 +7,6 @@ import { Fragment, useEffect, useState } from "react";
 import StarforceIcon from "@/public/starforce.svg";
 import FlagIcon from "@/public/flag.svg";
 import { cn } from "@/lib/utils";
-import { itemInfo } from "@/mapleData/itemInfo";
 import { VT323 } from "next/font/google";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
@@ -52,6 +51,17 @@ export default function Equipment(props) {
         let itemEquipments = {};
 
         user?.characterItemEquipment[currentViewingItemEquipmentTab]?.map((item) => {
+            item.starforceMax = GetMaxStar(
+                (
+                    parseInt(item.scroll_upgrade) +
+                    parseInt(item.scroll_upgradeable_count) +
+                    parseInt(item.scroll_resilience_count)
+                ),
+                item?.item_base_option?.base_equipment_level,
+                item?.starforce_scroll_flag,
+                item?.item_name
+            )
+
             itemImageSrcs[item.item_equipment_slot] = itemMorooShapeView ? item.item_icon : item.item_shape_icon;
             itemEquipments[item.item_equipment_slot] = item;
         });
@@ -273,6 +283,33 @@ export default function Equipment(props) {
         "damage": "%",
         "all_stat": "%",
     }
+    const itemStarData = [
+        [0, 5, 3],
+        [95, 8, 5],
+        [110, 10, 8],
+        [120, 15, 10],
+        [130, 20, 12],
+        [140, 25, 15],
+    ];
+    const GetMaxStar = (upgradeable_count, reqLevel, starforce_scroll_flag, item_name) => {
+        if (upgradeable_count == 0) return 0; // 업그레이드 가능 횟수
+        // if (this.Cash) return 0;
+        // if (this.GetBooleanValue(GearPropType.onlyUpgrade)) return 0; // onlyUpgrade 특정 아이템에 옵션이 있음 하지만 API에서는 안알려주니 밑에 상수로
+        if (["오닉스 펜던트 '각성'", '오닉스 링 "성장"', '오닉스 링 "완성"', "벤젼스 링", "결속의 반지", "코스모스 링", "테네브리스 원정대 반지", "어웨이크 링"].includes(item_name)) return 0;
+        // if (this.type == GearType.machineEngine || this.type == GearType.machineArms || this.type == GearType.machineLegs || this.type == GearType.machineBody || this.type == GearType.machineTransistors || this.type == GearType.dragonMask || this.type == GearType.dragonPendant || this.type == GearType.dragonWings || this.type == GearType.dragonTail)
+        //     return 0;
+
+        let data = [];
+        for (let i = 0; i < itemStarData.length; i++) {
+            const item = itemStarData[i];
+
+            if (reqLevel >= item[0]) data = item;
+            else break;
+        };
+
+        if (!data.length) return 0;
+        return data[starforce_scroll_flag == "사용" ? 2 : 1];
+    }
 
     const [openHoverCard, setOpenHoverCard] = useState({});
 
@@ -380,22 +417,19 @@ export default function Equipment(props) {
                                                                     onClick={() => setOpenHoverCard({ [slot]: false })}
                                                                 >
                                                                     {
-                                                                        itemInfo[itemEquipments[slot].item_name]?.starforceMax != 0 &&
-                                                                            (parseInt(itemEquipments[slot].scroll_upgrade) +
-                                                                                parseInt(itemEquipments[slot].scroll_upgradeable_count) +
-                                                                                parseInt(itemEquipments[slot].scroll_resilience_count) >= 1) ?
+                                                                        itemEquipments[slot].starforceMax ?
                                                                             <div className="w-4/5 mx-auto flex flex-wrap justify-center mb-1">
                                                                                 {
-                                                                                    Array(itemEquipments[slot].starforce_scroll_flag == "사용" ? 3 : Math.ceil((itemInfo[itemEquipments[slot].item_name]?.starforceMax || 25) / 5)).fill().map((_, index) => {
-                                                                                        if (((itemInfo[itemEquipments[slot].item_name]?.starforceMax || 25) - (5 * index)) <= 0) return (<Fragment key={index}></Fragment>);
+                                                                                    Array(Math.ceil(itemEquipments[slot].starforceMax / 5)).fill().map((_, index) => {
+                                                                                        if ((itemEquipments[slot].starforceMax - (5 * index)) <= 0) return (<Fragment key={index}></Fragment>);
                                                                                         return (
                                                                                             <Fragment key={index}>
                                                                                                 {[15].includes((5 * index)) ? <div className="w-full mt-2"></div> : <></>}
                                                                                                 <div className="flex flex-grow-0 flex-shrink-0 justify-center items-center">
                                                                                                     {
-                                                                                                        Array((itemInfo[itemEquipments[slot].item_name]?.starforceMax || 25) - (5 * index) >= 5 ?
+                                                                                                        Array(itemEquipments[slot].starforceMax - (5 * index) >= 5 ?
                                                                                                             5 :
-                                                                                                            (itemInfo[itemEquipments[slot].item_name]?.starforceMax || 25) - (5 * index))
+                                                                                                            itemEquipments[slot].starforceMax - (5 * index))
                                                                                                             .fill().map((_, starIndex) => {
                                                                                                                 return (
                                                                                                                     <StarforceIcon
