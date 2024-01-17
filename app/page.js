@@ -2,6 +2,10 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 
 const notice = [
   {
+    title: "2024.01.18",
+    content: ["캐릭터 페이지 > 데이터 조회 날짜 선택 기능 추가", "버그 수정 및 성능 개선"],
+  },
+  {
     title: "2024.01.16",
     content: ["캐릭터 페이지 > 유니온 탭 활성화", "버그 수정 및 성능 개선"],
   },

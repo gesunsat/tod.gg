@@ -10,8 +10,9 @@ import { getCharVMatrix } from "@/lib/nexonAPI/getCharVMatrix";
 import { getCharHexaMatrix } from "@/lib/nexonAPI/getCharHexaMatrix";
 import { getCharHexaMatrixStat } from "@/lib/nexonAPI/getCharHexaMatrixStat";
 
-export default async function Skill({ params }) {
+export default async function Skill({ params, searchParams }) {
     const characterName = decodeURI(params.name);
+    const selectedDate = searchParams?.date;
     const OCID = await getCharOCID(characterName);
 
     const [
@@ -22,12 +23,12 @@ export default async function Skill({ params }) {
         charHexaMatrix,
         charHexaMatrixStat,
     ] = await Promise.all([
-        getCharSkill(OCID.ocid, 5),
-        getCharSkill(OCID.ocid, 6),
-        getCharLinkSkill(OCID.ocid),
-        getCharVMatrix(OCID.ocid),
-        getCharHexaMatrix(OCID.ocid),
-        getCharHexaMatrixStat(OCID.ocid),
+        getCharSkill(OCID.ocid, 5, selectedDate),
+        getCharSkill(OCID.ocid, 6, selectedDate),
+        getCharLinkSkill(OCID.ocid, selectedDate),
+        getCharVMatrix(OCID.ocid, selectedDate),
+        getCharHexaMatrix(OCID.ocid, selectedDate),
+        getCharHexaMatrixStat(OCID.ocid, selectedDate),
     ]);
 
     const character = {
@@ -58,22 +59,13 @@ export default async function Skill({ params }) {
                     <TabsTrigger value="link">링크 스킬</TabsTrigger>
                 </TabsList>
                 <TabsContent value="6th">
-                    {
-                        character?.characterSkill6th?.character_skill_grade &&
-                        <Skill6th character={character} />
-                    }
+                    <Skill6th character={character} />
                 </TabsContent>
                 <TabsContent value="5th">
-                    {
-                        character?.characterSkill5th?.character_skill_grade &&
-                        <Skill5th character={character} />
-                    }
+                    <Skill5th character={character} />
                 </TabsContent>
                 <TabsContent value="link">
-                    {
-                        character?.characterLinkSkill?.character_class &&
-                        <SkillLink character={character} />
-                    }
+                    <SkillLink character={character} />
                 </TabsContent>
             </Tabs>
         </>

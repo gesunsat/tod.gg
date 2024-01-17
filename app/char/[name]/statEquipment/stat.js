@@ -9,7 +9,7 @@ export default function Stat(props) {
     const [user, setUser] = useState();
     useEffect(() => {
         setUser(props.character);
-    }, [])
+    }, [props])
 
     const [characterStat, setCharacterStat] = useState({});
     useEffect(() => {

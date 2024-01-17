@@ -17,7 +17,7 @@ export default function Skill5th(props) {
         if (localStorage.getItem("skill5thViewType")) setCurrentSkill5thViewType(localStorage.getItem("skill5thViewType"));
 
         setCharacter(props.character);
-    }, [])
+    }, [props])
     useEffect(() => {
         localStorage.setItem("skill5thViewType", currentSkill5thViewType);
     }, [currentSkill5thViewType]);

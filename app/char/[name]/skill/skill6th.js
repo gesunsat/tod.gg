@@ -24,7 +24,7 @@ export default function Skill6th(props) {
         if (localStorage.getItem("skill6thViewType")) setCurrentSkill6thViewType(localStorage.getItem("skill6thViewType"));
 
         setCharacter(props.character);
-    }, [])
+    }, [props])
 
     useEffect(() => {
         skillMapping();

@@ -100,15 +100,16 @@ const classWithAnImage = [
     "플레임위자드"
 ];
 
-export default async function Union({ params }) {
+export default async function Union({ params, searchParams }) {
     const characterName = decodeURI(params.name);
+    const selectedDate = searchParams?.date;
     const OCID = await getCharOCID(characterName);
     const [
         userUnion,
         userUnionRaider,
     ] = await Promise.all([
-        getUserUnion(OCID.ocid),
-        getUserUnionRaider(OCID.ocid),
+        getUserUnion(OCID.ocid, selectedDate),
+        getUserUnionRaider(OCID.ocid, selectedDate),
     ]);
 
     const fill_vector = [];

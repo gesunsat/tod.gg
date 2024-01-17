@@ -13,8 +13,9 @@ import { getCharPetEquipment } from "@/lib/nexonAPI/getCharPetEquipment";
 import { getCharOCID } from "@/lib/nexonAPI/getCharOCID";
 import { getCharBasic } from "@/lib/nexonAPI/getCharBasic";
 
-export default async function StatEquipment({ params }) {
+export default async function StatEquipment({ params, searchParams }) {
     const characterName = decodeURI(params.name);
+    const selectedDate = searchParams?.date;
     const OCID = await getCharOCID(characterName);
 
     const [
@@ -30,17 +31,17 @@ export default async function StatEquipment({ params }) {
         charAndroidEquipment,
         charPetEquipment,
     ] = await Promise.all([
-        getCharBasic(OCID.ocid),
-        getCharPopularity(OCID.ocid),
-        getCharAbility(OCID.ocid),
-        getCharStat(OCID.ocid),
-        getCharHyperStat(OCID.ocid),
-        getCharItemEquipment(OCID.ocid),
-        getCharCashitemEquipment(OCID.ocid),
-        getCharSymbolEquipment(OCID.ocid),
-        getCharBeautyEquipment(OCID.ocid),
-        getCharAndroidEquipment(OCID.ocid),
-        getCharPetEquipment(OCID.ocid),
+        getCharBasic(OCID.ocid, selectedDate),
+        getCharPopularity(OCID.ocid, selectedDate),
+        getCharAbility(OCID.ocid, selectedDate),
+        getCharStat(OCID.ocid, selectedDate),
+        getCharHyperStat(OCID.ocid, selectedDate),
+        getCharItemEquipment(OCID.ocid, selectedDate),
+        getCharCashitemEquipment(OCID.ocid, selectedDate),
+        getCharSymbolEquipment(OCID.ocid, selectedDate),
+        getCharBeautyEquipment(OCID.ocid, selectedDate),
+        getCharAndroidEquipment(OCID.ocid, selectedDate),
+        getCharPetEquipment(OCID.ocid, selectedDate),
     ]);
 
     const character = {
@@ -57,7 +58,6 @@ export default async function StatEquipment({ params }) {
         "characterAndroidEquipment": charAndroidEquipment,
         "characterPetEquipment": charPetEquipment,
     };
-
     return (
         <div className="grid grid-cols-3 gap-2">
             <Equipment character={character} />

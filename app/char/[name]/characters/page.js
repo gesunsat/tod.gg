@@ -7,13 +7,13 @@ import NullCharacterIcon from "@/public/nullCharacter.png"
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Fragment } from "react";
 import { getCharOCID } from "@/lib/nexonAPI/getCharOCID";
-import { getCharBasic } from "@/lib/nexonAPI/getCharBasic";
 import { getRankingUnion } from "@/lib/nexonAPI/getRankingUnion";
 
-export default async function Characters({ params }) {
+export default async function Characters({ params, searchParams }) {
     const characterName = decodeURI(params.name);
+    const selectedDate = searchParams?.date;
     const OCID = await getCharOCID(characterName);
-    const rankingUnion = await getRankingUnion(OCID.ocid);
+    const rankingUnion = await getRankingUnion(OCID.ocid, selectedDate);
     let worldCharacters = await getWorldCharacters(rankingUnion?.ranking?.[0]?.world_name, rankingUnion?.ranking?.[0]?.character_name);
 
     const characters = [];
@@ -29,7 +29,6 @@ export default async function Characters({ params }) {
 
         charactersInfo[character.character_name] = character;
     });
-
 
     return (
         <div>

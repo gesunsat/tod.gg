@@ -36,7 +36,7 @@ export default function Equipment(props) {
 
         setUser(props.character);
         // console.log(props.character)
-    }, []);
+    }, [props]);
 
     const [itemImageSrcs, setItemImageSrcs] = useState({});
     const [itemEquipments, setItemEquipments] = useState({});
@@ -386,7 +386,7 @@ export default function Equipment(props) {
                                                                 itemEquipments[slot] &&
                                                                 (itemEquipments[slot]?.potential_option_grade && !itemEquipments[slot]?.potential_option_1) ||
                                                                 (itemEquipments[slot]?.additional_potential_option_grade && !itemEquipments[slot]?.additional_potential_option_2)
-                                                            ) && "border-2 border-red-400",
+                                                            ) && "border-2 border-pink-600",
                                                             "relative items-center aspect-square m-[2.5px] bg-background rounded")}
                                                     >
                                                         {
@@ -558,7 +558,7 @@ export default function Equipment(props) {
                                                                                 </div>
                                                                                 <div>
                                                                                     {
-                                                                                        user?.characterAndroidEquipment.android_hair?.hair_name &&
+                                                                                        user?.characterAndroidEquipment?.android_hair?.hair_name &&
                                                                                         <>
                                                                                             {
                                                                                                 user?.characterAndroidEquipment.android_hair?.mix_color ?
@@ -568,7 +568,7 @@ export default function Equipment(props) {
                                                                                         </>
                                                                                     }
                                                                                     {
-                                                                                        user?.characterAndroidEquipment.android_hair?.mix_color &&
+                                                                                        user?.characterAndroidEquipment?.android_hair?.mix_color &&
                                                                                         <>
                                                                                             <span> ( </span>
                                                                                             <span>{user?.characterAndroidEquipment.android_hair?.base_color}</span>
@@ -582,7 +582,7 @@ export default function Equipment(props) {
                                                                                 </div>
                                                                                 <div>
                                                                                     {
-                                                                                        user?.characterAndroidEquipment.android_face?.hair_name &&
+                                                                                        user?.characterAndroidEquipment?.android_face?.hair_name &&
                                                                                         <>
                                                                                             {
                                                                                                 user?.characterAndroidEquipment.android_face?.mix_color ?
@@ -592,7 +592,7 @@ export default function Equipment(props) {
                                                                                         </>
                                                                                     }
                                                                                     {
-                                                                                        user?.characterAndroidEquipment.android_face?.mix_color &&
+                                                                                        user?.characterAndroidEquipment?.android_face?.mix_color &&
                                                                                         <>
                                                                                             <span> ( </span>
                                                                                             <span>{user?.characterAndroidEquipment.android_face?.base_color}</span>
@@ -605,7 +605,7 @@ export default function Equipment(props) {
                                                                                     }
                                                                                 </div>
                                                                                 <div>
-                                                                                    <span> {user?.characterAndroidEquipment.android_skin_name}</span>
+                                                                                    <span> {user?.characterAndroidEquipment?.android_skin_name}</span>
                                                                                 </div>
                                                                             </div>
                                                                             <div className="border-dotted border-b-[1px] border-gray-600 w-full mt-2 mb-2"></div>

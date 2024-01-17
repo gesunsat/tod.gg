@@ -77,7 +77,7 @@ export default async function GuildHeader(props) {
                             </div>
                         </div>
                     </div>
-                    <div className="hidden lg:block col-span-4 lg:col-span-2 bg-muted bg-opacity-20 flex justify-center p-1 relative rounded">
+                    <div className="hidden lg:block col-span-4 lg:col-span-2 bg-muted bg-opacity-20 justify-center p-1 relative rounded">
                         <div>
                         </div>
                     </div>

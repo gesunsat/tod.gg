@@ -9,7 +9,7 @@ export default function SkillLink(props) {
     const [character, setCharacter] = useState({});
     useEffect(() => {
         setCharacter(props.character);
-    }, [])
+    }, [props])
 
     const [openHoverCard, setOpenHoverCard] = useState({});
 
