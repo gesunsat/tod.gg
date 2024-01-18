@@ -284,11 +284,12 @@ export default function Equipment(props) {
         "all_stat": "%",
     }
     const itemStarData = [
-        [0, 5, 3],
+        [0, 5, 5],
         [95, 8, 5],
-        [110, 10, 8],
-        [120, 15, 10],
-        [130, 20, 12],
+        [100, 10, 8],
+        [110, 10, 10],
+        [120, 15, 15],
+        [130, 20, 15],
         [140, 25, 15],
     ];
     const GetMaxStar = (upgradeable_count, reqLevel, starforce_scroll_flag, item_name) => {

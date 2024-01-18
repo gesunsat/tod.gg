@@ -107,7 +107,6 @@ export default async function CharacterLayout({ params, children }) {
                 <div>다음 날 오전 1시 이후 다시 검색해주세요.</div>
                 <br />
                 <div>(2023년 12월 21일 이후 접속한 캐릭터만 조회가 가능합니다.)</div>
-                <DatePicker className="h-30 w-30" />
             </div>
         )
     }
