@@ -26,13 +26,13 @@ import { updateCharacterInfo } from "@/lib/todAPI/updateCharacterInfo";
 import { PlayIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import Menu from "./mainTabs";
 import { serverIconImg } from "@/mapleData/serverIconImg";
 import { getWorldCharacters } from "@/lib/todAPI/getWorldCharacters";
 import { headers } from 'next/headers';
 import { searchQueryParams } from "@/lib/getQueryParam";
-import { DatePicker } from "@/components/dataPicker";
+import { DatePicker } from "@/components/datePicker";
 import CharHeader from "./header";
+import CharTabs from "./tabs";
 
 export async function generateMetadata({ params }) {
     try {
@@ -146,7 +146,7 @@ export default async function CharacterLayout({ params, children }) {
             <div id="MobileRichMidaMargin" className="mt-3 lg:mt-0 w-full h-[230px] lg:h-0"></div>
 
             <div className="rounded-lg border bg-card text-card-foreground shadow-sm p-2 mt-2">
-                <Menu characterName={characterName} />
+                <CharTabs characterName={characterName} />
 
                 <div className="mt-2">
                     {children}

@@ -4,7 +4,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
 
-export default function MainTabs(props) {
+export default function CharTabs(props) {
     const characterName = props.characterName;
     let pathname = usePathname();
     pathname = pathname.replace(`/char/${encodeURI(characterName)}`, "");
@@ -16,7 +16,7 @@ export default function MainTabs(props) {
     return (
         <>
             <Tabs defaultValue={pathname} value={pathname}>
-                <TabsList className="justify-start w-full overflow-x-scroll hidden-scroll flex gap-x-[10px] sm:grid sm:grid-cols-5">
+                <TabsList className="justify-start w-full overflow-x-scroll hidden-scroll flex gap-x-[10px] sm:grid sm:grid-cols-6">
                     <TabsTrigger asChild value="">
                         <Link href={`/char/${characterName}${queryString ? `?${queryString}` : ""}`}>스탯/장비</Link>
                     </TabsTrigger>
@@ -28,6 +28,9 @@ export default function MainTabs(props) {
                     </TabsTrigger>
                     <TabsTrigger asChild value="/content">
                         <Link href={`/char/${characterName}/content${queryString ? `?${queryString}` : ""}`}>컨텐츠/랭킹</Link>
+                    </TabsTrigger>
+                    <TabsTrigger asChild value="/history">
+                        <Link href={`/char/${characterName}/history${queryString ? `?${queryString}` : ""}`}>통계</Link>
                     </TabsTrigger>
                     <TabsTrigger asChild value="/characters">
                         <Link href={`/char/${characterName}/characters${queryString ? `?${queryString}` : ""}`}>보유 캐릭터</Link>

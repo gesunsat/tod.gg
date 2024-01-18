@@ -26,12 +26,11 @@ import { updateCharacterInfo } from "@/lib/todAPI/updateCharacterInfo";
 import { PlayIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import Menu from "./mainTabs";
 import { serverIconImg } from "@/mapleData/serverIconImg";
 import { getWorldCharacters } from "@/lib/todAPI/getWorldCharacters";
 import { headers } from 'next/headers';
 import { searchQueryParams } from "@/lib/getQueryParam";
-import { DatePicker } from "@/components/dataPicker";
+import { DatePicker } from "@/components/datePicker";
 
 export default async function CharHeader(props) {
     const characterName = decodeURI(props.characterName);
