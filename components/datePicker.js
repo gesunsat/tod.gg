@@ -35,7 +35,8 @@ export function DatePicker({ className, onClick }) {
     const params = new URLSearchParams(searchParams);
     Object.keys(updatedQuery).forEach((key) => {
       if (updatedQuery[key]) {
-        params.set(key, updatedQuery[key]);
+        if (key == "date" && updatedQuery[key] == getYesterdayDate()) params.delete(key);
+        else params.set(key, updatedQuery[key]);
       } else {
         params.delete(key);
       }
