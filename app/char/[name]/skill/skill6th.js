@@ -253,8 +253,8 @@ export default function Skill6th(props) {
                                                                     <div>
                                                                         <span>
                                                                             {character?.characterHexaMatrixStat?.preset_hexa_stat_core?.[currentHexaMatrixStatPresetNo].main_stat_name == "주력 스탯 증가" ?
-                                                                                character?.characterBasic?.character_class == "제논" ? "올스탯 증가" :
-                                                                                    character?.characterBasic?.character_class == "데몬 어벤져" ? "HP 증가" : "주력 스탯 증가" :
+                                                                                character?.characterSkill6th?.character_class == "제논" ? "올스탯 증가" :
+                                                                                    character?.characterSkill6th?.character_class == "데몬어벤져" ? "HP 증가" : "주력 스탯 증가" :
                                                                                 character?.characterHexaMatrixStat?.preset_hexa_stat_core?.[currentHexaMatrixStatPresetNo].main_stat_name}
                                                                         </span>
                                                                     </div>
@@ -264,10 +264,10 @@ export default function Skill6th(props) {
                                                                         }
                                                                         <span>
                                                                             {
-                                                                                character?.characterHexaMatrixStat?.preset_hexa_stat_core?.[currentHexaMatrixStatPresetNo].main_stat_name == "주력 스탯 증가" ?
+                                                                                (character?.characterHexaMatrixStat?.preset_hexa_stat_core?.[currentHexaMatrixStatPresetNo].main_stat_level >= 1 && character?.characterHexaMatrixStat?.preset_hexa_stat_core?.[currentHexaMatrixStatPresetNo].main_stat_name == "주력 스탯 증가") ?
                                                                                     hexaStatMain[character?.characterHexaMatrixStat?.preset_hexa_stat_core?.[currentHexaMatrixStatPresetNo].main_stat_name][(character?.characterHexaMatrixStat?.preset_hexa_stat_core?.[currentHexaMatrixStatPresetNo].main_stat_level) - 1]
-                                                                                    * ((character?.characterHexaMatrixStat?.preset_hexa_stat_core?.[currentHexaMatrixStatPresetNo].main_stat_name == "주력 스탯 증가" && character?.characterBasic?.character_class == "제논") ? 0.48 : 1)
-                                                                                    * ((character?.characterHexaMatrixStat?.preset_hexa_stat_core?.[currentHexaMatrixStatPresetNo].main_stat_name == "주력 스탯 증가" && character?.characterBasic?.character_class == "데몬 어벤져") ? 21 : 1) :
+                                                                                    * ((character?.characterHexaMatrixStat?.preset_hexa_stat_core?.[currentHexaMatrixStatPresetNo].main_stat_name == "주력 스탯 증가" && character?.characterSkill6th?.character_class == "제논") ? 0.48 : 1)
+                                                                                    * ((character?.characterHexaMatrixStat?.preset_hexa_stat_core?.[currentHexaMatrixStatPresetNo].main_stat_name == "주력 스탯 증가" && character?.characterSkill6th?.character_class == "데몬어벤져") ? 21 : 1) :
                                                                                     hexaStatMain[character?.characterHexaMatrixStat?.preset_hexa_stat_core?.[currentHexaMatrixStatPresetNo].main_stat_name][(character?.characterHexaMatrixStat?.preset_hexa_stat_core?.[currentHexaMatrixStatPresetNo].main_stat_level) - 1]
                                                                             }
                                                                         </span>
@@ -283,8 +283,8 @@ export default function Skill6th(props) {
                                                                     <div>
                                                                         <span>
                                                                             {character?.characterHexaMatrixStat?.preset_hexa_stat_core?.[currentHexaMatrixStatPresetNo].sub_stat_name_1 == "주력 스탯 증가" ?
-                                                                                character?.characterBasic?.character_class == "제논" ? "올스탯 증가" :
-                                                                                    character?.characterBasic?.character_class == "데몬 어벤져" ? "HP 증가" : "주력 스탯 증가" :
+                                                                                character?.characterSkill6th?.character_class == "제논" ? "올스탯 증가" :
+                                                                                    character?.characterSkill6th?.character_class == "데몬어벤져" ? "HP 증가" : "주력 스탯 증가" :
                                                                                 character?.characterHexaMatrixStat?.preset_hexa_stat_core?.[currentHexaMatrixStatPresetNo].sub_stat_name_1}
                                                                         </span>
                                                                     </div>
@@ -294,10 +294,10 @@ export default function Skill6th(props) {
                                                                         }
                                                                         <span>
                                                                             {
-                                                                                character?.characterHexaMatrixStat?.preset_hexa_stat_core?.[currentHexaMatrixStatPresetNo].sub_stat_name_1 == "주력 스탯 증가" ?
+                                                                                (character?.characterHexaMatrixStat?.preset_hexa_stat_core?.[currentHexaMatrixStatPresetNo].main_stat_level >= 1 && character?.characterHexaMatrixStat?.preset_hexa_stat_core?.[currentHexaMatrixStatPresetNo].sub_stat_name_1 == "주력 스탯 증가") ?
                                                                                     hexaStatSub[character?.characterHexaMatrixStat?.preset_hexa_stat_core?.[currentHexaMatrixStatPresetNo].sub_stat_name_1][(character?.characterHexaMatrixStat?.preset_hexa_stat_core?.[currentHexaMatrixStatPresetNo].sub_stat_level_1) - 1]
-                                                                                    * ((character?.characterHexaMatrixStat?.preset_hexa_stat_core?.[currentHexaMatrixStatPresetNo].sub_stat_name_1 == "주력 스탯 증가" && character?.characterBasic?.character_class == "제논") ? 0.48 : 1)
-                                                                                    * ((character?.characterHexaMatrixStat?.preset_hexa_stat_core?.[currentHexaMatrixStatPresetNo].sub_stat_name_1 == "주력 스탯 증가" && character?.characterBasic?.character_class == "데몬 어벤져") ? 21 : 1) :
+                                                                                    * ((character?.characterHexaMatrixStat?.preset_hexa_stat_core?.[currentHexaMatrixStatPresetNo].sub_stat_name_1 == "주력 스탯 증가" && character?.characterSkill6th?.character_class == "제논") ? 0.48 : 1)
+                                                                                    * ((character?.characterHexaMatrixStat?.preset_hexa_stat_core?.[currentHexaMatrixStatPresetNo].sub_stat_name_1 == "주력 스탯 증가" && character?.characterSkill6th?.character_class == "데몬어벤져") ? 21 : 1) :
                                                                                     hexaStatSub[character?.characterHexaMatrixStat?.preset_hexa_stat_core?.[currentHexaMatrixStatPresetNo].sub_stat_name_1][(character?.characterHexaMatrixStat?.preset_hexa_stat_core?.[currentHexaMatrixStatPresetNo].sub_stat_level_1) - 1]
                                                                             }
                                                                         </span>
@@ -313,8 +313,8 @@ export default function Skill6th(props) {
                                                                     <div>
                                                                         <span>
                                                                             {character?.characterHexaMatrixStat?.preset_hexa_stat_core?.[currentHexaMatrixStatPresetNo].sub_stat_name_2 == "주력 스탯 증가" ?
-                                                                                character?.characterBasic?.character_class == "제논" ? "올스탯 증가" :
-                                                                                    character?.characterBasic?.character_class == "데몬 어벤져" ? "HP 증가" : "주력 스탯 증가" :
+                                                                                character?.characterSkill6th?.character_class == "제논" ? "올스탯 증가" :
+                                                                                    character?.characterSkill6th?.character_class == "데몬어벤져" ? "HP 증가" : "주력 스탯 증가" :
                                                                                 character?.characterHexaMatrixStat?.preset_hexa_stat_core?.[currentHexaMatrixStatPresetNo].sub_stat_name_2}
                                                                         </span>
                                                                     </div>
@@ -326,8 +326,8 @@ export default function Skill6th(props) {
                                                                             {
                                                                                 character?.characterHexaMatrixStat?.preset_hexa_stat_core?.[currentHexaMatrixStatPresetNo].sub_stat_name_2 == "주력 스탯 증가" ?
                                                                                     hexaStatSub[character?.characterHexaMatrixStat?.preset_hexa_stat_core?.[currentHexaMatrixStatPresetNo].sub_stat_name_2][(character?.characterHexaMatrixStat?.preset_hexa_stat_core?.[currentHexaMatrixStatPresetNo].sub_stat_level_2) - 1]
-                                                                                    * ((character?.characterHexaMatrixStat?.preset_hexa_stat_core?.[currentHexaMatrixStatPresetNo].sub_stat_name_2 == "주력 스탯 증가" && character?.characterBasic?.character_class == "제논") ? 0.48 : 1)
-                                                                                    * ((character?.characterHexaMatrixStat?.preset_hexa_stat_core?.[currentHexaMatrixStatPresetNo].sub_stat_name_2 == "주력 스탯 증가" && character?.characterBasic?.character_class == "데몬 어벤져") ? 21 : 1) :
+                                                                                    * ((character?.characterHexaMatrixStat?.preset_hexa_stat_core?.[currentHexaMatrixStatPresetNo].sub_stat_name_2 == "주력 스탯 증가" && character?.characterSkill6th?.character_class == "제논") ? 0.48 : 1)
+                                                                                    * ((character?.characterHexaMatrixStat?.preset_hexa_stat_core?.[currentHexaMatrixStatPresetNo].sub_stat_name_2 == "주력 스탯 증가" && character?.characterSkill6th?.character_class == "데몬어벤져") ? 21 : 1) :
                                                                                     hexaStatSub[character?.characterHexaMatrixStat?.preset_hexa_stat_core?.[currentHexaMatrixStatPresetNo].sub_stat_name_2][(character?.characterHexaMatrixStat?.preset_hexa_stat_core?.[currentHexaMatrixStatPresetNo].sub_stat_level_2) - 1]
                                                                             }
                                                                         </span>
