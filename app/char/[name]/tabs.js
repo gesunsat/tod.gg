@@ -30,7 +30,7 @@ export default function CharTabs(props) {
                         <Link href={`/char/${characterName}/content${queryString ? `?${queryString}` : ""}`}>컨텐츠/랭킹</Link>
                     </TabsTrigger>
                     <TabsTrigger asChild value="/history">
-                        <Link href={`/char/${characterName}/history${queryString ? `?${queryString}` : ""}`}>통계</Link>
+                        <Link href={`/char/${characterName}/history${queryString ? `?${queryString}` : ""}`}>히스토리</Link>
                     </TabsTrigger>
                     <TabsTrigger asChild value="/characters">
                         <Link href={`/char/${characterName}/characters${queryString ? `?${queryString}` : ""}`}>보유 캐릭터</Link>
