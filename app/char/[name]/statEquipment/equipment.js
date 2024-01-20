@@ -2409,7 +2409,7 @@ export default function Equipment(props) {
                                                                             {
                                                                                 arcaneSymbolEquipments[symbolName].symbol_level < 20 &&
                                                                                 <div className="text-yellow-400">
-                                                                                    <span>만렙 필요 개수 : </span>
+                                                                                    <span>만렙까지 남은 개수 : </span>
                                                                                     <span>{(arcaneSymbolNumberOfLevelsRequire[arcaneSymbolEquipments[symbolName].symbol_level] - arcaneSymbolEquipments[symbolName].symbol_growth_count).toLocaleString()}개</span>
 
                                                                                 </div>
@@ -2586,7 +2586,7 @@ export default function Equipment(props) {
                                                                             {
                                                                                 authenticSymbolEquipments[symbolName].symbol_level < 11 &&
                                                                                 <div className="text-yellow-400">
-                                                                                    <span>만렙 필요 개수 : </span>
+                                                                                    <span>만렙까지 남은 개수 : </span>
                                                                                     <span>{(authenticSymbolNumberOfLevelsRequire[authenticSymbolEquipments[symbolName].symbol_level] - authenticSymbolEquipments[symbolName].symbol_growth_count).toLocaleString()}개</span>
 
                                                                                 </div>
