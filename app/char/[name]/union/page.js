@@ -157,8 +157,7 @@ export default async function Union({ params, searchParams }) {
         <>
             <div className="bg-muted p-2 rounded-md shadow-md">
                 <div className="flex flex-row flex-wrap">
-
-                    <div className="basis-full lg:basis-2/3 order-1">
+                    <div className="basis-full lg:basis-2/3 order-1 relative">
                         <div className="grid grid-cols-[repeat(22,_minmax(0,_1fr))] aspect-[22/20]">
                             {
                                 Array(raider_x_size * raider_y_size).fill().map((_, bgCubeIndex) => {
@@ -175,6 +174,28 @@ export default async function Union({ params, searchParams }) {
                                 })
                             }
                         </div>
+                        <div className="absolute top-0 right-0 text-lg text-white font-bold h-full w-full">
+                            <div className="relative h-full w-full">
+                                <div style={{ textShadow: "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000" }} className="absolute -translate-x-1/2 -translate-y-1/2 text-xs sm:text-lg whitespace-nowrap top-[33%] left-[43%]">{userUnionRaider?.union_inner_stat?.[0]?.stat_field_effect.replace("유니온 ", "").replace("최대 ", "")}</div>
+                                <div style={{ textShadow: "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000" }} className="absolute -translate-x-1/2 -translate-y-1/2 text-xs sm:text-lg whitespace-nowrap top-[33%] left-[57%]">{userUnionRaider?.union_inner_stat?.[1]?.stat_field_effect.replace("유니온 ", "").replace("최대 ", "")}</div>
+                                <div style={{ textShadow: "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000" }} className="absolute -translate-x-1/2 -translate-y-1/2 text-xs sm:text-lg whitespace-nowrap top-[42%] left-[70%]">{userUnionRaider?.union_inner_stat?.[2]?.stat_field_effect.replace("유니온 ", "").replace("최대 ", "")}</div>
+                                <div style={{ textShadow: "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000" }} className="absolute -translate-x-1/2 -translate-y-1/2 text-xs sm:text-lg whitespace-nowrap top-[58%] left-[70%]">{userUnionRaider?.union_inner_stat?.[3]?.stat_field_effect.replace("유니온 ", "").replace("최대 ", "")}</div>
+                                <div style={{ textShadow: "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000" }} className="absolute -translate-x-1/2 -translate-y-1/2 text-xs sm:text-lg whitespace-nowrap top-[67%] left-[57%]">{userUnionRaider?.union_inner_stat?.[4]?.stat_field_effect.replace("유니온 ", "").replace("최대 ", "")}</div>
+                                <div style={{ textShadow: "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000" }} className="absolute -translate-x-1/2 -translate-y-1/2 text-xs sm:text-lg whitespace-nowrap top-[67%] left-[43%]">{userUnionRaider?.union_inner_stat?.[5]?.stat_field_effect.replace("유니온 ", "").replace("최대 ", "")}</div>
+                                <div style={{ textShadow: "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000" }} className="absolute -translate-x-1/2 -translate-y-1/2 text-xs sm:text-lg whitespace-nowrap top-[42%] left-[30%]">{userUnionRaider?.union_inner_stat?.[6]?.stat_field_effect.replace("유니온 ", "").replace("최대 ", "")}</div>
+                                <div style={{ textShadow: "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000" }} className="absolute -translate-x-1/2 -translate-y-1/2 text-xs sm:text-lg whitespace-nowrap top-[58%] left-[30%]">{userUnionRaider?.union_inner_stat?.[7]?.stat_field_effect.replace("유니온 ", "").replace("최대 ", "")}</div>
+
+                                <div style={{ textShadow: "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000" }} className="absolute -translate-x-1/2 -translate-y-1/2 text-xs sm:text-lg whitespace-nowrap top-[12.5%] left-[31.5%]">상태이상내성</div>
+                                <div style={{ textShadow: "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000" }} className="absolute -translate-x-1/2 -translate-y-1/2 text-xs sm:text-lg whitespace-nowrap top-[12.5%] left-[68.5%]">획득경험치</div>
+                                <div style={{ textShadow: "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000" }} className="absolute -translate-x-1/2 -translate-y-1/2 text-xs sm:text-lg whitespace-nowrap top-[32.5%] left-[89%]">크리티컬 확률</div>
+                                <div style={{ textShadow: "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000" }} className="absolute -translate-x-1/2 -translate-y-1/2 text-xs sm:text-lg whitespace-nowrap top-[67.5%] left-[89%]">보스데미지</div>
+                                <div style={{ textShadow: "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000" }} className="absolute -translate-x-1/2 -translate-y-1/2 text-xs sm:text-lg whitespace-nowrap top-[87.5%] left-[68.5%]">일반데미지</div>
+                                <div style={{ textShadow: "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000" }} className="absolute -translate-x-1/2 -translate-y-1/2 text-xs sm:text-lg whitespace-nowrap top-[87.5%] left-[31.5%]">버프지속시간</div>
+                                <div style={{ textShadow: "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000" }} className="absolute -translate-x-1/2 -translate-y-1/2 text-xs sm:text-lg whitespace-nowrap top-[67.5%] left-[11%]">방어율무시</div>
+                                <div style={{ textShadow: "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000" }} className="absolute -translate-x-1/2 -translate-y-1/2 text-xs sm:text-lg whitespace-nowrap top-[32.5%] left-[11%]">크리티컬 데미지</div>
+                            </div>
+                        </div>
+
                     </div>
 
                     <div className="basis-full lg:basis-1/3 ps-0 lg:ps-2 order-3 lg:order-2 h-auto">
