@@ -600,7 +600,7 @@ export default function Equipment(props) {
                                                                                 </div>
                                                                                 <div>
                                                                                     {
-                                                                                        user?.characterAndroidEquipment?.android_face?.hair_name &&
+                                                                                        user?.characterAndroidEquipment?.android_face?.face_name &&
                                                                                         <>
                                                                                             {
                                                                                                 user?.characterAndroidEquipment.android_face?.mix_color ?
@@ -727,6 +727,13 @@ export default function Equipment(props) {
                                                                             <div>
                                                                                 <span className="text-amber-400">가위 사용 가능 횟수 : </span>
                                                                                 <span className="text-amber-400">{parseInt(itemEquipments[slot].cuttable_count)}회</span>
+                                                                            </div>
+                                                                        }
+                                                                        {
+                                                                            (user?.characterAndroidEquipment?.android_grade && slot == "안드로이드") &&
+                                                                            <div>
+                                                                                <span>등급 :</span>
+                                                                                <span> {user?.characterAndroidEquipment?.android_grade}</span>
                                                                             </div>
                                                                         }
 
@@ -1956,13 +1963,24 @@ export default function Equipment(props) {
                                     androidCashitemEquipmentSlotArrangement.map((slot, index) => {
                                         if (slot == null) return (<div key={index} className="aspect-square"></div>);
 
+                                        if (user?.characterAndroidEquipment?.android_non_humanoid_flag == "비인간형") {
+                                            return (
+                                                <div
+                                                    key={index}
+                                                    className="relative items-center aspect-square m-[2.5px] bg-background rounded"
+                                                >
+                                                    <div key={index} className="aspect-square bg-muted rounded" />
+                                                </div>
+                                            )
+                                        }
+
                                         if (slot == "하의" && androidCashitemEquipments["상의"]?.cash_item_equipment_part == "한벌옷") {
                                             return (
                                                 <div
                                                     key={index}
                                                     className="relative items-center aspect-square m-[2.5px] bg-background rounded"
                                                 >
-                                                    <div key={index} className="aspect-square bg-opacity-30 bg-red-500 rounded"></div>
+                                                    <div key={index} className="aspect-square bg-opacity-30 bg-red-500 rounded" />
                                                 </div>
                                             )
                                         }
