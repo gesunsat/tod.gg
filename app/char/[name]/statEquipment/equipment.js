@@ -1969,7 +1969,7 @@ export default function Equipment(props) {
                                                     key={index}
                                                     className="relative items-center aspect-square m-[2.5px] bg-background rounded"
                                                 >
-                                                    <div key={index} className="aspect-square bg-muted rounded" />
+                                                    <div key={index} className="aspect-square bg-opacity-40 bg-red-950 rounded" />
                                                 </div>
                                             )
                                         }
