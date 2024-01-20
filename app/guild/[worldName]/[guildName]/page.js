@@ -1,56 +1,41 @@
-import { getGuildBasic } from "@/lib/nexonAPI/getGuildBasic";
 import { getGuildID } from "@/lib/nexonAPI/getGuildID";
-import GuildInfo from "./info";
+import { getGuildBasic } from "@/lib/nexonAPI/getGuildBasic";
+import GuildHeader from "./header";
+import { getRankingGuild } from "@/lib/nexonAPI/getRankingGuild";
+import GuildMembers from "./members";
 
-export async function generateMetadata({ params }) {
-  try {
-    const guildID = await getGuildID(decodeURI(params.worldName), decodeURI(params.guildName));
-    if (!guildID?.oguild_id) {
-      return {
-        title: "길드 정보 | TOD.GG",
-        description: "길드가 존재하지 않거나 불러올 수 없는 길드입니다.",
-      }
-    }
-
-    const guildBasic = await getGuildBasic(guildID.oguild_id);
-    if (!guildBasic?.guild_name) {
-      return {
-        title: "길드 정보 | TOD.GG",
-        description: "길드가 존재하지 않거나 불러올 수 없는 길드입니다.",
-      }
-    }
-
-    return {
-      title: `#${guildBasic.guild_name} #${guildBasic.world_name} 길드 정보 | TOD.GG`,
-      description:
-        `마스터:${guildBasic.guild_master_name} | ` +
-        `레벨:${guildBasic.guild_level} | ` +
-        `인원:${guildBasic.guild_member_count}`,
-      openGraph: {
-        url: `https://tod.gg/guild/${guildBasic.world_name}/${guildBasic.guild_name}`,
-        title: `#${guildBasic.guild_name} #${guildBasic.world_name} 길드 정보 | TOD.GG`,
-        description:
-          `마스터:${guildBasic.guild_master_name} | ` +
-          `레벨:${guildBasic.guild_level} | ` +
-          `인원:${guildBasic.guild_member_count}`,
-      }
-    }
-  } catch (err) {
-    console.log(err);
-    return {
-      title: "길드 정보 | TOD.GG",
-      description: "길드가 존재하지 않거나 불러올 수 없는 길드입니다.",
-    }
+export default async function GuildPage({ params }) {
+  const worldName = decodeURI(params.worldName);
+  const guildName = decodeURI(params.guildName);
+  const guildID = await getGuildID(worldName, guildName);
+  if (!guildID?.oguild_id) {
+    return (
+      <div className="text-center my-64">
+        <div>존재하지 않거나 불러올 수 없는 길드입니다.</div>
+        <div>다음 날 오전 1시 이후 다시 검색해주세요.</div>
+      </div>
+    )
   }
-}
 
-export default function GuildPage({ params }) {
+  const guildBasic = await getGuildBasic(guildID.oguild_id);
+  if (!guildBasic?.guild_name) {
+    return (
+      <div className="text-center my-64">
+        <div>존재하지 않거나 불러올 수 없는 길드입니다.</div>
+        <div>다음 날 오전 1시 이후 다시 검색해주세요.</div>
+      </div>
+    )
+  }
+  const guildRankingFlag = await getRankingGuild(1, worldName, 1, guildName);
+  const guildRankingSuro = await getRankingGuild(2, worldName, 1, guildName);
+
   return (
     <>
-      <GuildInfo
-        worldName={decodeURI(params.worldName)}
-        guildName={decodeURI(params.guildName)}
-      />
+      <GuildHeader guildBasic={guildBasic} guildRankingFlag={guildRankingFlag} guildRankingSuro={guildRankingSuro} />
+      <div className="rounded-lg border bg-card text-card-foreground shadow-sm mt-2 p-2">
+        <GuildMembers guildBasic={guildBasic} guildID={guildID} />
+      </div>
+      {/* <Temp guildBasic={guildBasic} guildRankingFlag={guildRankingFlag} guildRankingSuro={guildRankingSuro} /> */}
     </>
   );
 }
