@@ -54,7 +54,7 @@ export default function Skill6th(props) {
             if (hexaMatrix.hexa_core_name == "솔 야누스") linked_skill.push({ hexa_skill_id: "솔 야누스 : 새벽" });
 
             linked_skill.map((skill) => {
-                skill6thInfo[skill.hexa_skill_id].skill_core_type = hexaMatrix.hexa_core_type;
+                skill6thInfo[skill.hexa_skill_id].skill_core_type = hexaMatrix.hexa_core_type.replace("스킬 코어", "오리진 코어");
                 sortSkill6thByCoreType.push(skill.hexa_skill_id);
             })
         });
