@@ -107,48 +107,55 @@ export default function Equipment(props) {
         let cashitemImageSrcs = {};
         let cashitemEquipments = {};
 
-        user?.characterCashitemEquipment[`${additionalCashitemTabViewing ? "additional_" : ""}cash_item_equipment_preset_${currentPresetNo}`]?.map((cashitem) => {
-            if (cashitem.base_preset_item_disable_flag == "1") {
-                cashitemImageSrcs[cashitem.cash_item_equipment_slot] = "";
-                cashitemEquipments[cashitem.cash_item_equipment_slot] = {};
-            } else {
-                cashitemImageSrcs[cashitem.cash_item_equipment_slot] = cashitem.cash_item_icon;
-                cashitemEquipments[cashitem.cash_item_equipment_slot] = cashitem;
-            }
-        });
-        user?.characterCashitemEquipment[`${additionalCashitemTabViewing ? "additional_" : ""}cash_item_equipment_preset_1`]?.map((cashitem) => {
-            const slot = cashitem.cash_item_equipment_slot;
-            if (cashitemEquipments[slot]) return;
-            cashitemImageSrcs[cashitem.cash_item_equipment_slot] = cashitem.cash_item_icon;
-            cashitemEquipments[slot] = cashitem;
-        });
-        if (additionalCashitemTabViewing) {
-            user?.characterCashitemEquipment[`cash_item_equipment_preset_${user?.characterCashitemEquipment.preset_no}`]?.map((cashitem) => {
+        if (currentPresetNo != "0") {
+            user?.characterCashitemEquipment[`${additionalCashitemTabViewing ? "additional_" : ""}cash_item_equipment_preset_${currentPresetNo}`]?.map((cashitem) => {
+                if (cashitem.base_preset_item_disable_flag == "1") {
+                    cashitemImageSrcs[cashitem.cash_item_equipment_slot] = "";
+                    cashitemEquipments[cashitem.cash_item_equipment_slot] = {};
+                } else {
+                    cashitemImageSrcs[cashitem.cash_item_equipment_slot] = cashitem.cash_item_icon;
+                    cashitemEquipments[cashitem.cash_item_equipment_slot] = cashitem;
+                }
+            });
+            user?.characterCashitemEquipment[`${additionalCashitemTabViewing ? "additional_" : ""}cash_item_equipment_preset_1`]?.map((cashitem) => {
                 const slot = cashitem.cash_item_equipment_slot;
                 if (cashitemEquipments[slot]) return;
-                if (!["무기", "반지4", "반지3", "반지2", "반지1"].includes(slot)) return;
-
-                cashitemImageSrcs[slot] = cashitem.cash_item_icon;
+                cashitemImageSrcs[cashitem.cash_item_equipment_slot] = cashitem.cash_item_icon;
                 cashitemEquipments[slot] = cashitem;
             });
-        }
-        cashitemImageSrcs["헤어"] = HairIcon;
-        cashitemImageSrcs["성형"] = FaceIcon;
-        cashitemImageSrcs["피부"] = SkinIcon;
-        cashitemEquipments["헤어"] = {
-            name: user?.characterBeautyEquipment[`${additionalCashitemTabViewing ? "additional_" : ""}character_hair`]["hair_name"],
-            base_color: user?.characterBeautyEquipment[`${additionalCashitemTabViewing ? "additional_" : ""}character_hair`]["base_color"],
-            mix_color: user?.characterBeautyEquipment[`${additionalCashitemTabViewing ? "additional_" : ""}character_hair`]["mix_color"],
-            mix_rate: user?.characterBeautyEquipment[`${additionalCashitemTabViewing ? "additional_" : ""}character_hair`]["mix_rate"],
-        }
-        cashitemEquipments["성형"] = {
-            name: user?.characterBeautyEquipment[`${additionalCashitemTabViewing ? "additional_" : ""}character_face`]["face_name"],
-            base_color: user?.characterBeautyEquipment[`${additionalCashitemTabViewing ? "additional_" : ""}character_face`]["base_color"],
-            mix_color: user?.characterBeautyEquipment[`${additionalCashitemTabViewing ? "additional_" : ""}character_face`]["mix_color"],
-            mix_rate: user?.characterBeautyEquipment[`${additionalCashitemTabViewing ? "additional_" : ""}character_face`]["mix_rate"],
-        }
-        cashitemEquipments["피부"] = {
-            name: user?.characterBeautyEquipment[`${additionalCashitemTabViewing ? "additional_" : ""}character_skin_name`],
+            if (additionalCashitemTabViewing) {
+                user?.characterCashitemEquipment[`cash_item_equipment_preset_${user?.characterCashitemEquipment.preset_no}`]?.map((cashitem) => {
+                    const slot = cashitem.cash_item_equipment_slot;
+                    if (cashitemEquipments[slot]) return;
+                    if (!["무기", "반지4", "반지3", "반지2", "반지1"].includes(slot)) return;
+
+                    cashitemImageSrcs[slot] = cashitem.cash_item_icon;
+                    cashitemEquipments[slot] = cashitem;
+                });
+            }
+            cashitemImageSrcs["헤어"] = HairIcon;
+            cashitemImageSrcs["성형"] = FaceIcon;
+            cashitemImageSrcs["피부"] = SkinIcon;
+            cashitemEquipments["헤어"] = {
+                name: user?.characterBeautyEquipment[`${additionalCashitemTabViewing ? "additional_" : ""}character_hair`]["hair_name"],
+                base_color: user?.characterBeautyEquipment[`${additionalCashitemTabViewing ? "additional_" : ""}character_hair`]["base_color"],
+                mix_color: user?.characterBeautyEquipment[`${additionalCashitemTabViewing ? "additional_" : ""}character_hair`]["mix_color"],
+                mix_rate: user?.characterBeautyEquipment[`${additionalCashitemTabViewing ? "additional_" : ""}character_hair`]["mix_rate"],
+            }
+            cashitemEquipments["성형"] = {
+                name: user?.characterBeautyEquipment[`${additionalCashitemTabViewing ? "additional_" : ""}character_face`]["face_name"],
+                base_color: user?.characterBeautyEquipment[`${additionalCashitemTabViewing ? "additional_" : ""}character_face`]["base_color"],
+                mix_color: user?.characterBeautyEquipment[`${additionalCashitemTabViewing ? "additional_" : ""}character_face`]["mix_color"],
+                mix_rate: user?.characterBeautyEquipment[`${additionalCashitemTabViewing ? "additional_" : ""}character_face`]["mix_rate"],
+            }
+            cashitemEquipments["피부"] = {
+                name: user?.characterBeautyEquipment[`${additionalCashitemTabViewing ? "additional_" : ""}character_skin_name`],
+            }
+        } else {
+            user?.characterCashitemEquipment[`${additionalCashitemTabViewing ? "additional_" : ""}cash_item_equipment_base`]?.map((cashitem) => {
+                cashitemImageSrcs[cashitem.cash_item_equipment_slot] = cashitem.cash_item_icon;
+                cashitemEquipments[cashitem.cash_item_equipment_slot] = cashitem;
+            });
         }
 
         // console.log("cashitem", cashitemImageSrcs);
@@ -1206,9 +1213,9 @@ export default function Equipment(props) {
                         {
                             user?.characterCashitemEquipment?.additional_cash_item_equipment_preset_1.length != 0 &&
                             <>
-                                <Tabs defaultValue="normalCashitem" activationMode="manual" className="w-full" onValueChange={(value) => setAdditionalCashitemTabViewing(value == "additionalCashitem" ? true : false)}>
+                                <Tabs defaultValue="noneAdditionalCashitem" activationMode="manual" className="w-full mt-2" onValueChange={(value) => setAdditionalCashitemTabViewing(value == "additionalCashitem" ? true : false)}>
                                     <TabsList className="justify-start w-full overflow-x-scroll hidden-scroll grid grid-cols-2">
-                                        <TabsTrigger value="normalCashitem">
+                                        <TabsTrigger value="noneAdditionalCashitem">
                                             {user?.characterBasic.character_class == "제로" && "알파(남)"}
                                             {user?.characterBasic.character_class == "엔젤릭버스터" && "일반"}
                                         </TabsTrigger>
@@ -1546,14 +1553,17 @@ export default function Equipment(props) {
                                 defaultValue={currentCashitemPresetNo || user?.characterCashitemEquipment?.preset_no || 1}
                                 onValueChange={(value) => setCurrentCashitemPresetNo(value)}
                             >
+                                <ToggleGroupItem className="dark:data-[state=on]:bg-background data-[state=on]:pointer-events-none" value={"0"} aria-label="cashitemBase">
+                                    <div className="h-auto w-auto">장비</div>
+                                </ToggleGroupItem>
                                 <ToggleGroupItem className="dark:data-[state=on]:bg-background data-[state=on]:pointer-events-none" value={1} aria-label="cashitemPreset1">
-                                    <div className="h-auto w-4">1</div>
+                                    <div className="h-auto w-auto">코디 1</div>
                                 </ToggleGroupItem>
                                 <ToggleGroupItem className="dark:data-[state=on]:bg-background data-[state=on]:pointer-events-none" value={2} aria-label="cashitemPreset2" disabled={user?.characterCashitemEquipment?.cash_item_equipment_preset_2.length ? false : true}>
-                                    <div className="h-auto w-4">2</div>
+                                    <div className="h-auto w-auto">코디 2</div>
                                 </ToggleGroupItem>
                                 <ToggleGroupItem className="dark:data-[state=on]:bg-background data-[state=on]:pointer-events-none" value={3} aria-label="cashitemPreset3" disabled={user?.characterCashitemEquipment?.cash_item_equipment_preset_3.length ? false : true}>
-                                    <div className="h-auto w-4">3</div>
+                                    <div className="h-auto w-auto">코디 3</div>
                                 </ToggleGroupItem>
                             </ToggleGroup>
                         </div>
