@@ -6,6 +6,7 @@ import { getUserUnion } from "@/lib/nexonAPI/getUserUnion";
 import Image from "next/image";
 import { Fragment } from "react";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { getUserUnionArtifact } from "@/lib/nexonAPI/getUserUnionArtifact";
 
 const unionGradeImage = {
     "노비스 유니온 1": "symbol.0.0",
@@ -107,9 +108,11 @@ export default async function Union({ params, searchParams }) {
     const [
         userUnion,
         userUnionRaider,
+        userUnionArtifact,
     ] = await Promise.all([
         getUserUnion(OCID.ocid, selectedDate),
         getUserUnionRaider(OCID.ocid, selectedDate),
+        getUserUnionArtifact(OCID.ocid, selectedDate),
     ]);
 
     const fill_vector = [];
@@ -155,135 +158,188 @@ export default async function Union({ params, searchParams }) {
 
     return (
         <>
-            <div className="bg-muted p-2 rounded-md shadow-md">
-                <div className="flex flex-row flex-wrap">
-                    <div className="basis-full lg:basis-2/3 order-1 relative">
-                        <div className="grid grid-cols-[repeat(22,_minmax(0,_1fr))] aspect-[22/20]">
-                            {
-                                Array(raider_x_size * raider_y_size).fill().map((_, bgCubeIndex) => {
-                                    return (
-                                        <div
-                                            key={bgCubeIndex}
-                                            className={cn(
-                                                "col-span-1 bg-gray-800 border-[1px] border-gray-700",
-                                                fill_vector.includes(bgCubeIndex + 1) && "bg-orange-200 border-orange-200 shadow-inner shadow-amber-100 drop-shadow-2xl"
-                                            )}
-                                            style={union_raider_vector_map[bgCubeIndex]}
-                                        />
-                                    )
-                                })
-                            }
-                        </div>
-                        <div className="absolute top-0 right-0 text-lg text-white font-bold h-full w-full">
-                            <div className="relative h-full w-full">
-                                <div style={{ textShadow: "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000" }} className="absolute -translate-x-1/2 -translate-y-1/2 text-xs sm:text-lg whitespace-nowrap top-[33%] left-[43%]">{userUnionRaider?.union_inner_stat?.[0]?.stat_field_effect.replace("유니온 ", "").replace("최대 ", "")}</div>
-                                <div style={{ textShadow: "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000" }} className="absolute -translate-x-1/2 -translate-y-1/2 text-xs sm:text-lg whitespace-nowrap top-[33%] left-[57%]">{userUnionRaider?.union_inner_stat?.[1]?.stat_field_effect.replace("유니온 ", "").replace("최대 ", "")}</div>
-                                <div style={{ textShadow: "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000" }} className="absolute -translate-x-1/2 -translate-y-1/2 text-xs sm:text-lg whitespace-nowrap top-[42%] left-[70%]">{userUnionRaider?.union_inner_stat?.[2]?.stat_field_effect.replace("유니온 ", "").replace("최대 ", "")}</div>
-                                <div style={{ textShadow: "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000" }} className="absolute -translate-x-1/2 -translate-y-1/2 text-xs sm:text-lg whitespace-nowrap top-[58%] left-[70%]">{userUnionRaider?.union_inner_stat?.[3]?.stat_field_effect.replace("유니온 ", "").replace("최대 ", "")}</div>
-                                <div style={{ textShadow: "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000" }} className="absolute -translate-x-1/2 -translate-y-1/2 text-xs sm:text-lg whitespace-nowrap top-[67%] left-[57%]">{userUnionRaider?.union_inner_stat?.[4]?.stat_field_effect.replace("유니온 ", "").replace("최대 ", "")}</div>
-                                <div style={{ textShadow: "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000" }} className="absolute -translate-x-1/2 -translate-y-1/2 text-xs sm:text-lg whitespace-nowrap top-[67%] left-[43%]">{userUnionRaider?.union_inner_stat?.[5]?.stat_field_effect.replace("유니온 ", "").replace("최대 ", "")}</div>
-                                    <div style={{ textShadow: "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000" }} className="absolute -translate-x-1/2 -translate-y-1/2 text-xs sm:text-lg whitespace-nowrap top-[58%] left-[30%]">{userUnionRaider?.union_inner_stat?.[6]?.stat_field_effect.replace("유니온 ", "").replace("최대 ", "")}</div>
-                                    <div style={{ textShadow: "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000" }} className="absolute -translate-x-1/2 -translate-y-1/2 text-xs sm:text-lg whitespace-nowrap top-[42%] left-[30%]">{userUnionRaider?.union_inner_stat?.[7]?.stat_field_effect.replace("유니온 ", "").replace("최대 ", "")}</div>
-
-                                <div style={{ textShadow: "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000" }} className="absolute -translate-x-1/2 -translate-y-1/2 text-xs sm:text-lg whitespace-nowrap top-[12.5%] left-[31.5%]">상태이상내성</div>
-                                <div style={{ textShadow: "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000" }} className="absolute -translate-x-1/2 -translate-y-1/2 text-xs sm:text-lg whitespace-nowrap top-[12.5%] left-[68.5%]">획득경험치</div>
-                                <div style={{ textShadow: "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000" }} className="absolute -translate-x-1/2 -translate-y-1/2 text-xs sm:text-lg whitespace-nowrap top-[32.5%] left-[89%]">크리티컬 확률</div>
-                                <div style={{ textShadow: "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000" }} className="absolute -translate-x-1/2 -translate-y-1/2 text-xs sm:text-lg whitespace-nowrap top-[67.5%] left-[89%]">보스데미지</div>
-                                <div style={{ textShadow: "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000" }} className="absolute -translate-x-1/2 -translate-y-1/2 text-xs sm:text-lg whitespace-nowrap top-[87.5%] left-[68.5%]">일반데미지</div>
-                                <div style={{ textShadow: "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000" }} className="absolute -translate-x-1/2 -translate-y-1/2 text-xs sm:text-lg whitespace-nowrap top-[87.5%] left-[31.5%]">버프지속시간</div>
-                                <div style={{ textShadow: "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000" }} className="absolute -translate-x-1/2 -translate-y-1/2 text-xs sm:text-lg whitespace-nowrap top-[67.5%] left-[11%]">방어율무시</div>
-                                <div style={{ textShadow: "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000" }} className="absolute -translate-x-1/2 -translate-y-1/2 text-xs sm:text-lg whitespace-nowrap top-[32.5%] left-[11%]">크리티컬 데미지</div>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <div className="basis-full lg:basis-1/3 ps-0 lg:ps-2 order-3 lg:order-2 h-auto">
-                        <div className="flex flex-col gap-2 h-full">
-                            <div className="hidden lg:block">
-                                <UnionSymbol />
-                            </div>
-                            <div className="bg-background rounded h-auto">
-                                <div className="font-semibold px-2 pt-2 pb-3">
-                                    공격대 점령 효과
-                                </div>
-                                <div className="ms-3">
-                                    <div className="whitespace-pre-wrap">
-                                        {
-                                            userUnionRaider?.union_occupied_stat.sort().join("\n")
-                                        }
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="bg-background rounded h-full min-h-[200px]">
-                                <div className="relative h-full">
-                                    <div className="absolute h-full w-full">
-                                        <ScrollArea type={"always"} className="h-full">
-                                            <div className="font-semibold px-2 pt-2 pb-3">
-                                                공격대원 효과
-                                            </div>
-                                            <div className="whitespace-pre-wrap ms-3">
-                                                {
-                                                    userUnionRaider?.union_raider_stat.sort().join(`\n`)
-                                                }
-                                            </div>
-                                        </ScrollArea>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="basis-full mt-2 mb-2 lg:mb-0 order-2 lg:order-3">
-                        <div className="flex flex-col gap-2 h-full">
-                            <div className="block lg:hidden">
-                                <UnionSymbol />
-                            </div>
-                            <div className="grid max-[370px]:grid-cols-1 min-[370px]:grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2">
+            <div className="space-y-2">
+                {/* <div className="bg-muted p-2 rounded-md">
+                    <div className="grid grid-cols-3">
+                        <div className="col-span-3 lg:col-span-2">
+                            <div className="grid grid-cols-3 gap-5">
                                 {
-                                    classList.length >= 1 &&
-                                    classList.map((block, block_index) => {
-                                        // {block[0]}{block[1]}
+                                    Array(9).fill().map((_, artifactIndex) => {
                                         return (
-                                            <Fragment key={block_index}>
-                                                <div className="col-span-1 bg-background rounded flex gap-2 p-2">
-                                                    <div className="relative aspect-square w-1/4">
-                                                        <Image
-                                                            alt={block[1]}
-                                                            src={
-                                                                classWithAnImage.includes(block[0]) ?
-                                                                    `/class/${block[0]}.png` :
-                                                                    "/class/공란.png"
-                                                            }
-                                                            className="object-contain rounded-full" fill sizes="256px"
-                                                        />
-                                                    </div>
-                                                    <div className="flex-1 self-center max-[370px]:text-base min-[370px]:text-xs sm:text-base">
-                                                        <div>
-                                                            {block[0].replace("모바일 캐릭터", "메이플M")}
-                                                        </div>
-                                                        <div className="flex gap-2 self-center">
-                                                            <div
-                                                                className={cn(
-                                                                    block[2] == "SSS" && "text-sky-500",
-                                                                    block[2] == "SS" && "text-violet-500",
-                                                                    block[2] == "S" && "text-amber-500 dark:text-yellow-500",
-                                                                    block[2] == "A" && "text-neutral-400",
-                                                                    "font-bold"
-                                                                )}
-                                                            >{block[2]}</div>
-                                                            <div >|</div>
-                                                            <div className="flex">
-                                                                <span>Lv.{block[1]}</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                            <div
+                                                key={artifactIndex}
+                                                className={cn(
+                                                    "col-span-1 w-full aspect-[1/1.18] rounded-2xl relative",
+                                                    // userUnionArtifact?.union_artifact_crystal?.[artifactIndex]?.level == 5 ?
+                                                    //     "from-indigo-500" :
+                                                    //     "from-sky-500"
 
-                                                </div>
-                                            </Fragment>
+                                                )}
+                                            >
+                                                <Image
+                                                    alt={`slot_${artifactIndex}`}
+                                                    src={`/artifact/artifact.slot${userUnionArtifact?.union_artifact_crystal?.[artifactIndex]?.level == 5 ? ".evo" : ""}.png`}
+                                                    width="0"
+                                                    height="0"
+                                                    sizes="100vw"
+                                                    className="w-full h-full"
+                                                />
+                                                <Image
+                                                    alt={userUnionArtifact?.union_artifact_crystal?.[artifactIndex]?.name}
+                                                    src={`/artifact/artifact.${artifactIndex}${userUnionArtifact?.union_artifact_crystal?.[artifactIndex]?.name ? "" : ".disabled"}.png`}
+                                                    width="0"
+                                                    height="0"
+                                                    sizes="100vw"
+                                                    className="w-auto h-auto absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+                                                />
+                                                <video
+                                                    autoPlay
+                                                    muted
+                                                    loop
+                                                    className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 object-cover"
+                                                >
+                                                    <source src="/artifact/gradeEffect1.webm" type="video/webm" />
+                                                </video>
+                                            </div>
                                         )
                                     })
                                 }
+                            </div>
+                        </div>
+                        <div className="col-span-3 lg:col-span-1">
+
+                        </div>
+                    </div>
+                </div> */}
+
+                <div className="bg-muted p-2 rounded-md">
+                    <div className="flex flex-row flex-wrap">
+                        <div className="basis-full lg:basis-2/3 order-1 relative">
+                            <div className="grid grid-cols-[repeat(22,_minmax(0,_1fr))] aspect-[22/20]">
+                                {
+                                    Array(raider_x_size * raider_y_size).fill().map((_, bgCubeIndex) => {
+                                        return (
+                                            <div
+                                                key={bgCubeIndex}
+                                                className={cn(
+                                                    "col-span-1 bg-gray-800 border-[1px] border-gray-700",
+                                                    fill_vector.includes(bgCubeIndex + 1) && "bg-orange-200 border-orange-200 shadow-inner shadow-amber-100 drop-shadow-2xl"
+                                                )}
+                                                style={union_raider_vector_map[bgCubeIndex]}
+                                            />
+                                        )
+                                    })
+                                }
+                            </div>
+                            <div className="absolute top-0 right-0 text-lg text-white font-bold h-full w-full">
+                                <div className="relative h-full w-full">
+                                    <div style={{ textShadow: "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000" }} className="absolute -translate-x-1/2 -translate-y-1/2 text-xs sm:text-lg whitespace-nowrap top-[33%] left-[43%]">{userUnionRaider?.union_inner_stat?.[0]?.stat_field_effect.replace("유니온 ", "").replace("최대 ", "")}</div>
+                                    <div style={{ textShadow: "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000" }} className="absolute -translate-x-1/2 -translate-y-1/2 text-xs sm:text-lg whitespace-nowrap top-[33%] left-[57%]">{userUnionRaider?.union_inner_stat?.[1]?.stat_field_effect.replace("유니온 ", "").replace("최대 ", "")}</div>
+                                    <div style={{ textShadow: "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000" }} className="absolute -translate-x-1/2 -translate-y-1/2 text-xs sm:text-lg whitespace-nowrap top-[42%] left-[70%]">{userUnionRaider?.union_inner_stat?.[2]?.stat_field_effect.replace("유니온 ", "").replace("최대 ", "")}</div>
+                                    <div style={{ textShadow: "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000" }} className="absolute -translate-x-1/2 -translate-y-1/2 text-xs sm:text-lg whitespace-nowrap top-[58%] left-[70%]">{userUnionRaider?.union_inner_stat?.[3]?.stat_field_effect.replace("유니온 ", "").replace("최대 ", "")}</div>
+                                    <div style={{ textShadow: "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000" }} className="absolute -translate-x-1/2 -translate-y-1/2 text-xs sm:text-lg whitespace-nowrap top-[67%] left-[57%]">{userUnionRaider?.union_inner_stat?.[4]?.stat_field_effect.replace("유니온 ", "").replace("최대 ", "")}</div>
+                                    <div style={{ textShadow: "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000" }} className="absolute -translate-x-1/2 -translate-y-1/2 text-xs sm:text-lg whitespace-nowrap top-[67%] left-[43%]">{userUnionRaider?.union_inner_stat?.[5]?.stat_field_effect.replace("유니온 ", "").replace("최대 ", "")}</div>
+                                    <div style={{ textShadow: "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000" }} className="absolute -translate-x-1/2 -translate-y-1/2 text-xs sm:text-lg whitespace-nowrap top-[58%] left-[30%]">{userUnionRaider?.union_inner_stat?.[6]?.stat_field_effect.replace("유니온 ", "").replace("최대 ", "")}</div>
+                                    <div style={{ textShadow: "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000" }} className="absolute -translate-x-1/2 -translate-y-1/2 text-xs sm:text-lg whitespace-nowrap top-[42%] left-[30%]">{userUnionRaider?.union_inner_stat?.[7]?.stat_field_effect.replace("유니온 ", "").replace("최대 ", "")}</div>
+
+                                    <div style={{ textShadow: "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000" }} className="absolute -translate-x-1/2 -translate-y-1/2 text-xs sm:text-lg whitespace-nowrap top-[12.5%] left-[31.5%]">상태이상내성</div>
+                                    <div style={{ textShadow: "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000" }} className="absolute -translate-x-1/2 -translate-y-1/2 text-xs sm:text-lg whitespace-nowrap top-[12.5%] left-[68.5%]">획득경험치</div>
+                                    <div style={{ textShadow: "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000" }} className="absolute -translate-x-1/2 -translate-y-1/2 text-xs sm:text-lg whitespace-nowrap top-[32.5%] left-[89%]">크리티컬 확률</div>
+                                    <div style={{ textShadow: "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000" }} className="absolute -translate-x-1/2 -translate-y-1/2 text-xs sm:text-lg whitespace-nowrap top-[67.5%] left-[89%]">보스데미지</div>
+                                    <div style={{ textShadow: "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000" }} className="absolute -translate-x-1/2 -translate-y-1/2 text-xs sm:text-lg whitespace-nowrap top-[87.5%] left-[68.5%]">일반데미지</div>
+                                    <div style={{ textShadow: "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000" }} className="absolute -translate-x-1/2 -translate-y-1/2 text-xs sm:text-lg whitespace-nowrap top-[87.5%] left-[31.5%]">버프지속시간</div>
+                                    <div style={{ textShadow: "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000" }} className="absolute -translate-x-1/2 -translate-y-1/2 text-xs sm:text-lg whitespace-nowrap top-[67.5%] left-[11%]">방어율무시</div>
+                                    <div style={{ textShadow: "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000" }} className="absolute -translate-x-1/2 -translate-y-1/2 text-xs sm:text-lg whitespace-nowrap top-[32.5%] left-[11%]">크리티컬 데미지</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="basis-full lg:basis-1/3 ps-0 lg:ps-2 order-3 lg:order-2 h-auto">
+                            <div className="flex flex-col gap-2 h-full">
+                                <div className="hidden lg:block">
+                                    <UnionSymbol />
+                                </div>
+                                <div className="bg-background rounded h-auto">
+                                    <div className="font-semibold px-2 pt-2 pb-3">
+                                        공격대 점령 효과
+                                    </div>
+                                    <div className="ms-3">
+                                        <div className="whitespace-pre-wrap">
+                                            {
+                                                userUnionRaider?.union_occupied_stat.sort().join("\n")
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="bg-background rounded h-full min-h-[200px]">
+                                    <div className="relative h-full">
+                                        <div className="absolute h-full w-full">
+                                            <ScrollArea type={"always"} className="h-full">
+                                                <div className="font-semibold px-2 pt-2 pb-3">
+                                                    공격대원 효과
+                                                </div>
+                                                <div className="whitespace-pre-wrap ms-3">
+                                                    {
+                                                        userUnionRaider?.union_raider_stat.sort().join(`\n`)
+                                                    }
+                                                </div>
+                                            </ScrollArea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="basis-full mt-2 mb-2 lg:mb-0 order-2 lg:order-3">
+                            <div className="flex flex-col gap-2 h-full">
+                                <div className="block lg:hidden">
+                                    <UnionSymbol />
+                                </div>
+                                <div className="grid max-[370px]:grid-cols-1 min-[370px]:grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2">
+                                    {
+                                        classList.length >= 1 &&
+                                        classList.map((block, block_index) => {
+                                            // {block[0]}{block[1]}
+                                            return (
+                                                <Fragment key={block_index}>
+                                                    <div className="col-span-1 bg-background rounded flex gap-2 p-2">
+                                                        <div className="relative aspect-square w-1/4">
+                                                            <Image
+                                                                alt={block[1]}
+                                                                src={
+                                                                    classWithAnImage.includes(block[0]) ?
+                                                                        `/class/${block[0]}.png` :
+                                                                        "/class/공란.png"
+                                                                }
+                                                                className="object-contain rounded-full" fill sizes="256px"
+                                                            />
+                                                        </div>
+                                                        <div className="flex-1 self-center max-[370px]:text-base min-[370px]:text-xs sm:text-base">
+                                                            <div>
+                                                                {block[0].replace("모바일 캐릭터", "메이플M")}
+                                                            </div>
+                                                            <div className="flex gap-2 self-center">
+                                                                <div
+                                                                    className={cn(
+                                                                        block[2] == "SSS" && "text-sky-500",
+                                                                        block[2] == "SS" && "text-violet-500",
+                                                                        block[2] == "S" && "text-amber-500 dark:text-yellow-500",
+                                                                        block[2] == "A" && "text-neutral-400",
+                                                                        "font-bold"
+                                                                    )}
+                                                                >{block[2]}</div>
+                                                                <div >|</div>
+                                                                <div className="flex">
+                                                                    <span>Lv.{block[1]}</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </Fragment>
+                                            )
+                                        })
+                                    }
                                 </div>
                             </div>
                         </div>
