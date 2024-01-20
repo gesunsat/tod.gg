@@ -182,8 +182,8 @@ export default async function Union({ params, searchParams }) {
                                 <div style={{ textShadow: "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000" }} className="absolute -translate-x-1/2 -translate-y-1/2 text-xs sm:text-lg whitespace-nowrap top-[58%] left-[70%]">{userUnionRaider?.union_inner_stat?.[3]?.stat_field_effect.replace("유니온 ", "").replace("최대 ", "")}</div>
                                 <div style={{ textShadow: "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000" }} className="absolute -translate-x-1/2 -translate-y-1/2 text-xs sm:text-lg whitespace-nowrap top-[67%] left-[57%]">{userUnionRaider?.union_inner_stat?.[4]?.stat_field_effect.replace("유니온 ", "").replace("최대 ", "")}</div>
                                 <div style={{ textShadow: "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000" }} className="absolute -translate-x-1/2 -translate-y-1/2 text-xs sm:text-lg whitespace-nowrap top-[67%] left-[43%]">{userUnionRaider?.union_inner_stat?.[5]?.stat_field_effect.replace("유니온 ", "").replace("최대 ", "")}</div>
-                                <div style={{ textShadow: "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000" }} className="absolute -translate-x-1/2 -translate-y-1/2 text-xs sm:text-lg whitespace-nowrap top-[42%] left-[30%]">{userUnionRaider?.union_inner_stat?.[6]?.stat_field_effect.replace("유니온 ", "").replace("최대 ", "")}</div>
-                                <div style={{ textShadow: "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000" }} className="absolute -translate-x-1/2 -translate-y-1/2 text-xs sm:text-lg whitespace-nowrap top-[58%] left-[30%]">{userUnionRaider?.union_inner_stat?.[7]?.stat_field_effect.replace("유니온 ", "").replace("최대 ", "")}</div>
+                                    <div style={{ textShadow: "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000" }} className="absolute -translate-x-1/2 -translate-y-1/2 text-xs sm:text-lg whitespace-nowrap top-[58%] left-[30%]">{userUnionRaider?.union_inner_stat?.[6]?.stat_field_effect.replace("유니온 ", "").replace("최대 ", "")}</div>
+                                    <div style={{ textShadow: "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000" }} className="absolute -translate-x-1/2 -translate-y-1/2 text-xs sm:text-lg whitespace-nowrap top-[42%] left-[30%]">{userUnionRaider?.union_inner_stat?.[7]?.stat_field_effect.replace("유니온 ", "").replace("최대 ", "")}</div>
 
                                 <div style={{ textShadow: "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000" }} className="absolute -translate-x-1/2 -translate-y-1/2 text-xs sm:text-lg whitespace-nowrap top-[12.5%] left-[31.5%]">상태이상내성</div>
                                 <div style={{ textShadow: "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000" }} className="absolute -translate-x-1/2 -translate-y-1/2 text-xs sm:text-lg whitespace-nowrap top-[12.5%] left-[68.5%]">획득경험치</div>
@@ -284,6 +284,7 @@ export default async function Union({ params, searchParams }) {
                                         )
                                     })
                                 }
+                                </div>
                             </div>
                         </div>
                     </div>
