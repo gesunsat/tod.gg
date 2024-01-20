@@ -283,6 +283,8 @@ export default function Equipment(props) {
         "damage": "%",
         "all_stat": "%",
     }
+    const arcaneSymbolNumberOfLevelsRequire = [0, 2679, 2667, 2652, 2632, 2605, 2569, 2522, 2462, 2387, 2295, 2184, 2052, 1897, 1717, 1510, 1274, 1007, 707, 372];
+    const authenticSymbolNumberOfLevelsRequire = [0, 4565, 4536, 4460, 4319, 4095, 3770, 3326, 2745, 2009, 1100];
     const itemStarData = [
         [0, 5, 5],
         [95, 8, 5],
@@ -2350,6 +2352,14 @@ export default function Equipment(props) {
                                                                                     </div>
                                                                             }
                                                                             {
+                                                                                arcaneSymbolEquipments[symbolName].symbol_level < 20 &&
+                                                                                <div className="text-yellow-400">
+                                                                                    <span>만렙 필요 개수 : </span>
+                                                                                    <span>{(arcaneSymbolNumberOfLevelsRequire[arcaneSymbolEquipments[symbolName].symbol_level] - arcaneSymbolEquipments[symbolName].symbol_growth_count).toLocaleString()}개</span>
+
+                                                                                </div>
+                                                                            }
+                                                                            {
                                                                                 Object.keys(arcaneSymbolEquipments[symbolName]).map((symbolInnerKey, symbolInnerIndex) => {
                                                                                     if (arcaneSymbolEquipments[symbolName][symbolInnerKey] == 0) return;
                                                                                     return (
@@ -2517,6 +2527,14 @@ export default function Equipment(props) {
                                                                                     <div className="text-yellow-400">
                                                                                         <span>성장치 : MAX</span>
                                                                                     </div>
+                                                                            }
+                                                                            {
+                                                                                authenticSymbolEquipments[symbolName].symbol_level < 11 &&
+                                                                                <div className="text-yellow-400">
+                                                                                    <span>만렙 필요 개수 : </span>
+                                                                                    <span>{(authenticSymbolNumberOfLevelsRequire[authenticSymbolEquipments[symbolName].symbol_level] - authenticSymbolEquipments[symbolName].symbol_growth_count).toLocaleString()}개</span>
+
+                                                                                </div>
                                                                             }
                                                                             {
                                                                                 Object.keys(authenticSymbolEquipments[symbolName]).map((symbolInnerKey, symbolInnerIndex) => {
