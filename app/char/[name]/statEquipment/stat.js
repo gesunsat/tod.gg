@@ -28,9 +28,7 @@ export default function Stat(props) {
     }, [user]);
 
     const [currentHyperStatPresetNo, setCurrentHyperStatPresetNo] = useState(parseInt(user?.characterHyperStat?.use_preset_no) || 1);
-    useEffect(() => {
-
-    }, [currentHyperStatPresetNo])
+    const [currentAbilityPresetNo, setCurrentAbilityPresetNo] = useState(parseInt(user?.characterAbility?.preset_no) || 1);
 
     return (
         <>
@@ -216,7 +214,7 @@ export default function Stat(props) {
                         </div>
                         <div className="flex flex-col lg:flex-row gap-2 mt-2">
                             <div className="text-lg basis-full lg:basis-1/2 bg-background rounded py-2">
-                                <div className="basis-auto px-5 flex flex-col h-full justify-between">
+                                <div className="basis-auto px-3 flex flex-col h-full justify-between">
                                     <div className="flex justify-center">
                                         <div>하이퍼 스탯</div>
                                     </div>
@@ -254,32 +252,69 @@ export default function Stat(props) {
                             </div>
                             <div className="text-lg basis-full lg:basis-1/2 bg-background rounded py-2">
                                 <div className="basis-auto px-3 flex flex-col h-full justify-between">
-                                    <div className="flex justify-center mb-2">
+                                    <div className="flex justify-center">
                                         <div>어빌리티</div>
                                     </div>
                                     <div className="space-y-2">
                                         {
-                                            user?.characterAbility?.ability_info &&
-                                            user?.characterAbility?.ability_info?.map((ability, abilityIndex) => {
-                                                return (
-                                                    <Fragment key={abilityIndex}>
-                                                        <div
-                                                            className={cn(
-                                                                ability?.ability_grade == "레전드리" && "bg-green-500 dark:bg-lime-600",
-                                                                ability?.ability_grade == "유니크" && "bg-yellow-500 dark:bg-amber-600",
-                                                                ability?.ability_grade == "에픽" && "bg-violet-400 dark:bg-violet-600",
-                                                                ability?.ability_grade == "레어" && "bg-sky-400 dark:bg-sky-600",
-                                                                "rounded"
-                                                            )}
-                                                        >
-                                                            <div className="px-2 py-1 text-center">{ability.ability_value}</div>
-                                                        </div >
-                                                    </Fragment>
-                                                )
-                                            })
+                                            user?.characterAbility?.[`ability_preset_${currentAbilityPresetNo}`]?.ability_info ?
+                                                user?.characterAbility?.[`ability_preset_${currentAbilityPresetNo}`]?.ability_info?.map((ability, abilityIndex) => {
+                                                    { console.log(ability) }
+                                                    return (
+                                                        <Fragment key={abilityIndex}>
+                                                            <div
+                                                                className={cn(
+                                                                    ability?.ability_grade == "레전드리" && "bg-green-500 dark:bg-lime-600",
+                                                                    ability?.ability_grade == "유니크" && "bg-yellow-500 dark:bg-amber-600",
+                                                                    ability?.ability_grade == "에픽" && "bg-violet-400 dark:bg-violet-600",
+                                                                    ability?.ability_grade == "레어" && "bg-sky-400 dark:bg-sky-600",
+                                                                    "rounded"
+                                                                )}
+                                                            >
+                                                                <div className="px-2 py-1 text-center">{ability.ability_value}</div>
+                                                            </div >
+                                                        </Fragment>
+                                                    )
+                                                }) :
+                                                user?.characterAbility?.ability_info?.map((ability, abilityIndex) => {
+                                                    { console.log(ability) }
+                                                    return (
+                                                        <Fragment key={abilityIndex}>
+                                                            <div
+                                                                className={cn(
+                                                                    ability?.ability_grade == "레전드리" && "bg-green-500 dark:bg-lime-600",
+                                                                    ability?.ability_grade == "유니크" && "bg-yellow-500 dark:bg-amber-600",
+                                                                    ability?.ability_grade == "에픽" && "bg-violet-400 dark:bg-violet-600",
+                                                                    ability?.ability_grade == "레어" && "bg-sky-400 dark:bg-sky-600",
+                                                                    "rounded"
+                                                                )}
+                                                            >
+                                                                <div className="px-2 py-1 text-center">{ability.ability_value}</div>
+                                                            </div >
+                                                        </Fragment>
+                                                    )
+                                                })
                                         }
                                     </div>
-                                    <div></div>
+                                    <div className="mt-2 py-1 px-1 bg-muted relative select-none rounded shadow-md w-fit self-center">
+                                        <ToggleGroup
+                                            variant="outline"
+                                            type="single"
+                                            rovingFocus={false}
+                                            defaultValue={currentAbilityPresetNo}
+                                            onValueChange={(value) => setCurrentAbilityPresetNo(value)}
+                                        >
+                                            <ToggleGroupItem className="dark:data-[state=on]:bg-background data-[state=on]:pointer-events-none" value={1} aria-label="abilityPreset1">
+                                                <div className="h-auto w-4">1</div>
+                                            </ToggleGroupItem>
+                                            <ToggleGroupItem className="dark:data-[state=on]:bg-background data-[state=on]:pointer-events-none" value={2} aria-label="abilityPreset2">
+                                                <div className="h-auto w-4">2</div>
+                                            </ToggleGroupItem>
+                                            <ToggleGroupItem className="dark:data-[state=on]:bg-background data-[state=on]:pointer-events-none" value={3} aria-label="abilityPreset3">
+                                                <div className="h-auto w-4">3</div>
+                                            </ToggleGroupItem>
+                                        </ToggleGroup>
+                                    </div>
                                 </div>
                             </div>
                         </div>
