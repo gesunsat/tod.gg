@@ -102,20 +102,20 @@ export default function CharHistory({ params, searchParams }) {
 
     useEffect(() => {
         if (expChart && expAreaSeries) {
-            expChart.applyOptions(themesData[currentTheme.theme].chart);
-            expAreaSeries.applyOptions(themesData[currentTheme.theme].series);
+            expChart.applyOptions(themesData[currentTheme.resolvedTheme].chart);
+            expAreaSeries.applyOptions(themesData[currentTheme.resolvedTheme].series);
         }
         if (levelChart && levelAreaSeries) {
-            levelChart.applyOptions(themesData[currentTheme.theme].chart);
-            levelAreaSeries.applyOptions(themesData[currentTheme.theme].series);
+            levelChart.applyOptions(themesData[currentTheme.resolvedTheme].chart);
+            levelAreaSeries.applyOptions(themesData[currentTheme.resolvedTheme].series);
         }
         if (combatPowerChart && combatPowerAreaSeries) {
-            combatPowerChart.applyOptions(themesData[currentTheme.theme].chart);
-            combatPowerAreaSeries.applyOptions(themesData[currentTheme.theme].series);
+            combatPowerChart.applyOptions(themesData[currentTheme.resolvedTheme].chart);
+            combatPowerAreaSeries.applyOptions(themesData[currentTheme.resolvedTheme].series);
         }
         if (unionChart && unionAreaSeries) {
-            unionChart.applyOptions(themesData[currentTheme.theme].chart);
-            unionAreaSeries.applyOptions(themesData[currentTheme.theme].series);
+            unionChart.applyOptions(themesData[currentTheme.resolvedTheme].chart);
+            unionAreaSeries.applyOptions(themesData[currentTheme.resolvedTheme].series);
         }
     }, [currentTheme]);
 
@@ -258,8 +258,9 @@ export default function CharHistory({ params, searchParams }) {
                 }, 50);
             });
 
-            chart.applyOptions(themesData[currentTheme.theme].chart);
-            areaSeries.applyOptions(themesData[currentTheme.theme].series);
+
+            chart.applyOptions(themesData[currentTheme.resolvedTheme].chart);
+            areaSeries.applyOptions(themesData[currentTheme.resolvedTheme].series);
 
             setExpChart(chart);
             setExpAreaSeries(areaSeries);
@@ -410,8 +411,8 @@ export default function CharHistory({ params, searchParams }) {
                 }, 50);
             });
 
-            chart.applyOptions(themesData[currentTheme.theme].chart);
-            areaSeries.applyOptions(themesData[currentTheme.theme].series);
+            chart.applyOptions(themesData[currentTheme.resolvedTheme].chart);
+            areaSeries.applyOptions(themesData[currentTheme.resolvedTheme].series);
 
             setLevelChart(chart);
             setLevelAreaSeries(areaSeries);
@@ -562,8 +563,8 @@ export default function CharHistory({ params, searchParams }) {
                 }, 50);
             });
 
-            chart.applyOptions(themesData[currentTheme.theme].chart);
-            areaSeries.applyOptions(themesData[currentTheme.theme].series);
+            chart.applyOptions(themesData[currentTheme.resolvedTheme].chart);
+            areaSeries.applyOptions(themesData[currentTheme.resolvedTheme].series);
 
             setCombatPowerChart(chart);
             setCombatPowerAreaSeries(areaSeries);
@@ -706,8 +707,8 @@ export default function CharHistory({ params, searchParams }) {
                 }, 50);
             });
 
-            chart.applyOptions(themesData[currentTheme.theme].chart);
-            areaSeries.applyOptions(themesData[currentTheme.theme].series);
+            chart.applyOptions(themesData[currentTheme.resolvedTheme].chart);
+            areaSeries.applyOptions(themesData[currentTheme.resolvedTheme].series);
 
             setUnionChart(chart);
             setUnionAreaSeries(areaSeries);
