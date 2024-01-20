@@ -259,7 +259,6 @@ export default function Stat(props) {
                                         {
                                             user?.characterAbility?.[`ability_preset_${currentAbilityPresetNo}`]?.ability_info ?
                                                 user?.characterAbility?.[`ability_preset_${currentAbilityPresetNo}`]?.ability_info?.map((ability, abilityIndex) => {
-                                                    { console.log(ability) }
                                                     return (
                                                         <Fragment key={abilityIndex}>
                                                             <div
@@ -277,7 +276,6 @@ export default function Stat(props) {
                                                     )
                                                 }) :
                                                 user?.characterAbility?.ability_info?.map((ability, abilityIndex) => {
-                                                    { console.log(ability) }
                                                     return (
                                                         <Fragment key={abilityIndex}>
                                                             <div

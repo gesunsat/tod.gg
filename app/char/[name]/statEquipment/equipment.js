@@ -40,6 +40,7 @@ export default function Equipment(props) {
 
     const [itemImageSrcs, setItemImageSrcs] = useState({});
     const [itemEquipments, setItemEquipments] = useState({});
+    const [currentItemPresetNo, setCurrentItemPresetNo] = useState();
     const [currentViewingItemEquipmentTab, setCurrentViewingItemEquipmentTab] = useState("item_equipment");
     useEffect(() => {
         if (!user) return;
@@ -47,10 +48,17 @@ export default function Equipment(props) {
 
         localStorage.setItem("itemMorooShapeView", itemMorooShapeView);
 
+        const currentPresetNo = currentItemPresetNo || user?.characterItemEquipment.preset_no || 1;
+
         let itemImageSrcs = {};
         let itemEquipments = {};
 
-        user?.characterItemEquipment[currentViewingItemEquipmentTab]?.map((item) => {
+        let keyToFind = !user?.characterItemEquipment.preset_no ?
+            `item_equipment` :
+            currentViewingItemEquipmentTab != "item_equipment" ?
+                currentViewingItemEquipmentTab :
+                `item_equipment_preset${currentPresetNo}`;
+        user?.characterItemEquipment[keyToFind]?.map((item) => {
             item.starforceMax = GetMaxStar(
                 (
                     parseInt(item.scroll_upgrade) +
@@ -84,7 +92,7 @@ export default function Equipment(props) {
 
         setItemImageSrcs(itemImageSrcs);
         setItemEquipments(itemEquipments);
-    }, [user, itemMorooShapeView, currentViewingItemEquipmentTab]);
+    }, [user, itemMorooShapeView, currentViewingItemEquipmentTab, currentItemPresetNo]);
 
     const [cashitemImageSrcs, setCashitemImageSrcs] = useState({});
     const [cashitemEquipments, setCashitemEquipments] = useState({});
@@ -973,6 +981,25 @@ export default function Equipment(props) {
                                             })
                                         }
                                     </div>
+                                </div>
+                                <div className="items-center mt-2 py-1 bg-muted bg-opacity-20 justify-between flex flex-col flex-1 p-1 relative select-none rounded-md shadow-md">
+                                    <ToggleGroup
+                                        variant="outline"
+                                        type="single"
+                                        rovingFocus={false}
+                                        defaultValue={currentItemPresetNo || user?.characterItemEquipment?.preset_no || 1}
+                                        onValueChange={(value) => setCurrentItemPresetNo(value)}
+                                    >
+                                        <ToggleGroupItem className="dark:data-[state=on]:bg-background data-[state=on]:pointer-events-none" value={1} aria-label="itemPreset1">
+                                            <div className="h-auto w-4">1</div>
+                                        </ToggleGroupItem>
+                                        <ToggleGroupItem className="dark:data-[state=on]:bg-background data-[state=on]:pointer-events-none" value={2} aria-label="itemPreset2" disabled={user?.characterItemEquipment?.item_equipment_preset2.length ? false : true}>
+                                            <div className="h-auto w-4">2</div>
+                                        </ToggleGroupItem>
+                                        <ToggleGroupItem className="dark:data-[state=on]:bg-background data-[state=on]:pointer-events-none" value={3} aria-label="itemPreset3" disabled={user?.characterItemEquipment?.item_equipment_preset3.length ? false : true}>
+                                            <div className="h-auto w-4">3</div>
+                                        </ToggleGroupItem>
+                                    </ToggleGroup>
                                 </div>
                                 <div className="items-center mt-2 py-2 bg-muted bg-opacity-20 justify-between flex flex-col flex-1 p-1 relative select-none rounded-md shadow-md">
                                     <div className="flex space-x-2">
@@ -2594,7 +2621,6 @@ export default function Equipment(props) {
                                 </div>
                             </TabsContent>
                         </Tabs>
-
                     </TabsContent>
                 </Tabs>
             </div>
