@@ -256,8 +256,9 @@ export default function Stat(props) {
                                         <div>어빌리티</div>
                                     </div>
                                     <div className="space-y-2">
+                                        {console.log(user?.characterAbility)}
                                         {
-                                            user?.characterAbility?.[`ability_preset_${currentAbilityPresetNo}`]?.ability_info ?
+                                            user?.characterAbility?.preset_no ?
                                                 user?.characterAbility?.[`ability_preset_${currentAbilityPresetNo}`]?.ability_info?.map((ability, abilityIndex) => {
                                                     return (
                                                         <Fragment key={abilityIndex}>
@@ -305,10 +306,10 @@ export default function Stat(props) {
                                             <ToggleGroupItem className="dark:data-[state=on]:bg-background data-[state=on]:pointer-events-none" value={1} aria-label="abilityPreset1">
                                                 <div className="h-auto w-4">1</div>
                                             </ToggleGroupItem>
-                                            <ToggleGroupItem className="dark:data-[state=on]:bg-background data-[state=on]:pointer-events-none" value={2} aria-label="abilityPreset2">
+                                            <ToggleGroupItem className="dark:data-[state=on]:bg-background data-[state=on]:pointer-events-none" value={2} aria-label="abilityPreset2" disabled={!user?.characterAbility?.ability_preset_2}>
                                                 <div className="h-auto w-4">2</div>
                                             </ToggleGroupItem>
-                                            <ToggleGroupItem className="dark:data-[state=on]:bg-background data-[state=on]:pointer-events-none" value={3} aria-label="abilityPreset3">
+                                            <ToggleGroupItem className="dark:data-[state=on]:bg-background data-[state=on]:pointer-events-none" value={3} aria-label="abilityPreset3" disabled={!user?.characterAbility?.ability_preset_2}>
                                                 <div className="h-auto w-4">3</div>
                                             </ToggleGroupItem>
                                         </ToggleGroup>
