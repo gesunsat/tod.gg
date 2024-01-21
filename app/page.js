@@ -3,6 +3,10 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 const notice = [
   {
     title: "2024.01.18",
+    content: ["캐릭터 페이지 > 유니온 아티펙트 탭 활성화", "넥슨 API 수정 대응", "버그 수정 및 성능 개선"],
+  },
+  {
+    title: "2024.01.18",
     content: ["캐릭터 페이지 > 히스토리 탭 활성화", "버그 수정 및 성능 개선"],
   },
   {

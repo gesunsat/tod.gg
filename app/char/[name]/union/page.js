@@ -7,6 +7,8 @@ import Image from "next/image";
 import { Fragment } from "react";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { getUserUnionArtifact } from "@/lib/nexonAPI/getUserUnionArtifact";
+import Style from "./union.module.css";
+import { getYesterdayDate } from "@/lib/getYesterdayDate";
 
 const unionGradeImage = {
     "노비스 유니온 1": "symbol.0.0",
@@ -101,6 +103,27 @@ const classWithAnImage = [
     "플레임위자드"
 ];
 
+const artifactMonsterImageSize = {
+    "artifact.0.evo": { w: 130, h: 136 },
+    "artifact.0": { w: 128, h: 122 },
+    "artifact.1.evo": { w: 119, h: 118 },
+    "artifact.1": { w: 111, h: 111 },
+    "artifact.2.evo": { w: 136, h: 130 },
+    "artifact.2": { w: 128, h: 122 },
+    "artifact.3.evo": { w: 124, h: 120 },
+    "artifact.3": { w: 116, h: 114 },
+    "artifact.4.evo": { w: 164, h: 136 },
+    "artifact.4": { w: 157, h: 129 },
+    "artifact.5.evo": { w: 145, h: 135 },
+    "artifact.5": { w: 136, h: 127 },
+    "artifact.6.evo": { w: 157, h: 133 },
+    "artifact.6": { w: 150, h: 125 },
+    "artifact.7.evo": { w: 111, h: 129 },
+    "artifact.7": { w: 104, h: 122 },
+    "artifact.8.evo": { w: 167, h: 139 },
+    "artifact.8": { w: 159, h: 132 },
+}
+
 export default async function Union({ params, searchParams }) {
     const characterName = decodeURI(params.name);
     const selectedDate = searchParams?.date;
@@ -156,11 +179,30 @@ export default async function Union({ params, searchParams }) {
         )
     }
 
+    const effectAbbreviation = (str) => {
+        str = str.replace(" 증가", "");
+        str = str.replace("최대 HP/MP", "HP");
+        str = str.replace("공격력/마력", "공/마");
+        str = str.replace("보스 몬스터 공격 시 데미지", "보공");
+        str = str.replace("몬스터 방어율 무시", "방무");
+        str = str.replace("버프 지속시간", "벞지");
+        str = str.replace("재사용 대기시간 미적용 확률", "쿨초");
+        str = str.replace("메소 획득량", "메획");
+        str = str.replace("아이템 드롭률", "아획");
+        str = str.replace("크리티컬 확률", "크확");
+        str = str.replace("크리티컬 데미지", "크뎀");
+        str = str.replace("추가 경험치 획득", "추경");
+        str = str.replace("상태이상 내성", "내성");
+        str = str.replace("소환수 지속시간", "소환수");
+        str = str.replace("파이널 어택류 스킬 데미지", "파이널");
+        return str;
+    }
+
     return (
         <>
             <div className="space-y-2">
-                {/* <div className="bg-muted p-2 rounded-md">
-                    <div className="grid grid-cols-3">
+                <div className="bg-muted p-2 rounded-md">
+                    <div className="grid grid-cols-3 gap-2">
                         <div className="col-span-3 lg:col-span-2">
                             <div className="grid grid-cols-3 gap-5">
                                 {
@@ -169,37 +211,168 @@ export default async function Union({ params, searchParams }) {
                                             <div
                                                 key={artifactIndex}
                                                 className={cn(
-                                                    "col-span-1 w-full aspect-[1/1.18] rounded-2xl relative",
+                                                    "col-span-1 w-full aspect-[1/1.18] rounded-2xl",
                                                     // userUnionArtifact?.union_artifact_crystal?.[artifactIndex]?.level == 5 ?
                                                     //     "from-indigo-500" :
                                                     //     "from-sky-500"
 
                                                 )}
                                             >
-                                                <Image
-                                                    alt={`slot_${artifactIndex}`}
-                                                    src={`/artifact/artifact.slot${userUnionArtifact?.union_artifact_crystal?.[artifactIndex]?.level == 5 ? ".evo" : ""}.png`}
-                                                    width="0"
-                                                    height="0"
-                                                    sizes="100vw"
-                                                    className="w-full h-full"
-                                                />
-                                                <Image
-                                                    alt={userUnionArtifact?.union_artifact_crystal?.[artifactIndex]?.name}
-                                                    src={`/artifact/artifact.${artifactIndex}${userUnionArtifact?.union_artifact_crystal?.[artifactIndex]?.name ? "" : ".disabled"}.png`}
-                                                    width="0"
-                                                    height="0"
-                                                    sizes="100vw"
-                                                    className="w-auto h-auto absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
-                                                />
-                                                <video
-                                                    autoPlay
-                                                    muted
-                                                    loop
-                                                    className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 object-cover"
-                                                >
-                                                    <source src="/artifact/gradeEffect1.webm" type="video/webm" />
-                                                </video>
+                                                <div className="flex flex-col w-full h-full justify-center relative">
+                                                    {
+                                                        (
+                                                            userUnionArtifact?.union_artifact_crystal?.[artifactIndex]?.name &&
+                                                            new Date(selectedDate || getYesterdayDate() + " 23:59:59") < new Date(userUnionArtifact?.union_artifact_crystal?.[artifactIndex]?.date_expire)
+                                                        ) ?
+                                                            <Image
+                                                                className="absolute top-0 w-full h-full"
+                                                                alt={`slot_${artifactIndex}`}
+                                                                src={`/artifact/artifact.slot${userUnionArtifact?.union_artifact_crystal?.[artifactIndex]?.level == 5 ? ".evo" : ""}.png`}
+                                                                priority
+                                                                width={178}
+                                                                height={210}
+                                                            /> :
+                                                            <Image
+                                                                className="absolute top-0 w-full h-full"
+                                                                alt={`slot_${artifactIndex}`}
+                                                                src={`/artifact/disabledSlot.png`}
+                                                                priority
+                                                                width={178}
+                                                                height={210}
+                                                            />
+                                                    }
+                                                    {
+                                                        (
+                                                            userUnionArtifact?.union_artifact_crystal?.[artifactIndex]?.level == 5 &&
+                                                            new Date(selectedDate || getYesterdayDate() + " 23:59:59") < new Date(userUnionArtifact?.union_artifact_crystal?.[artifactIndex]?.date_expire)
+                                                        ) &&
+                                                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3/4 h-auto aspect-square">
+                                                            <div className={cn(
+                                                                "w-full aspect-square rounded-full",
+                                                                Style.evoCircleGlow
+                                                            )} />
+                                                        </div>
+                                                    }
+                                                    {
+                                                        (
+                                                            userUnionArtifact?.union_artifact_crystal?.[artifactIndex]?.level >= 1 &&
+                                                            new Date(selectedDate || getYesterdayDate() + " 23:59:59") < new Date(userUnionArtifact?.union_artifact_crystal?.[artifactIndex]?.date_expire)
+                                                        ) &&
+                                                        <video
+                                                            autoPlay muted loop
+                                                            className={cn(
+                                                                "absolute object-cover w-3/4",
+                                                                userUnionArtifact?.union_artifact_crystal?.[artifactIndex]?.level <= 1 ?
+                                                                    "top-3/4 left-1/2 -translate-x-1/2" :
+                                                                    userUnionArtifact?.union_artifact_crystal?.[artifactIndex]?.level <= 4 ?
+                                                                        "bottom-1 left-1/2 -translate-x-1/2" :
+                                                                        "bottom-1 left-1/2 -translate-x-1/2"
+
+                                                            )}
+                                                        >
+                                                            <source
+                                                                type="video/webm"
+                                                                src={
+                                                                    `/artifact/gradeEffect${userUnionArtifact?.union_artifact_crystal?.[artifactIndex]?.level <= 1 ?
+                                                                        "" :
+                                                                        userUnionArtifact?.union_artifact_crystal?.[artifactIndex]?.level <= 4 ?
+                                                                            "Normal" :
+                                                                            "Evo"
+                                                                    }.webm`
+                                                                }
+                                                                className=""
+                                                            />
+                                                        </video>
+                                                    }
+                                                    <div className="relative h-3/5 mb-2 self-center">
+                                                        <Image
+                                                            alt={userUnionArtifact?.union_artifact_crystal?.[artifactIndex]?.name || `monster_${artifactIndex}`}
+                                                            src={`/artifact/artifact.${artifactIndex}${userUnionArtifact?.union_artifact_crystal?.[artifactIndex]?.level == 5 ? "" : ""}.png`}
+                                                            className={cn(
+                                                                "object-contain h-full w-auto scale-75 sm:scale-100 translate-y-3",
+                                                                userUnionArtifact?.union_artifact_crystal?.[artifactIndex]?.name == "크리스탈 : 스텀프" && "translate-x-[3px] sm:translate-x-[5px]",
+                                                                new Date(selectedDate || getYesterdayDate() + " 23:59:59") > new Date(userUnionArtifact?.union_artifact_crystal?.[artifactIndex]?.date_expire) && "grayscale brightness-[0.35]",
+                                                                !userUnionArtifact?.union_artifact_crystal?.[artifactIndex]?.name && "grayscale brightness-[0.35]",
+                                                                (5 > userUnionArtifact?.union_artifact_crystal?.[artifactIndex]?.level && userUnionArtifact?.union_artifact_crystal?.[artifactIndex]?.level >= 2) && Style.normalGlow,
+                                                                (
+                                                                    userUnionArtifact?.union_artifact_crystal?.[artifactIndex]?.level == 5 &&
+                                                                    new Date(selectedDate || getYesterdayDate() + " 23:59:59") < new Date(userUnionArtifact?.union_artifact_crystal?.[artifactIndex]?.date_expire)
+                                                                ) && Style.evoGlow,
+                                                            )}
+                                                            width={artifactMonsterImageSize[`artifact.${artifactIndex}${userUnionArtifact?.union_artifact_crystal?.[artifactIndex]?.level == 5 ? ".evo" : ""}`]?.w}
+                                                            height={artifactMonsterImageSize[`artifact.${artifactIndex}${userUnionArtifact?.union_artifact_crystal?.[artifactIndex]?.level == 5 ? ".evo" : ""}`]?.h}
+                                                        />
+                                                    </div>
+                                                    {
+                                                        userUnionArtifact?.union_artifact_crystal?.[artifactIndex]?.level >= 1 &&
+                                                        <div className={cn(
+                                                            "absolute top-5 left-1/2 -translate-x-1/2 w-full",
+                                                            new Date(selectedDate || getYesterdayDate() + " 23:59:59") > new Date(userUnionArtifact?.union_artifact_crystal?.[artifactIndex]?.date_expire) ? "h-[17px]" : "h-[23px]"
+                                                        )}>
+                                                            <div className="flex flex-row justify-center h-1/2 sm:h-full">
+                                                                {
+                                                                    Array(userUnionArtifact?.union_artifact_crystal?.[artifactIndex]?.level).fill().map((_, levelIndex) => {
+                                                                        return (
+                                                                            <div
+                                                                                key={levelIndex}
+                                                                                className={cn("aspect-square h-auto w-auto relative")}
+                                                                            >
+                                                                                <Image
+                                                                                    alt={"등급 레벨"}
+                                                                                    src={`/artifact/level${new Date(selectedDate || getYesterdayDate() + " 23:59:59") > new Date(userUnionArtifact?.union_artifact_crystal?.[artifactIndex]?.date_expire) ? ".disabled" : ""}.png`}
+                                                                                    className="scale-125 lg:scale-100 w-auto h-auto"
+                                                                                    width={23}
+                                                                                    height={23}
+                                                                                />
+                                                                            </div>
+                                                                        )
+                                                                    })
+                                                                }
+                                                            </div>
+                                                        </div>
+                                                    }
+                                                    {
+                                                        !userUnionArtifact?.union_artifact_crystal?.[artifactIndex]?.name &&
+                                                        <Image
+                                                            alt={"슬롯 미개방"}
+                                                            src={`/artifact/disabled.png`}
+                                                            className={cn(
+                                                                "absolute top-0 w-full h-full",
+                                                                // userUnionArtifact?.union_artifact_crystal?.[artifactIndex]?.name == "크리스탈 : 스텀프" && "translate-x-[3px] sm:translate-x-[5px]"
+                                                            )}
+                                                            width={176}
+                                                            height={206}
+                                                        />
+                                                    }
+                                                    {
+                                                        new Date(selectedDate || getYesterdayDate() + " 23:59:59") > new Date(userUnionArtifact?.union_artifact_crystal?.[artifactIndex]?.date_expire) &&
+                                                        <Image
+                                                            alt={"유효기간 만료"}
+                                                            src={`/artifact/outdated.png`}
+                                                            className={cn(
+                                                                "absolute top-0 w-full h-full",
+                                                                // userUnionArtifact?.union_artifact_crystal?.[artifactIndex]?.name == "크리스탈 : 스텀프" && "translate-x-[3px] sm:translate-x-[5px]"
+                                                            )}
+                                                            width={176}
+                                                            height={206}
+                                                        />
+                                                    }
+                                                    {
+                                                        (
+                                                            userUnionArtifact?.union_artifact_crystal?.[artifactIndex]?.level >= 1 &&
+                                                            new Date(selectedDate || getYesterdayDate() + " 23:59:59") < new Date(userUnionArtifact?.union_artifact_crystal?.[artifactIndex]?.date_expire)
+                                                        ) &&
+                                                        <div className="text-center flex justify-center absolute bottom-0 w-full h-1/6 backdrop-blur-[3px] rounded-b-lg flex-none transition-colors duration-500 lg:z-50 bg-white/60 dark:bg-black/60">
+                                                            <ul className="mt-1 flex gap-0 sm:gap-3 text-xs sm:text-base">
+                                                                <li>{effectAbbreviation(userUnionArtifact?.union_artifact_crystal?.[artifactIndex]?.crystal_option_name_1)}</li>
+                                                                <li>|</li>
+                                                                <li>{effectAbbreviation(userUnionArtifact?.union_artifact_crystal?.[artifactIndex]?.crystal_option_name_2)}</li>
+                                                                <li>|</li>
+                                                                <li>{effectAbbreviation(userUnionArtifact?.union_artifact_crystal?.[artifactIndex]?.crystal_option_name_3)}</li>
+                                                            </ul>
+                                                        </div>
+                                                    }
+                                                </div>
                                             </div>
                                         )
                                     })
@@ -207,10 +380,32 @@ export default async function Union({ params, searchParams }) {
                             </div>
                         </div>
                         <div className="col-span-3 lg:col-span-1">
-
+                            <div className="flex flex-col h-full">
+                                <div className="flex justify-center gap-2 h-24">
+                                    <div className="text-lg font-semibold self-center text-center relative">
+                                        <div>ARTIFACT Lv.{userUnion?.artifact_level}</div>
+                                    </div>
+                                </div>
+                                <div className="bg-background rounded h-full">
+                                    <div className="font-semibold px-2 pt-2 pb-3">
+                                        아티팩트 효과
+                                    </div>
+                                    <div className="ms-3">
+                                        {
+                                            userUnionArtifact?.union_artifact_effect?.map((effect, effectIndex) => {
+                                                return (
+                                                    <Fragment key={effectIndex}>
+                                                        <div>Lv.{effect.level} {effect.name}</div>
+                                                    </Fragment>
+                                                )
+                                            })
+                                        }
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div> */}
+                </div>
 
                 <div className="bg-muted p-2 rounded-md">
                     <div className="flex flex-row flex-wrap">
@@ -345,7 +540,7 @@ export default async function Union({ params, searchParams }) {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div >
         </>
     )
 }

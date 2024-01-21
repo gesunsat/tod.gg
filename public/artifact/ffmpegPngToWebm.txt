@@ -1,0 +1,1 @@
+ffmpeg -framerate 14 -f image2 -i gradeEffect/a%02d.png -c:v libvpx-vp9 -pix_fmt yuva420p gradeEffect.webm
