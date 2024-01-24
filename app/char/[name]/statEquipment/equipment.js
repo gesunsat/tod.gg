@@ -301,12 +301,11 @@ export default function Equipment(props) {
     const arcaneSymbolNumberOfLevelsRequire = [0, 2679, 2667, 2652, 2632, 2605, 2569, 2522, 2462, 2387, 2295, 2184, 2052, 1897, 1717, 1510, 1274, 1007, 707, 372];
     const authenticSymbolNumberOfLevelsRequire = [0, 4565, 4536, 4460, 4319, 4095, 3770, 3326, 2745, 2009, 1100];
     const itemStarData = [
-        [0, 5, 5],
+        [0, 5, 3],
         [95, 8, 5],
-        [100, 10, 8],
-        [110, 10, 10],
-        [120, 15, 15],
-        [130, 20, 15],
+        [110, 10, 8],
+        [120, 15, 10],
+        [130, 20, 12],
         [140, 25, 15],
     ];
     const GetMaxStar = (upgradeable_count, reqLevel, starforce_scroll_flag, item_name) => {
@@ -324,9 +323,17 @@ export default function Equipment(props) {
             if (reqLevel >= item[0]) data = item;
             else break;
         };
+        let isSuperior = false;
+        if (item_name.includes("타일런트 ")) isSuperior = true;
+        if (item_name.includes("헬리시움 ")) isSuperior = true;
+        if (item_name.includes("노바 ")) isSuperior = true;
 
         if (!data.length) return 0;
-        return data[starforce_scroll_flag == "사용" ? 2 : 1];
+        return starforce_scroll_flag == "사용" ?
+            Math.min(data[1], 15) :
+            isSuperior ?
+                data[2] :
+                data[1];
     }
 
     const [openHoverCard, setOpenHoverCard] = useState({});
