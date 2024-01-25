@@ -66,6 +66,7 @@ export default function Equipment(props) {
                     parseInt(item.scroll_resilience_count)
                 ),
                 item?.item_base_option?.base_equipment_level,
+                item?.starforce,
                 item?.starforce_scroll_flag,
                 item?.item_name
             )
@@ -308,7 +309,7 @@ export default function Equipment(props) {
         [130, 20, 12],
         [140, 25, 15],
     ];
-    const GetMaxStar = (upgradeable_count, reqLevel, starforce_scroll_flag, item_name) => {
+    const GetMaxStar = (upgradeable_count, reqLevel, currentStarforce, starforce_scroll_flag, item_name) => {
         if (upgradeable_count == 0) return 0; // 업그레이드 가능 횟수
         // if (this.Cash) return 0;
         // if (this.GetBooleanValue(GearPropType.onlyUpgrade)) return 0; // onlyUpgrade 특정 아이템에 옵션이 있음 하지만 API에서는 안알려주니 밑에 상수로
@@ -324,16 +325,16 @@ export default function Equipment(props) {
             else break;
         };
         let isSuperior = false;
-        if (item_name.includes("타일런트 ")) isSuperior = true;
-        if (item_name.includes("헬리시움 ")) isSuperior = true;
-        if (item_name.includes("노바 ")) isSuperior = true;
+        if (item_name.indexOf("타일런트 ") == 0) isSuperior = true;
+        if (item_name.indexOf("헬리시움 ") == 0) isSuperior = true;
+        if (item_name.indexOf("노바 ") == 0) isSuperior = true;
 
         if (!data.length) return 0;
-        return starforce_scroll_flag == "사용" ?
-            Math.min(data[1], 15) :
-            isSuperior ?
-                data[2] :
-                data[1];
+        return Math.max(
+            starforce_scroll_flag == "사용" ?
+                Math.min(data[1], 15) :
+                isSuperior ? data[2] : data[1],
+            currentStarforce)
     }
 
     const [openHoverCard, setOpenHoverCard] = useState({});
