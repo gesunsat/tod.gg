@@ -383,7 +383,7 @@ export default async function Union({ params, searchParams }) {
                             <div className="flex flex-col h-full">
                                 <div className="flex justify-center gap-2 h-24">
                                     <div className="text-lg font-semibold self-center text-center relative">
-                                        <div>ARTIFACT Lv.{userUnion?.artifact_level}</div>
+                                        <div>ARTIFACT Lv.{userUnion?.artifact_level >= 1 ? userUnion?.artifact_level : "0"}</div>
                                     </div>
                                 </div>
                                 <div className="bg-background rounded h-full">
