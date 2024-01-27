@@ -214,7 +214,7 @@ export default function GuildMembers(props) {
                     {
                         members.map((member, memberIndex) => {
                             return (
-                                <div key={memberIndex} className="col-span-1">
+                                <div key={memberIndex} className="col-span-1 hover:scale-105 transition">
                                     <Link href={`/char/${member}`}>
                                         <div className="bg-muted bg-opacity-20 flex justify-center py-5 relative rounded">
                                             <div className="flex flex-1 gap-3">
