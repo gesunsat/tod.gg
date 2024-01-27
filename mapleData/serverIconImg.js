@@ -28,7 +28,7 @@ export const serverIconImg = {
     "스카니아": ScaniaServerIcon,
     "유니온": UnionServerIcon,
     "제니스": ZenithServerIcon,
-    "버닝1": BurningServerIcon,
+    "버닝": BurningServerIcon,
     "버닝2": BurningServerIcon,
     "버닝3": BurningServerIcon,
 };
