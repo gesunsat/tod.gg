@@ -3,6 +3,7 @@ import { getGuildBasic } from "@/lib/nexonAPI/getGuildBasic";
 import GuildHeader from "./header";
 import { getRankingGuild } from "@/lib/nexonAPI/getRankingGuild";
 import GuildMembers from "./members";
+import SearchGuild from "../../searchGuild";
 
 export default async function GuildPage({ params }) {
   const worldName = decodeURI(params.worldName);
@@ -31,6 +32,9 @@ export default async function GuildPage({ params }) {
 
   return (
     <>
+      <div className="rounded-lg border bg-card text-card-foreground shadow-sm mb-2">
+        <SearchGuild className={"w-auto lg:w-1/2 mx-5 lg:mx-auto my-5"} />
+      </div>
       <GuildHeader guildBasic={guildBasic} guildRankingFlag={guildRankingFlag} guildRankingSuro={guildRankingSuro} />
       <div className="rounded-lg border bg-card text-card-foreground shadow-sm mt-2 p-2">
         <GuildMembers guildBasic={guildBasic} guildID={guildID} />
