@@ -21,16 +21,26 @@ import { cn } from "@/lib/utils";
 
 export default function GuildMembers(props) {
     const guildBasic = props.guildBasic;
-
-    const [members, setMembers] = useState([]);
-    const initMemberSort = [...guildBasic?.guild_member] || [];
-    initMemberSort.splice(guildBasic?.guild_member.indexOf(guildBasic.guild_master_name), 1);
-    initMemberSort.unshift(guildBasic.guild_master_name);
+    const guildID = props?.guildID?.oguild_id;
     useEffect(() => {
         getMembersInfo();
+    }, [])
+
+    const [members, setMembers] = useState([]);
+    const [membersInfo, setMembersInfo] = useState({});
+    useEffect(() => {
+        if (members.length == 0) return;
+
+        let initMemberSort = [...guildBasic?.guild_member].sort((a, b) => {
+            if ((membersInfo[a]?.["combat_power"] || 0) > (membersInfo[b]?.["combat_power"] || 0)) return -1;
+            if ((membersInfo[a]?.["combat_power"] || 0) < (membersInfo[b]?.["combat_power"] || 0)) return 1;
+            return 0;
+        });
+        initMemberSort.splice(initMemberSort.indexOf(guildBasic.guild_master_name), 1);
+        initMemberSort.unshift(guildBasic.guild_master_name);
 
         setMembers(initMemberSort);
-    }, [])
+    }, [membersInfo])
 
     const [sec, setSec] = useState(0);
     const [time, setTime] = useState(null);
@@ -49,22 +59,21 @@ export default function GuildMembers(props) {
     }, [time]);
 
     const [loading, setLoading] = useState(false);
-    const [membersInfo, setMembersInfo] = useState({});
-    const [memberMinDate, setMemberMinDate] = useState(new Date("2000-01-01"));
+    const [memberGuildDate, setMemberGuildDate] = useState(new Date("2000-01-01"));
     const getMembersInfo = async () => {
         try {
             setLoading(true);
-            if (!props?.guildID?.oguild_id) return;
+            if (!guildID) return;
 
-            const res = await getGuildMembersInfo(guildBasic.guild_member);
+            const res = await getGuildMembersInfo(guildBasic.guild_member, guildID);
             const membersInfo = res.guildMembersInfo;
-            const memberMinDate = new Date(res.minDate);
+            const memberGuildDate = new Date(res.guildDate);
 
             // console.log(membersInfo);
-            // console.log(memberMinDate);
+            // console.log(memberGuildDate);
 
             setMembersInfo(membersInfo);
-            setMemberMinDate(memberMinDate);
+            setMemberGuildDate(memberGuildDate);
         } catch (err) {
             console.log(err);
         } finally {
@@ -74,19 +83,19 @@ export default function GuildMembers(props) {
 
     const handleUpdateGuildMembersInfo = async () => {
         try {
-            if (!props?.guildID?.oguild_id) return;
+            if (!guildID) return;
             setLoading(true);
             setTime(5);
 
-            const res = await updateGuildMembersInfo(guildBasic.guild_member, props?.guildID?.oguild_id);
+            const res = await updateGuildMembersInfo(guildBasic.guild_member, guildID);
             const membersInfo = res.guildMembersInfo;
-            const memberMinDate = new Date(res.minDate);
+            const memberGuildDate = new Date(res.guildDate);
 
             // console.log(membersInfo);
-            // console.log(memberMinDate);
+            // console.log(memberGuildDate);
 
             setMembersInfo(membersInfo);
-            setMemberMinDate(memberMinDate);
+            setMemberGuildDate(memberGuildDate);
         } catch (err) {
             console.log(err);
         } finally {
@@ -95,7 +104,7 @@ export default function GuildMembers(props) {
         }
     };
 
-    const [memberSortOption, setMemberSortOption] = useState("");
+    const [memberSortOption, setMemberSortOption] = useState("combat_power");
     useEffect(() => {
         setMemberSearchValue("");
         sortMembers();
@@ -158,9 +167,9 @@ export default function GuildMembers(props) {
                         </div>
                     </div>
                     <div className="flex-1 items-center flex justify-between">
-                        <Select onValueChange={e => setMemberSortOption(e)}>
+                        <Select defaultValue="combat_power" onValueChange={e => setMemberSortOption(e)}>
                             <SelectTrigger className="w-[120px]">
-                                <SelectValue placeholder="정렬" />
+                                <SelectValue placeholder="전투력" />
                             </SelectTrigger>
                             <SelectContent>
                                 <SelectItem value={"name"}>이름</SelectItem>
@@ -176,14 +185,14 @@ export default function GuildMembers(props) {
                                 </div>
                             }
                             {
-                                new Date(getYesterdayDate()) - memberMinDate < (1000 * 60 * 60 * 24) - 1000 ?
+                                new Date(getYesterdayDate()) - memberGuildDate < (1000 * 60 * 60 * 24) - 1000 ?
                                     <div>최신</div> :
                                     <>
                                         {
-                                            memberMinDate.getFullYear() == "2000" ?
+                                            (memberGuildDate.getFullYear() == "2000" || loading) ?
                                                 <></> :
                                                 <div>
-                                                    {(new Date(getYesterdayDate()) - memberMinDate) / (1000 * 60 * 60 * 24)}일 전
+                                                    {(new Date(getYesterdayDate()) - memberGuildDate) / (1000 * 60 * 60 * 24)}일 전
                                                 </div>
                                         }
                                     </>
@@ -192,7 +201,7 @@ export default function GuildMembers(props) {
                             <Button
                                 variant="secondary"
                                 onClick={handleUpdateGuildMembersInfo}
-                                disabled={new Date(getYesterdayDate()) - memberMinDate < (1000 * 60 * 60 * 24) - 1000}
+                                disabled={new Date(getYesterdayDate()) - memberGuildDate < (1000 * 60 * 60 * 24) - 1000}
                             >
                                 {
                                     loading ?
