@@ -31,6 +31,7 @@ import { getWorldCharacters } from "@/lib/todAPI/getWorldCharacters";
 import { headers } from 'next/headers';
 import { searchQueryParams } from "@/lib/getQueryParam";
 import { DatePicker } from "@/components/datePicker";
+import CharHeaderCharacterImage from "./headerCharacterImage";
 
 export default async function CharHeader(props) {
     const characterName = decodeURI(props.characterName);
@@ -73,15 +74,7 @@ export default async function CharHeader(props) {
 
     return (
         <>
-            <div className="col-span-4 lg:col-span-1 text-center p-3">
-                {
-                    character?.characterBasic?.character_image &&
-                    <div
-                        style={{ '--image-url': `url(${character.characterBasic.character_image})` }}
-                        className={"relative h-56 lg:h-full overflow-hidden bg-negative-fixed-more text-positive-fixed bg-center bg-no-repeat bg-contain bg-[image:var(--image-url)]"}
-                    />
-                }
-            </div>
+            <CharHeaderCharacterImage character={character} />
             <div className="col-span-4 lg:col-span-3 bg-muted bg-opacity-20 flex justify-between flex-1 p-3 rounded-md lg:rounded-s-none lg:rounded-e-md">
                 <div>
                     <div className="text-3xl font-bold">{character.characterBasic.character_name}</div>
