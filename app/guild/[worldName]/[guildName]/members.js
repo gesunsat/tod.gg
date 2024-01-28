@@ -32,8 +32,8 @@ export default function GuildMembers(props) {
         if (members.length == 0) return;
 
         let initMemberSort = [...guildBasic?.guild_member].sort((a, b) => {
-            if ((membersInfo[a]?.["combat_power"] || 0) > (membersInfo[b]?.["combat_power"] || 0)) return -1;
-            if ((membersInfo[a]?.["combat_power"] || 0) < (membersInfo[b]?.["combat_power"] || 0)) return 1;
+            if ((membersInfo?.[a]?.["combat_power"] || 0) > (membersInfo?.[b]?.["combat_power"] || 0)) return -1;
+            if ((membersInfo?.[a]?.["combat_power"] || 0) < (membersInfo?.[b]?.["combat_power"] || 0)) return 1;
             return 0;
         });
         initMemberSort.splice(initMemberSort.indexOf(guildBasic.guild_master_name), 1);
@@ -223,9 +223,9 @@ export default function GuildMembers(props) {
                     {
                         members.map((member, memberIndex) => {
                             return (
-                                <div key={memberIndex} className="col-span-1 hover:scale-105 transition">
+                                <div key={memberIndex} className="col-span-1">
                                     <Link href={`/char/${member}`}>
-                                        <div className="bg-muted bg-opacity-20 flex justify-center py-5 relative rounded">
+                                        <div className="bg-muted bg-opacity-20 flex justify-center py-5 relative rounded transition-all outline outline-0 hover:outline-4">
                                             <div className="flex flex-1 gap-3">
                                                 <div className="min-h-[96px] min-w-[96px] flex items-center justify-center">
                                                     <div className="ps-2">

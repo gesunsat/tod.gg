@@ -44,9 +44,9 @@ export default async function Characters({ params, searchParams }) {
                     characters.map((character, characterIndex) => {
                         return (
                             <Fragment key={characterIndex}>
-                                <div className="col-span-3 lg:col-span-1 hover:scale-105 transition">
+                                <div className="col-span-3 lg:col-span-1">
                                     <Link href={`/char/${character}`}>
-                                        <div className="bg-muted bg-opacity-20 flex justify-center py-5 relative rounded">
+                                        <div className="bg-muted bg-opacity-20 flex justify-center py-5 relative rounded transition-all outline outline-0 hover:outline-4">
                                             <div className="flex flex-1 gap-3">
                                                 <div className="min-h-[96px] min-w-[96px] flex items-center justify-center">
                                                     <div className="ps-2">
