@@ -36,7 +36,6 @@
     "next-themes": "^0.2.1",
     "node-fetch": "^3.3.2",
     "react": "^18",
-    "react-beautiful-dnd": "^13.1.1",
     "react-day-picker": "^8.10.0",
     "react-dom": "^18",
     "react-responsive": "^9.0.2",
