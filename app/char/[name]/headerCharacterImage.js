@@ -35,7 +35,7 @@ export default function CharHeaderCharacterImage(props) {
             }
         }
 
-        const newFavingCharacters = [...favoriteCharacters];
+        const newFavoritesCharacters = [...favoriteCharacters];
         const handleData = {
             "character_image": character.characterBasic?.character_image || "",
             "character_class": character.characterBasic.character_class || "",
@@ -44,16 +44,16 @@ export default function CharHeaderCharacterImage(props) {
             "world_name": character.characterBasic.world_name || "",
         }
         if (existCharacterIndex == -1) {
-            newFavingCharacters.push(handleData);
+            newFavoritesCharacters.push(handleData);
             setIsFavoriteCharacter(true);
         } else {
-            newFavingCharacters.splice(existCharacterIndex, 1);
+            newFavoritesCharacters.splice(existCharacterIndex, 1);
             setIsFavoriteCharacter(false);
         }
 
-        localStorage.setItem("favoriteCharacters", JSON.stringify(newFavingCharacters))
+        localStorage.setItem("favoriteCharacters", JSON.stringify(newFavoritesCharacters))
 
-        setFavoriteCharacters(newFavingCharacters);
+        setFavoriteCharacters(newFavoritesCharacters);
     }
 
     return (
@@ -69,7 +69,7 @@ export default function CharHeaderCharacterImage(props) {
                 <Star
                     onClick={handleFavoritesCharacters}
                     className={cn(
-                        "transition-all ease-in hover:stroke-yellow-500 cursor-pointer",
+                        "transition-all ease-in hover:stroke-yellow-500 dark:hover:stroke-yellow-500 cursor-pointer",
                         isFavoriteCharacter ? "stroke-yellow-500 fill-yellow-500" : "stroke-black dark:stroke-white fill-transparent"
                     )}
                 />
