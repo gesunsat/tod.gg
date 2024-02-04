@@ -1914,7 +1914,6 @@ export default function Equipment(props) {
                                                     </div>
                                                 }
                                             </div>
-                                            {/* TODO: 넥슨 십쌔들 일 개같이 안해서 스킬1 아이콘이랑 스킬2 아이콘 똑같음 추후 확인 */}
                                             <div className="basis-1/2 relative items-center aspect-square m-[2.5px] bg-background rounded">
                                                 {
                                                     user?.characterPetEquipment[`pet_${index + 1}_auto_skill`]?.skill_2 &&
@@ -1953,15 +1952,6 @@ export default function Equipment(props) {
                                 })
                             }
                         </div>
-
-                        <Alert className="mt-2">
-                            <AlertTitle>
-                                알림
-                            </AlertTitle>
-                            <AlertDescription>
-                                넥슨 API의 문제로 인해 펫 스킬 2의 아이콘이<br />펫 스킬 1의 아이콘과 같은 문제가 있습니다.<br />아이콘에 커서를 올릴 시 스킬 명은 제대로 표기 됨
-                            </AlertDescription>
-                        </Alert>
                     </TabsContent>
 
                     <TabsContent value="androidEquipment">
