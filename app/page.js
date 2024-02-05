@@ -1,6 +1,7 @@
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import Image from "next/image";
 import Link from "next/link";
+import DiscordIcon from "@/public/discord.svg";
 
 const notice = [
   {
@@ -59,9 +60,8 @@ export default function Home() {
       <div className="grid grid-cols-2 gap-2">
         <div className="rounded-lg border bg-card text-card-foreground shadow-sm p-5 flex justify-center">
           <Link target="_blank" href="https://discord.gg/kGpvfKynwC">
-            <Image
-              src="/discord.svg"
-              alt="Discord"
+            <DiscordIcon
+              className="fill-black dark:fill-white"
               width={50}
               height={50}
             />
