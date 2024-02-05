@@ -29,7 +29,6 @@ export default function RootLayout({ children }) {
   return (
     <html lang="ko-KR" className="flex w-full min-h-full">
       <GoogleAnalytics />
-      <NaverAnalytics />
       <MicrosoftClarity />
 
       <body className={cn(interNotoSansKR.className, "dark:bg-card w-full min-h-full")}>
