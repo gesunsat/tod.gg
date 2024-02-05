@@ -7,6 +7,7 @@ export default function Footer(props) {
     <footer className="bg-card py-5">
       <div className="container px-3 mx-auto text-center text-sm">
         <div>This site is not associated with Nexon Korea & Nexon.</div>
+        <div>Data based on NEXON Open API.</div>
         <div>Copyright © 2024-{new Date().getFullYear()} TOD.GG. All rights reserved.</div>
         <div>
           <ul className="flex justify-center">
