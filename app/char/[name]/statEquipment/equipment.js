@@ -57,7 +57,7 @@ export default function Equipment(props) {
             `item_equipment` :
             currentViewingItemEquipmentTab != "item_equipment" ?
                 currentViewingItemEquipmentTab :
-                `item_equipment_preset${currentPresetNo}`;
+                `item_equipment_preset_${currentPresetNo}`;
         user?.characterItemEquipment[keyToFind]?.map((item) => {
             item.starforceMax = GetMaxStar(
                 (
@@ -1015,10 +1015,10 @@ export default function Equipment(props) {
                                         <ToggleGroupItem className="dark:data-[state=on]:bg-background data-[state=on]:pointer-events-none" value={1} aria-label="itemPreset1">
                                             <div className="h-auto w-4">1</div>
                                         </ToggleGroupItem>
-                                        <ToggleGroupItem className="dark:data-[state=on]:bg-background data-[state=on]:pointer-events-none" value={2} aria-label="itemPreset2" disabled={user?.characterItemEquipment?.item_equipment_preset2.length ? false : true}>
+                                        <ToggleGroupItem className="dark:data-[state=on]:bg-background data-[state=on]:pointer-events-none" value={2} aria-label="itemPreset2" disabled={user?.characterItemEquipment?.item_equipment_preset_2.length ? false : true}>
                                             <div className="h-auto w-4">2</div>
                                         </ToggleGroupItem>
-                                        <ToggleGroupItem className="dark:data-[state=on]:bg-background data-[state=on]:pointer-events-none" value={3} aria-label="itemPreset3" disabled={user?.characterItemEquipment?.item_equipment_preset3.length ? false : true}>
+                                        <ToggleGroupItem className="dark:data-[state=on]:bg-background data-[state=on]:pointer-events-none" value={3} aria-label="itemPreset3" disabled={user?.characterItemEquipment?.item_equipment_preset_3.length ? false : true}>
                                             <div className="h-auto w-4">3</div>
                                         </ToggleGroupItem>
                                     </ToggleGroup>
