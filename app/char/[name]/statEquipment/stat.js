@@ -256,7 +256,6 @@ export default function Stat(props) {
                                         <div>어빌리티</div>
                                     </div>
                                     <div className="space-y-2">
-                                        {console.log(user?.characterAbility)}
                                         {
                                             user?.characterAbility?.preset_no ?
                                                 user?.characterAbility?.[`ability_preset_${currentAbilityPresetNo}`]?.ability_info?.map((ability, abilityIndex) => {
