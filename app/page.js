@@ -1,9 +1,15 @@
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import Image from "next/image";
+import Link from "next/link";
 
 const notice = [
   {
+    title: "2024.02.01",
+    content: ["즐겨찾기 기능 추가", "넥슨 API 업데이트 대응", "버그 수정 및 성능 개선"],
+  },
+  {
     title: "2024.01.18",
-    content: ["캐릭터 페이지 > 유니온 아티펙트 탭 활성화", "넥슨 API 수정 대응", "버그 수정 및 성능 개선"],
+    content: ["캐릭터 페이지 > 유니온 아티펙트 탭 활성화", "넥슨 API 업데이트 대응", "버그 수정 및 성능 개선"],
   },
   {
     title: "2024.01.18",
@@ -23,7 +29,7 @@ const notice = [
   },
   {
     title: "2024.01.13",
-    content: ["캐릭터 페이지 > 스킬 탭 > 6차, 5차, 링크 스킬 표기", "넥슨 API 수정 대응", "버그 수정 및 성능 개선"],
+    content: ["캐릭터 페이지 > 스킬 탭 > 6차, 5차, 링크 스킬 표기", "넥슨 API 업데이트 대응", "버그 수정 및 성능 개선"],
   },
   {
     title: "2024.01.12",
@@ -49,8 +55,22 @@ const notice = [
 
 export default function Home() {
   return (
-    <div className="rounded-lg border bg-card text-card-foreground shadow-sm p-5">
-      <div>
+    <>
+      <div className="grid grid-cols-2 gap-2">
+        <div className="rounded-lg border bg-card text-card-foreground shadow-sm p-5 flex justify-center">
+          <Link target="_blank" href="https://discord.gg/kGpvfKynwC">
+            <Image
+              src="/discord.svg"
+              alt="Discord"
+              width={50}
+              height={50}
+            />
+          </Link>
+        </div>
+        <div className="rounded-lg border bg-card text-card-foreground shadow-sm p-5">
+        </div>
+      </div>
+      <div className="rounded-lg border bg-card text-card-foreground shadow-sm p-5 mt-2">
         <div className="text-center text-xl">
           공지 / 업데이트
         </div>
@@ -72,7 +92,7 @@ export default function Home() {
             ))
           }
         </Accordion>
-      </div >
-    </div>
+      </div>
+    </>
   )
 }
