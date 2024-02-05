@@ -322,14 +322,14 @@ export default function CharHistory({ params, searchParams }) {
             });
 
             const areaSeries = chart.addAreaSeries({
-                autoscaleInfoProvider: () => {
-                    return {
-                        priceRange: {
-                            minValue: 0,
-                            maxValue: 300,
-                        },
-                    };
-                },
+                // autoscaleInfoProvider: () => {
+                //     return {
+                //         priceRange: {
+                //             minValue: 0,
+                //             maxValue: 300,
+                //         },
+                //     };
+                // },
                 priceFormat: {
                     type: "custom",
                     formatter: (val) => val.toFixed(0),
