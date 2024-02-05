@@ -204,7 +204,7 @@ export default async function Union({ params, searchParams }) {
                 <div className="bg-muted p-2 rounded-md">
                     <div className="grid grid-cols-3 gap-2">
                         <div className="col-span-3 lg:col-span-2">
-                            <div className="grid grid-cols-3 gap-5">
+                            <div className="grid grid-cols-3 gap-1 sm:gap-5">
                                 {
                                     Array(9).fill().map((_, artifactIndex) => {
                                         return (
@@ -362,8 +362,16 @@ export default async function Union({ params, searchParams }) {
                                                             userUnionArtifact?.union_artifact_crystal?.[artifactIndex]?.level >= 1 &&
                                                             new Date(selectedDate || getYesterdayDate() + " 23:59:59") < new Date(userUnionArtifact?.union_artifact_crystal?.[artifactIndex]?.date_expire)
                                                         ) &&
-                                                        <div className="text-center flex justify-center absolute bottom-0 w-full h-1/6 backdrop-blur-[3px] rounded-b-lg flex-none transition-colors duration-500 lg:z-50 bg-white/60 dark:bg-black/60">
-                                                            <ul className="mt-1 flex gap-0 sm:gap-3 text-xs sm:text-base">
+                                                        <div className="text-center flex justify-center absolute bottom-0 w-full h-1/6 backdrop-blur-[3px] flex-none transition-colors duration-500 overflow-hidden">
+                                                            <Image
+                                                                className="absolute bottom-0 h-auto w-full brightness-0 opacity-60"
+                                                                alt={`slot_${artifactIndex}`}
+                                                                src={`/artifact/artifact.slot.evo.png`}
+                                                                priority
+                                                                width={178}
+                                                                height={210}
+                                                            />
+                                                            <ul className="mt-1 flex gap-0 sm:gap-3 text-xs sm:text-base z-10 text-white">
                                                                 <li>{effectAbbreviation(userUnionArtifact?.union_artifact_crystal?.[artifactIndex]?.crystal_option_name_1)}</li>
                                                                 <li>|</li>
                                                                 <li>{effectAbbreviation(userUnionArtifact?.union_artifact_crystal?.[artifactIndex]?.crystal_option_name_2)}</li>
@@ -392,7 +400,7 @@ export default async function Union({ params, searchParams }) {
                                     </div>
                                     <div className="ms-3">
                                         {
-                                            userUnionArtifact?.union_artifact_effect?.map((effect, effectIndex) => {
+                                            userUnionArtifact?.union_artifact_effect.sort((a, b) => a.level - b.level)?.map((effect, effectIndex) => {
                                                 return (
                                                     <Fragment key={effectIndex}>
                                                         <div>Lv.{effect.level} {effect.name}</div>
