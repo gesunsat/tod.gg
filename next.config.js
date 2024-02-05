@@ -16,8 +16,7 @@ const nextConfig = {
 				hostname: "open.api.nexon.com",
 				pathname: "**",
 			},
-		],
-		domains: ["open.api.nexon.com"],
+		]
 	},
 	reactStrictMode: process.env.NODE_ENV === "production"
 }
