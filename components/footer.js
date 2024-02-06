@@ -4,10 +4,9 @@ import { cn } from "@/lib/utils"
 
 export default function Footer(props) {
   return (
-    <footer className="bg-card py-5">
+    <footer className="bg-card py-3">
       <div className="container px-3 mx-auto text-center text-sm">
-        <div>This site is not associated with Nexon Korea & Nexon.</div>
-        <div>Data based on NEXON Open API.</div>
+        <div>This site is not associated with Nexon Korea & Nexon. Data based on NEXON Open API.</div>
         <div>Copyright © 2024-{new Date().getFullYear()} TOD.GG. All rights reserved.</div>
         <div>
           <ul className="flex justify-center">
