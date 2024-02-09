@@ -84,7 +84,7 @@ function getUnionGrade(level, character_class) {
     }
 };
 
-const classWithAnImage = [
+const jobWithAnImage = [
     "소울마스터", "칼리", "데몬어벤져",
     "패스파인더", "키네시스", "스트라이커",
     "팬텀", "비숍", "나이트로드",
@@ -141,9 +141,9 @@ export default async function Union({ params, searchParams }) {
     const fill_vector = [];
     const raider_x_size = 20;
     const raider_y_size = 22;
-    const classList = [];
+    const jobList = [];
     userUnionRaider?.union_block?.map((block) => {
-        classList.push([
+        jobList.push([
             block.block_class,
             block.block_level,
             getUnionGrade(parseInt(block.block_level), block.block_class)
@@ -155,7 +155,7 @@ export default async function Union({ params, searchParams }) {
             fill_vector.push((((raider_y_size / 2) - y) * raider_y_size) + (x - (raider_x_size / 2)))
         })
     })
-    classList.sort((a, b) => {
+    jobList.sort((a, b) => {
         if (a[1] > b[1]) return -1;
         if (a[1] < b[1]) return 1;
         return 0;
@@ -500,8 +500,8 @@ export default async function Union({ params, searchParams }) {
                                 </div>
                                 <div className="grid max-[370px]:grid-cols-1 min-[370px]:grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2">
                                     {
-                                        classList.length >= 1 &&
-                                        classList.map((block, block_index) => {
+                                        jobList.length >= 1 &&
+                                        jobList.map((block, block_index) => {
                                             // {block[0]}{block[1]}
                                             return (
                                                 <Fragment key={block_index}>
@@ -510,9 +510,9 @@ export default async function Union({ params, searchParams }) {
                                                             <Image
                                                                 alt={block[1]}
                                                                 src={
-                                                                    classWithAnImage.includes(block[0]) ?
-                                                                        `/class/${block[0]}.png` :
-                                                                        "/class/공란.png"
+                                                                    jobWithAnImage.includes(block[0]) ?
+                                                                        `/job/${block[0]}.png` :
+                                                                        "/job/공란.png"
                                                                 }
                                                                 className="object-contain rounded-full" fill sizes="256px"
                                                             />
