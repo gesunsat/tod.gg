@@ -5,27 +5,19 @@ import { PlusCircleIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { Fragment } from "react";
+import { serverOpenList } from "@/mapleData/serverOpenList";
 
 export default async function IndexGuildList(props) {
   const guildName = props.guildName;
 
   const guildIds = {};
-  await Promise.all([
-    (async () => { guildIds["스카니아"] = (await getGuildID("스카니아", guildName))?.oguild_id })(),
-    (async () => { guildIds["베라"] = (await getGuildID("베라", guildName))?.oguild_id })(),
-    (async () => { guildIds["루나"] = (await getGuildID("루나", guildName))?.oguild_id })(),
-    (async () => { guildIds["제니스"] = (await getGuildID("제니스", guildName))?.oguild_id })(),
-    (async () => { guildIds["크로아"] = (await getGuildID("크로아", guildName))?.oguild_id })(),
-    (async () => { guildIds["유니온"] = (await getGuildID("유니온", guildName))?.oguild_id })(),
-    (async () => { guildIds["엘리시움"] = (await getGuildID("엘리시움", guildName))?.oguild_id })(),
-    (async () => { guildIds["이노시스"] = (await getGuildID("이노시스", guildName))?.oguild_id })(),
-    (async () => { guildIds["레드"] = (await getGuildID("레드", guildName))?.oguild_id })(),
-    (async () => { guildIds["오로라"] = (await getGuildID("오로라", guildName))?.oguild_id })(),
-    (async () => { guildIds["아케인"] = (await getGuildID("아케인", guildName))?.oguild_id })(),
-    (async () => { guildIds["노바"] = (await getGuildID("노바", guildName))?.oguild_id })(),
-    (async () => { guildIds["리부트"] = (await getGuildID("리부트", guildName))?.oguild_id })(),
-    (async () => { guildIds["리부트2"] = (await getGuildID("리부트2", guildName))?.oguild_id })(),
-  ])
+
+  const promises = [];
+  for (const server of serverOpenList) {
+    promises.push((async () => { guildIds[server] = (await getGuildID(server, guildName))?.oguild_id })());
+  }
+  await Promise.all(promises);
+
   Object.keys(guildIds).map((guildId) => {
     if (!guildIds[guildId]) delete guildIds[guildId];
   })
