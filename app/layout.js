@@ -5,10 +5,9 @@ import Providers from './providers'
 import { Noto_Sans_KR } from 'next/font/google';
 import { cn } from "@/lib/utils"
 import { Toaster } from '@/components/ui/toaster';
-import Script from 'next/script';
 import GoogleAnalytics from '@/components/GoogleAnalytics';
-import NaverAnalytics from '@/components/NaverAnalytics';
 import MicrosoftClarity from '@/components/MicrosoftClarity';
+import GoogleADSense from '@/components/GoogleADSense';
 
 const interNotoSansKR = Noto_Sans_KR({ subsets: ["latin"] });
 
@@ -28,6 +27,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="ko-KR" className="flex w-full min-h-full">
+      <GoogleADSense />
       <GoogleAnalytics />
       <MicrosoftClarity />
 
