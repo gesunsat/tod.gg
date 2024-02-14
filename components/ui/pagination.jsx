@@ -14,6 +14,7 @@ const Pagination = ({
     className={cn("mx-auto flex w-full justify-center", className)}
     {...props} />
 )
+Pagination.displayName = "Pagination"
 
 const PaginationContent = React.forwardRef(({ className, ...props }, ref) => (
   <ul
@@ -34,15 +35,13 @@ const PaginationLink = ({
   size = "icon",
   ...props
 }) => (
-  <PaginationItem>
-    <a
-      aria-current={isActive ? "page" : undefined}
-      className={cn(buttonVariants({
-        variant: isActive ? "outline" : "ghost",
-        size,
-      }), className)}
-      {...props} />
-  </PaginationItem>
+  <a
+    aria-current={isActive ? "page" : undefined}
+    className={cn(buttonVariants({
+      variant: isActive ? "outline" : "ghost",
+      size,
+    }), className)}
+    {...props} />
 )
 PaginationLink.displayName = "PaginationLink"
 
@@ -51,12 +50,11 @@ const PaginationPrevious = ({
   ...props
 }) => (
   <PaginationLink
-    aria-label="Go to previous page"
+    aria-label="이전 페이지"
     size="default"
-    className={cn("gap-1 pl-2.5", className)}
+    className={cn("w-10 p-0", className)}
     {...props}>
     <ChevronLeft className="h-4 w-4" />
-    <span>Previous</span>
   </PaginationLink>
 )
 PaginationPrevious.displayName = "PaginationPrevious"
@@ -66,14 +64,14 @@ const PaginationNext = ({
   ...props
 }) => (
   <PaginationLink
-    aria-label="Go to next page"
+    aria-label="다음 페이지"
     size="default"
-    className={cn("gap-1 pr-2.5", className)}
+    className={cn("w-10 p-0", className)}
     {...props}>
-    <span>Next</span>
     <ChevronRight className="h-4 w-4" />
   </PaginationLink>
 )
+PaginationNext.displayName = "PaginationNext"
 
 const PaginationEllipsis = ({
   className,
@@ -87,6 +85,7 @@ const PaginationEllipsis = ({
     <span className="sr-only">More pages</span>
   </span>
 )
+PaginationEllipsis.displayName = "PaginationEllipsis"
 
 export {
   Pagination,
