@@ -5,7 +5,7 @@ import * as ScrollAreaPrimitive from "@radix-ui/react-scroll-area"
 
 import { cn } from "@/lib/utils"
 
-const ScrollArea = React.forwardRef(({ className, children, ...props }, ref) => (
+const ScrollArea = React.forwardRef(({ className, children, barColor, ...props }, ref) => (
   <ScrollAreaPrimitive.Root
     ref={ref}
     className={cn("relative overflow-hidden", className)}
@@ -13,13 +13,13 @@ const ScrollArea = React.forwardRef(({ className, children, ...props }, ref) => 
     <ScrollAreaPrimitive.Viewport className="h-full w-full rounded-[inherit]">
       {children}
     </ScrollAreaPrimitive.Viewport>
-    <ScrollBar />
+    <ScrollBar barColor={barColor} />
     <ScrollAreaPrimitive.Corner />
   </ScrollAreaPrimitive.Root>
 ))
 ScrollArea.displayName = ScrollAreaPrimitive.Root.displayName
 
-const ScrollBar = React.forwardRef(({ className, orientation = "vertical", ...props }, ref) => (
+const ScrollBar = React.forwardRef(({ className, orientation = "vertical", barColor = "bg-border", ...props }, ref) => (
   <ScrollAreaPrimitive.ScrollAreaScrollbar
     ref={ref}
     orientation={orientation}
@@ -33,9 +33,9 @@ const ScrollBar = React.forwardRef(({ className, orientation = "vertical", ...pr
     )}
     {...props}>
     <ScrollAreaPrimitive.ScrollAreaThumb
+      style={{ backgroundColor: barColor }}
       className={cn(
         "relative flex-1 rounded-full bg-border",
-        props["bar-color"]
       )}
     />
   </ScrollAreaPrimitive.ScrollAreaScrollbar>
