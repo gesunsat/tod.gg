@@ -1,0 +1,2 @@
+_medium : CharSelect.selectedWorld.icon.
+_ : 공식 홈페이지 랭킹 탭

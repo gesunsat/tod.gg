@@ -93,7 +93,7 @@ export default async function CharHeader(props) {
                         <div className="flex">
                             <Badge className={"text-[14px] w-[65px] flex justify-center mr-2"}>서버</Badge>
                             <div className="flex items-center">
-                                <Image width={20} height={20} className="my-auto mr-1" alt="서버 이미지" src={serverIconImg[character.characterBasic.world_name]}></Image>
+                                <Image width={24} height={24} className="my-auto mr-1" alt="서버 이미지" src={serverIconImg[character.characterBasic.world_name]}></Image>
                                 <span>{character.characterBasic.world_name}</span>
                             </div>
                         </div>

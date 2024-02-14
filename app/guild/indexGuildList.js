@@ -43,13 +43,13 @@ export default async function IndexGuildList(props) {
                 <div key={guildIdIndex} className="col-span-4 lg:col-span-1">
                   <Button variant="secondary" className="w-full h-16" asChild>
                     <Link href={`/guild/${guildId}/${guildName}`}>
-                      <div className="flex gap-3">
+                      <div className="flex gap-2">
                         <div className="self-center">
                           <Image
                             src={serverIconImg[guildId]}
                             alt={guildId}
-                            height={21}
-                            width={21}
+                            height={24}
+                            width={24}
                           />
                         </div>
                         <span className="text-xl">{guildId}</span>
