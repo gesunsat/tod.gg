@@ -9,7 +9,7 @@ export default function GoogleADSense() {
             async
             strategy="afterInteractive"
             crossorigin="anonymous"
-            src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-${NEXT_PUBLIC_GADS_ID}`}
+            src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-${process.env.NEXT_PUBLIC_MC_ID}`}
         />
     )
 }
