@@ -48,8 +48,9 @@ export default async function IndexGuildList(props) {
                           <Image
                             src={serverIconImg[guildId]}
                             alt={guildId}
-                            height={24}
-                            width={24}
+                            height={0}
+                            width={0}
+                            className="w-auto h-[28px]"
                           />
                         </div>
                         <span className="text-xl">{guildId}</span>

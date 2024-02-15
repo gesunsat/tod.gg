@@ -93,7 +93,7 @@ export default async function CharHeader(props) {
                         <div className="flex">
                             <Badge className={"text-[14px] w-[65px] flex justify-center mr-2"}>서버</Badge>
                             <div className="flex items-center">
-                                <Image width={24} height={24} className="my-auto mr-1" alt="서버 이미지" src={serverIconImg[character.characterBasic.world_name]}></Image>
+                                <Image width={25} height={25} className="w-auto h-[24px] my-auto mr-1" alt="서버 이미지" src={serverIconImg[character.characterBasic.world_name]}></Image>
                                 <span>{character.characterBasic.world_name}</span>
                             </div>
                         </div>
@@ -103,7 +103,7 @@ export default async function CharHeader(props) {
                                 <div className="flex items-center">
                                     {
                                         (character.guildBasic.guild_mark || character.guildBasic.guild_mark_custom) &&
-                                        <Image width={20} height={20} className="my-auto mr-1" alt="길드 이미지" src={character.guildBasic.guild_mark || `data:image/png;base64,${character.guildBasic.guild_mark_custom}`}></Image>
+                                        <Image width={24} height={24} className="my-auto mr-1" alt="길드 이미지" src={character.guildBasic.guild_mark || `data:image/png;base64,${character.guildBasic.guild_mark_custom}`}></Image>
                                     }
                                     <span className={character.guildBasic.guild_name && "underline underline-offset-4"}>{character.characterBasic.character_guild_name ? character.characterBasic.character_guild_name : "-"}</span>
                                 </div>
