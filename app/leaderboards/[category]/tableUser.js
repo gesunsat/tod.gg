@@ -17,7 +17,7 @@ import { ExternalLink } from "lucide-react";
 import Link from "next/link";
 import { getRankingUnion } from "@/lib/nexonAPI/getRankingUnion";
 import { getRankingDojang } from "@/lib/nexonAPI/getRankingDojang";
-import { getLastWeekGuildRankingDate, getLastWeekRankingDate } from "@/lib/getLastWeekGuildRankingDate";
+import { getLastWeekGuildRankingDate, getLastWeekRankingDate } from "@/lib/getLastWeekRankingDate";
 import { getRankingAchievement } from "@/lib/nexonAPI/getRankingAchievement";
 import { getRankingTheseed } from "@/lib/nexonAPI/getRankingTheseed";
 
@@ -98,7 +98,7 @@ export default async function LeaderboardsTableUser({ params, searchParams }) {
     }
     await Promise.all(promises);
 
-    console.log(cuttingRankingData[0])
+    // console.log(cuttingRankingData[0])
 
     return (
         <>

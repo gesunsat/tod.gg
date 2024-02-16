@@ -19,7 +19,7 @@ import { getRankingGuild } from "@/lib/nexonAPI/getRankingGuild";
 import { getGuildID } from "@/lib/nexonAPI/getGuildID";
 import { getGuildBasic } from "@/lib/nexonAPI/getGuildBasic";
 import { serverOpenList } from "@/mapleData/serverOpenList";
-import { getLastWeekRankingDate } from "@/lib/getLastWeekGuildRankingDate";
+import { getLastWeekRankingDate } from "@/lib/getLastWeekRankingDate";
 
 const RANKING_MAX_LENGTH = 200;
 const PAGE_SIZE = 10;
