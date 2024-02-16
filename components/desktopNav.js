@@ -18,7 +18,7 @@ export default function DesktopNav() {
             </Link>
           </li>
           <li className={cn("block relative border-black dark:border-white hover:border-b-4", pathname.indexOf("/leaderboards/") == 0 ? "border-b-4" : "")}>
-            <Link href={"/leaderboards/power"}>
+            <Link href={"/leaderboards/overall"}>
               <div className="flex text-center leading-5 p-3 text-black dark:text-white box-border whitespace-nowrap">랭킹</div>
             </Link>
           </li>

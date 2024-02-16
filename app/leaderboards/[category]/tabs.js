@@ -6,10 +6,10 @@ import { usePathname, useSearchParams } from "next/navigation";
 export default function LeaderboardsTabs({ className, category }) {
     return (
         <Tabs className={cn("", className)} defaultValue={category}>
-            <TabsList className="justify-start w-full overflow-x-scroll hidden-scroll flex gap-x-[10px] sm:grid sm:grid-cols-7">
-                <TabsTrigger value="power" disabled>
+            <TabsList className="justify-start w-full overflow-x-scroll hidden-scroll flex gap-x-[10px] sm:grid sm:grid-cols-6">
+                {/* <TabsTrigger value="power" disabled>
                     <Link href="/leaderboards/power">전투력</Link>
-                </TabsTrigger>
+                </TabsTrigger> */}
                 <TabsTrigger asChild value="overall">
                     <Link href="/leaderboards/overall">종합</Link>
                 </TabsTrigger>
