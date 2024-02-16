@@ -1,4 +1,9 @@
+import { Suspense } from "react";
+import LeaderboardsJobList from "./jobList";
+import LeaderboardsServerList from "./serverList";
 import LeaderboardsTabs from "./tabs";
+import { Skeleton } from "@/components/ui/skeleton";
+import LeaderboardsGuildTabs from "./guildTabs";
 
 // export async function generateMetadata({ params }) {
 //     try {
@@ -58,46 +63,32 @@ import LeaderboardsTabs from "./tabs";
 //     }
 // }
 
-export default async function CharacterLayout({ params, children }) {
-    // const characterName = decodeURI(params.name);
-    // const headersList = headers();
-    // const header_url = headersList.get("x-url") || "";
-    // const selectedDate = searchQueryParams({ query: "date", fullUrl: header_url });
-
-    // const OCID = await getCharOCID(characterName);
-    // if (!OCID?.ocid) {
-    //     return (
-    //         <div className="text-center my-32">
-    //             <DatePicker className="mb-5 h-10 mx-auto" />
-    //             <div>존재하지 않거나 불러올 수 없는 캐릭터입니다.</div>
-    //             <div>다음 날 오전 1시 이후 다시 검색해주세요.</div>
-    //             <br />
-    //             <div>(2023년 12월 21일 이후 접속한 캐릭터만 조회가 가능합니다.)</div>
-    //         </div>
-    //     )
-    // }
-
-    // const charBasic = await getCharBasic(OCID.ocid, selectedDate);
-    // if (!charBasic?.character_class) {
-    //     return (
-    //         <div className="text-center my-32">
-    //             <DatePicker className="mb-5 h-10 mx-auto" />
-    //             <div>존재하지 않거나 불러올 수 없는 캐릭터입니다.</div>
-    //             <div>다음 날 오전 1시 이후 다시 검색해주세요.</div>
-    //             <br />
-    //             <div>(2023년 12월 21일 이후 접속한 캐릭터만 조회가 가능합니다.)</div>
-    //         </div>
-    //     )
-    // }
-
+export default async function CharacterLayout({ params, searchParams, children }) {
     return (
         <>
-            <div className="rounded-lg border bg-card text-card-foreground shadow-sm p-2 m-1">
-                <LeaderboardsTabs />
+            <div className="rounded-lg border bg-card text-card-foreground shadow-sm p-2 m-1 space-y-2">
+                <LeaderboardsTabs category={params.category} />
 
-                <div className="mt-2">
-                    {children}
-                </div>
+                {
+                    params.category == "guild" &&
+                    <LeaderboardsGuildTabs />
+                }
+
+                {
+                    !(["union", "theseed", "dojang", "achievement"].includes(params.category)) &&
+                    <LeaderboardsServerList rebootDivide />
+                }
+                {
+                    (["union", "theseed", "dojang"].includes(params.category)) &&
+                    <LeaderboardsServerList />
+                }
+
+                {
+                    ["power", "overall", "dojang"].includes(params.category) &&
+                    <LeaderboardsJobList />
+                }
+
+                {children}
             </div>
         </>
     )
