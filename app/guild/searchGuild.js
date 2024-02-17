@@ -31,7 +31,7 @@ export default function SearchGuild({ className, ...props }) {
     <div className={cn("", className)} {...props}>
       <form onSubmit={handleUrlChange}>
         <div className="relative">
-          <Input autoFocus placeholder="길드 이름 (대소문자 구분)" className="text-base pl-3 bg-white dark:bg-muted" value={value} onInput={e => setValue(e.target.value)} />
+          <Input placeholder="길드 이름 (대소문자 구분)" className="text-base pl-3 bg-white dark:bg-muted" value={value} onInput={e => setValue(e.target.value)} />
           <Search className="absolute right-0 top-0 h-full w-9 px-2 text-muted-foreground cursor-pointer" onClick={handleUrlChange} />
         </div>
       </form>

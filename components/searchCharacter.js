@@ -95,7 +95,7 @@ export default function SearchCharcter({ className, ...props }) {
           </NavigationMenu>
         </div>
         <form onSubmit={handleSubmit}>
-          <Input autoFocus placeholder="캐릭터 이름" className="text-base pl-14 bg-white dark:bg-muted" value={value} onInput={e => setValue(e.target.value)} />
+          <Input placeholder="캐릭터 이름" className="text-base pl-14 bg-white dark:bg-muted" value={value} onInput={e => setValue(e.target.value)} />
           <div className="absolute right-0 top-0 h-full pr-2 text-muted-foreground cursor-pointer flex place-items-center">
             <Search className="w-9 transition-all stroke-black dark:stroke-white opacity-60 hover:opacity-100" onClick={handleSubmit} />
           </div>
