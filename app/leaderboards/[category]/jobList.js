@@ -43,8 +43,8 @@ export default function LeaderboardsJobList() {
     return (
         <>
             <div className={cn(
-                "mt-2",
-                fold ? "h-[320px]" : "h-[150px]"
+                "mt-2 duration-300",
+                fold ? "h-[350px]" : "h-[150px]"
             )}>
                 <div className="relative h-full">
                     <div className="absolute h-full w-full">
