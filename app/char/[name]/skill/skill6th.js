@@ -23,6 +23,7 @@ export default function Skill6th(props) {
     useEffect(() => {
         if (localStorage.getItem("skill6thViewType")) setCurrentSkill6thViewType(localStorage.getItem("skill6thViewType"));
 
+        // console.log(props.character)
         setCharacter(props.character);
     }, [props])
 
@@ -49,7 +50,12 @@ export default function Skill6th(props) {
             const values = Object.values(character?.characterSkill6th?.character_skill)[i];
             skill6thInfo[values.skill_name] = values;
         }
+
+        let totalUsedSolErda = 0;
+        let totalUsedSolErdaPiece = 0;
         character?.characterHexaMatrix?.character_hexa_core_equipment?.map((hexaMatrix) => {
+            if (hexaMatrix.hexa_core_level == 0) return;
+
             const linked_skill = [...hexaMatrix.linked_skill];
             if (hexaMatrix.hexa_core_name == "솔 야누스") linked_skill.push({ hexa_skill_id: "솔 야누스 : 새벽" });
 
@@ -57,25 +63,21 @@ export default function Skill6th(props) {
                 skill6thInfo[skill.hexa_skill_id].skill_core_type = hexaMatrix.hexa_core_type;
                 sortSkill6thByCoreType.push(skill.hexa_skill_id);
             })
-        });
 
-        let totalUsedSolErda = 0;
-        let totalUsedSolErdaPiece = 0;
-        character?.characterHexaMatrix?.character_hexa_core_equipment?.map((skill) => {
-            if (skill.hexa_core_type == "스킬 코어") {
-                totalUsedSolErda += OriginSkillEachLevelUsedSolErda[skill.hexa_core_level];
-                totalUsedSolErdaPiece += OriginSkillEachLevelUsedSolErdaPiece[skill.hexa_core_level];
-            } else if (skill.hexa_core_type == "마스터리 코어") {
-                totalUsedSolErda += MasterySkillEachLevelUsedSolErda[skill.hexa_core_level];
-                totalUsedSolErdaPiece += MasterySkillEachLevelUsedSolErdaPiece[skill.hexa_core_level];
-            } else if (skill.hexa_core_type == "강화 코어") {
-                totalUsedSolErda += EnhanceSkillEachLevelUsedSolErda[skill.hexa_core_level];
-                totalUsedSolErdaPiece += EnhanceSkillEachLevelUsedSolErdaPiece[skill.hexa_core_level];
-            } else if (skill.hexa_core_type == "공용 코어") {
-                totalUsedSolErda += CommonSkillEachLevelUsedSolErda[skill.hexa_core_level];
-                totalUsedSolErdaPiece += CommonSkillEachLevelUsedSolErdaPiece[skill.hexa_core_level];
+            if (hexaMatrix.hexa_core_type == "스킬 코어") {
+                totalUsedSolErda += OriginSkillEachLevelUsedSolErda[hexaMatrix.hexa_core_level];
+                totalUsedSolErdaPiece += OriginSkillEachLevelUsedSolErdaPiece[hexaMatrix.hexa_core_level];
+            } else if (hexaMatrix.hexa_core_type == "마스터리 코어") {
+                totalUsedSolErda += MasterySkillEachLevelUsedSolErda[hexaMatrix.hexa_core_level];
+                totalUsedSolErdaPiece += MasterySkillEachLevelUsedSolErdaPiece[hexaMatrix.hexa_core_level];
+            } else if (hexaMatrix.hexa_core_type == "강화 코어") {
+                totalUsedSolErda += EnhanceSkillEachLevelUsedSolErda[hexaMatrix.hexa_core_level];
+                totalUsedSolErdaPiece += EnhanceSkillEachLevelUsedSolErdaPiece[hexaMatrix.hexa_core_level];
+            } else if (hexaMatrix.hexa_core_type == "공용 코어") {
+                totalUsedSolErda += CommonSkillEachLevelUsedSolErda[hexaMatrix.hexa_core_level];
+                totalUsedSolErdaPiece += CommonSkillEachLevelUsedSolErdaPiece[hexaMatrix.hexa_core_level];
             }
-        })
+        });
 
         sortSkill6thByCoreType.sort((a, b) => {
             if (skill6thInfo[a] > skill6thInfo[b]) return -1;
