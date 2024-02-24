@@ -1,11 +1,14 @@
 "use client"
 
+import { Icons } from "@/components/icons";
 import { Button } from "@/components/ui/button";
+import { toast } from "@/components/ui/use-toast";
 import { getYesterdayDate } from "@/lib/getYesterdayDate";
 import { getCharacterCombatPowerHistory } from "@/lib/todAPI/getCharacterCombatPowerHistory";
 import { getCharacterExpHistory } from "@/lib/todAPI/getCharacterExpHistory";
 import { getCharacterLevelHistory } from "@/lib/todAPI/getCharacterLevelHistory";
 import { getCharacterUnionHistory } from "@/lib/todAPI/getCharacterUnionHistory";
+import { updateCharacterHistory } from "@/lib/todAPI/updateCharacterHistory";
 import { cn } from "@/lib/utils";
 import { createChart } from "lightweight-charts";
 import { useTheme } from "next-themes";
@@ -725,6 +728,24 @@ export default function CharHistory({ params, searchParams }) {
 
         setUnionData([...newData, ...unionDataRef.current]);
     }
+
+    const [isUpdateStart, setIsUpdateStart] = useState(false)
+    const handleUpdateCharacterHistory = async () => {
+        try {
+            setIsUpdateStart(true);
+
+            toast({
+                title: "🔍 서버에서 갱신 작업을 시작하겠습니다.",
+                description: "이 페이지를 벗어나 다른 작업을 하고 오셔도 됩니다!"
+            })
+
+            await updateCharacterHistory(characterName);
+
+        } catch (err) {
+            console.log(err);
+        }
+    };
+
     useEffect(() => {
         if (unionData.length == 0) return;
 
@@ -734,12 +755,15 @@ export default function CharHistory({ params, searchParams }) {
 
     return (
         <>
-            <Button
-                variant="secondary"
-                onClick={() => setMobileChartTouch(!mobileChartTouch)}
-                className={window.screen.width <= 430 ? "block ms-auto" : "hidden"}>
-                {mobileChartTouch ? "차트 터치 끄기" : "차트 터치 켜기"}
-            </Button>
+            <div className="flex gap-2 justify-end">
+                <Button
+                    variant="secondary"
+                    onClick={() => setMobileChartTouch(!mobileChartTouch)}
+                    className={window.screen.width <= 430 ? "block" : "hidden"}>
+                    {mobileChartTouch ? "차트 터치 끄기" : "차트 터치 켜기"}
+                </Button>
+                <Button onClick={handleUpdateCharacterHistory} disabled={isUpdateStart || expData?.[expData.length - 1]?.time == getYesterdayDate()} >전체갱신</Button>
+            </div>
             <div className="mt-5 flex flex-col items-center">
 
                 <div className={cn("w-full sm:w-4/5 space-y-10", mobileChartTouch ? "pointer-events-auto" : "pointer-events-none")}>
