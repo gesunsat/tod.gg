@@ -5,6 +5,10 @@ import DiscordIcon from "@/public/discord.svg";
 
 const notice = [
   {
+    title: "2024.02.25",
+    content: ["캐릭터 페이지 > 히스토리 전체 갱신 버튼 추가", "버그 수정 및 성능 개선"],
+  },
+  {
     title: "2024.02.17",
     content: ["랭킹 페이지 추가", "버그 수정 및 성능 개선"],
   },
@@ -19,10 +23,6 @@ const notice = [
   {
     title: "2024.01.18",
     content: ["캐릭터 페이지 > 히스토리 탭 활성화", "버그 수정 및 성능 개선"],
-  },
-  {
-    title: "2024.01.18",
-    content: ["캐릭터 페이지 > 데이터 조회 날짜 선택 기능 추가", "버그 수정 및 성능 개선"],
   }
 ]
 
