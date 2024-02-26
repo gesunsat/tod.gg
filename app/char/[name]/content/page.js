@@ -174,7 +174,7 @@ export default async function Content({ params, searchParams }) {
                                 </div>
                             </div>
                             <div className="mt-5 text-2xl">
-                                {userUnion?.union_grade.replace("1", "I").replace("2", "II").replace("3", "III").replace("4", "IV").replace("5", "V")}
+                                {userUnion?.union_grade?.replace("1", "I").replace("2", "II").replace("3", "III").replace("4", "IV").replace("5", "V")}
                             </div>
                             <div className="text-neutral-500">
                                 <span className="text-xs">Lv. </span>

@@ -172,7 +172,7 @@ export default async function Union({ params, searchParams }) {
                     />
                 </div>
                 <div className="text-lg font-semibold self-center text-center relative">
-                    <div>{userUnion?.union_grade.replace("1", "I").replace("2", "II").replace("3", "III").replace("4", "IV").replace("5", "V")}</div>
+                    <div>{userUnion?.union_grade?.replace("1", "I").replace("2", "II").replace("3", "III").replace("4", "IV").replace("5", "V")}</div>
                     <div className="absolute left-1/2 -translate-x-1/2 text-neutral-500 text-sm">Lv.{userUnion?.union_level}</div>
                 </div>
             </div>
