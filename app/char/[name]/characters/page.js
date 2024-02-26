@@ -43,58 +43,54 @@ export default async function Characters({ params, searchParams }) {
                 {
                     characters.map((character, characterIndex) => {
                         return (
-                            <Fragment key={characterIndex}>
-                                <div className="col-span-3 lg:col-span-1">
-                                    <Link href={`/char/${character}`}>
-                                        <div className="bg-muted bg-opacity-20 flex justify-center py-5 relative rounded transition-all outline outline-0 hover:outline-4">
-                                            <div className="flex flex-1 gap-3">
-                                                <div className="min-h-[96px] min-w-[96px] flex items-center justify-center">
-                                                    <div className="ps-2">
-                                                        <Image
-                                                            className={cn(
-                                                                charactersInfo?.[character]?.character_image || "brightness-50 dark:brightness-100",
-                                                                "mx-auto my-auto"
-                                                            )}
-                                                            src={charactersInfo?.[character]?.character_image || NullCharacterIcon}
-                                                            height={charactersInfo?.[character]?.character_image ? 96 : 72}
-                                                            width={charactersInfo?.[character]?.character_image ? 96 : 52}
-                                                            alt="캐릭터 이미지"
-                                                        />
-                                                        <div className="ps-2 absolute text-sm left-4 bottom-0 whitespace-nowrap">
-                                                            {charactersInfo?.[character]?.character_guild_name && <>길드 : {charactersInfo?.[character]?.character_guild_name}</>}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div className="flex-1">
-                                                    <div className="flex flex-col justify-between h-full">
-                                                        <div>
-
-                                                            <div className="text-lg font-semibold">
-                                                                <span>{character}</span>
-                                                            </div>
-                                                            <div className="text-sm opacity-75">
-                                                                <span className="text-xs">{charactersInfo?.[character]?.character_level ? `Lv.` : ""}</span>
-                                                                <span>{charactersInfo?.[character]?.character_level ? `${charactersInfo?.[character]?.character_level}` : ""}</span>
-                                                                <span>{charactersInfo?.[character]?.character_level ? ` | ` : ""}</span>
-                                                                <span>{charactersInfo?.[character]?.character_class ? charactersInfo?.[character]?.character_class : ""}</span>
-                                                            </div>
-                                                        </div>
-                                                        <div className="flex gap-2">
-                                                            {
-                                                                charactersInfo?.[character]?.combat_power &&
-                                                                <>
-                                                                    <Swords />
-                                                                    <span className="h-full">{parseInt(charactersInfo?.[character]?.combat_power).toLocaleString()}</span>
-                                                                </>
-                                                            }
-                                                        </div>
-                                                    </div>
+                            <Link key={characterIndex} href={`/char/${character}`} className="col-span-3 lg:col-span-1">
+                                <div className="bg-muted bg-opacity-20 flex justify-center py-5 relative rounded transition-all outline outline-0 hover:outline-4">
+                                    <div className="flex flex-1 gap-3">
+                                        <div className="min-h-[96px] min-w-[96px] flex items-center justify-center">
+                                            <div className="ps-2">
+                                                <Image
+                                                    className={cn(
+                                                        charactersInfo?.[character]?.character_image || "brightness-50 dark:brightness-100",
+                                                        "mx-auto my-auto"
+                                                    )}
+                                                    src={charactersInfo?.[character]?.character_image || NullCharacterIcon}
+                                                    height={charactersInfo?.[character]?.character_image ? 96 : 72}
+                                                    width={charactersInfo?.[character]?.character_image ? 96 : 52}
+                                                    alt="캐릭터 이미지"
+                                                />
+                                                <div className="ps-2 absolute text-sm left-4 bottom-0 whitespace-nowrap">
+                                                    {charactersInfo?.[character]?.character_guild_name && <>길드 : {charactersInfo?.[character]?.character_guild_name}</>}
                                                 </div>
                                             </div>
                                         </div>
-                                    </Link>
+                                        <div className="flex-1">
+                                            <div className="flex flex-col justify-between h-full">
+                                                <div>
+
+                                                    <div className="text-lg font-semibold">
+                                                        <span>{character}</span>
+                                                    </div>
+                                                    <div className="text-sm opacity-75">
+                                                        <span className="text-xs">{charactersInfo?.[character]?.character_level ? `Lv.` : ""}</span>
+                                                        <span>{charactersInfo?.[character]?.character_level ? `${charactersInfo?.[character]?.character_level}` : ""}</span>
+                                                        <span>{charactersInfo?.[character]?.character_level ? ` | ` : ""}</span>
+                                                        <span>{charactersInfo?.[character]?.character_class ? charactersInfo?.[character]?.character_class : ""}</span>
+                                                    </div>
+                                                </div>
+                                                <div className="flex gap-2">
+                                                    {
+                                                        charactersInfo?.[character]?.combat_power &&
+                                                        <>
+                                                            <Swords />
+                                                            <span className="h-full">{parseInt(charactersInfo?.[character]?.combat_power).toLocaleString()}</span>
+                                                        </>
+                                                    }
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                            </Fragment>
+                            </Link>
                         )
                     })
                 }
