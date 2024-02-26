@@ -4,7 +4,6 @@ import { getCharOCID } from "@/lib/nexonAPI/getCharOCID";
 import { getUserUnionRaider } from "@/lib/nexonAPI/getUserUnionRaider";
 import { getUserUnion } from "@/lib/nexonAPI/getUserUnion";
 import Image from "next/image";
-import { Fragment } from "react";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { getUserUnionArtifact } from "@/lib/nexonAPI/getUserUnionArtifact";
 import Style from "./union.module.css";
@@ -402,9 +401,7 @@ export default async function Union({ params, searchParams }) {
                                         {
                                             userUnionArtifact?.union_artifact_effect.sort((a, b) => a.level - b.level)?.map((effect, effectIndex) => {
                                                 return (
-                                                    <Fragment key={effectIndex}>
-                                                        <div>Lv.{effect.level} {effect.name}</div>
-                                                    </Fragment>
+                                                    <div key={effectIndex}>Lv.{effect.level} {effect.name}</div>
                                                 )
                                             })
                                         }
@@ -504,42 +501,39 @@ export default async function Union({ params, searchParams }) {
                                         jobList.map((block, block_index) => {
                                             // {block[0]}{block[1]}
                                             return (
-                                                <Fragment key={block_index}>
-                                                    <div className="col-span-1 bg-background rounded flex gap-2 p-2">
-                                                        <div className="relative aspect-square w-1/4">
-                                                            <Image
-                                                                alt={block[1]}
-                                                                src={
-                                                                    jobWithAnImage.includes(block[0]) ?
-                                                                        `/job/${block[0]}.png` :
-                                                                        "/job/공란.png"
-                                                                }
-                                                                className="object-contain rounded-full" fill sizes="256px"
-                                                            />
-                                                        </div>
-                                                        <div className="flex-1 self-center max-[370px]:text-base min-[370px]:text-xs sm:text-base">
-                                                            <div>
-                                                                {block[0].replace("모바일 캐릭터", "메이플M")}
-                                                            </div>
-                                                            <div className="flex gap-2 self-center">
-                                                                <div
-                                                                    className={cn(
-                                                                        block[2] == "SSS" && "text-sky-500",
-                                                                        block[2] == "SS" && "text-violet-500",
-                                                                        block[2] == "S" && "text-amber-500 dark:text-yellow-500",
-                                                                        block[2] == "A" && "text-neutral-400",
-                                                                        "font-bold"
-                                                                    )}
-                                                                >{block[2]}</div>
-                                                                <div >|</div>
-                                                                <div className="flex">
-                                                                    <span>Lv.{block[1]}</span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
+                                                <div key={block_index} className="col-span-1 bg-background rounded flex gap-2 p-2">
+                                                    <div className="relative aspect-square w-1/4">
+                                                        <Image
+                                                            alt={block[1]}
+                                                            src={
+                                                                jobWithAnImage.includes(block[0]) ?
+                                                                    `/job/${block[0]}.png` :
+                                                                    "/job/공란.png"
+                                                            }
+                                                            className="object-contain rounded-full" fill sizes="256px"
+                                                        />
                                                     </div>
-                                                </Fragment>
+                                                    <div className="flex-1 self-center max-[370px]:text-base min-[370px]:text-xs sm:text-base">
+                                                        <div>
+                                                            {block[0].replace("모바일 캐릭터", "메이플M")}
+                                                        </div>
+                                                        <div className="flex gap-2 self-center">
+                                                            <div
+                                                                className={cn(
+                                                                    block[2] == "SSS" && "text-sky-500",
+                                                                    block[2] == "SS" && "text-violet-500",
+                                                                    block[2] == "S" && "text-amber-500 dark:text-yellow-500",
+                                                                    block[2] == "A" && "text-neutral-400",
+                                                                    "font-bold"
+                                                                )}
+                                                            >{block[2]}</div>
+                                                            <div >|</div>
+                                                            <div className="flex">
+                                                                <span>Lv.{block[1]}</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             )
                                         })
                                     }
