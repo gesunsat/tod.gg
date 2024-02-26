@@ -5,7 +5,6 @@ import Image from "next/image";
 import Link from "next/link";
 import NullCharacterIcon from "@/public/nullCharacter.png"
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { Fragment } from "react";
 import { getCharOCID } from "@/lib/nexonAPI/getCharOCID";
 import { getRankingUnion } from "@/lib/nexonAPI/getRankingUnion";
 

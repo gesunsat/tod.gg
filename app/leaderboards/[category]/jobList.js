@@ -3,7 +3,7 @@
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { classLevel } from "@/mapleData/classLevel";
-import { Fragment, useState } from "react";
+import { useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Check, ChevronsDown, ChevronsUp } from "lucide-react";
 import Image from "next/image";

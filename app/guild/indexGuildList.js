@@ -4,7 +4,6 @@ import { getGuildID } from "@/lib/nexonAPI/getGuildID";
 import { PlusCircleIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { Fragment } from "react";
 import { serverOpenList } from "@/mapleData/serverOpenList";
 import { getGuildBasic } from "@/lib/nexonAPI/getGuildBasic";
 import { getLastWeekRankingDate } from "@/lib/getLastWeekRankingDate";

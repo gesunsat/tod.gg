@@ -3,7 +3,7 @@
 import { Skeleton } from "@/components/ui/skeleton";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { cn } from "@/lib/utils";
-import { Fragment, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Stat(props) {
     const [user, setUser] = useState();
@@ -260,36 +260,34 @@ export default function Stat(props) {
                                             user?.characterAbility?.preset_no ?
                                                 user?.characterAbility?.[`ability_preset_${currentAbilityPresetNo}`]?.ability_info?.map((ability, abilityIndex) => {
                                                     return (
-                                                        <Fragment key={abilityIndex}>
-                                                            <div
-                                                                className={cn(
-                                                                    ability?.ability_grade == "레전드리" && "bg-green-500 dark:bg-lime-600",
-                                                                    ability?.ability_grade == "유니크" && "bg-yellow-500 dark:bg-amber-600",
-                                                                    ability?.ability_grade == "에픽" && "bg-violet-400 dark:bg-violet-600",
-                                                                    ability?.ability_grade == "레어" && "bg-sky-400 dark:bg-sky-600",
-                                                                    "rounded"
-                                                                )}
-                                                            >
-                                                                <div className="px-2 py-1 text-center">{ability.ability_value}</div>
-                                                            </div >
-                                                        </Fragment>
+                                                        <div
+                                                            key={abilityIndex}
+                                                            className={cn(
+                                                                ability?.ability_grade == "레전드리" && "bg-green-500 dark:bg-lime-600",
+                                                                ability?.ability_grade == "유니크" && "bg-yellow-500 dark:bg-amber-600",
+                                                                ability?.ability_grade == "에픽" && "bg-violet-400 dark:bg-violet-600",
+                                                                ability?.ability_grade == "레어" && "bg-sky-400 dark:bg-sky-600",
+                                                                "rounded"
+                                                            )}
+                                                        >
+                                                            <div className="px-2 py-1 text-center">{ability.ability_value}</div>
+                                                        </div>
                                                     )
                                                 }) :
                                                 user?.characterAbility?.ability_info?.map((ability, abilityIndex) => {
                                                     return (
-                                                        <Fragment key={abilityIndex}>
-                                                            <div
-                                                                className={cn(
-                                                                    ability?.ability_grade == "레전드리" && "bg-green-500 dark:bg-lime-600",
-                                                                    ability?.ability_grade == "유니크" && "bg-yellow-500 dark:bg-amber-600",
-                                                                    ability?.ability_grade == "에픽" && "bg-violet-400 dark:bg-violet-600",
-                                                                    ability?.ability_grade == "레어" && "bg-sky-400 dark:bg-sky-600",
-                                                                    "rounded"
-                                                                )}
-                                                            >
-                                                                <div className="px-2 py-1 text-center">{ability.ability_value}</div>
-                                                            </div >
-                                                        </Fragment>
+                                                        <div
+                                                            key={abilityIndex}
+                                                            className={cn(
+                                                                ability?.ability_grade == "레전드리" && "bg-green-500 dark:bg-lime-600",
+                                                                ability?.ability_grade == "유니크" && "bg-yellow-500 dark:bg-amber-600",
+                                                                ability?.ability_grade == "에픽" && "bg-violet-400 dark:bg-violet-600",
+                                                                ability?.ability_grade == "레어" && "bg-sky-400 dark:bg-sky-600",
+                                                                "rounded"
+                                                            )}
+                                                        >
+                                                            <div className="px-2 py-1 text-center">{ability.ability_value}</div>
+                                                        </div>
                                                     )
                                                 })
                                         }

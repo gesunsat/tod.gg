@@ -223,61 +223,59 @@ export default function GuildMembers(props) {
                     {
                         members.map((member, memberIndex) => {
                             return (
-                                <div key={memberIndex} className="col-span-1">
-                                    <Link href={`/char/${member}`}>
-                                        <div className="bg-muted bg-opacity-20 flex justify-center py-5 relative rounded transition-all outline outline-0 hover:outline-4">
-                                            <div className="flex flex-1 gap-3">
-                                                <div className="min-h-[96px] min-w-[96px] flex items-center justify-center">
-                                                    <div className="ps-2">
-                                                        <div className="relative">
-                                                            {
-                                                                member == guildBasic?.guild_master_name &&
-                                                                <div className="absolute -translate-y-[80%] translate-x-1/2 right-1/2">
-                                                                    <Crown className="scale-100 scale-x-150 brightness-0 dark:brightness-100" stroke="yellow" />
-                                                                </div>
-                                                            }
-                                                            <Image
-                                                                className={cn(
-                                                                    membersInfo?.[member]?.characterBasic?.character_image || "brightness-50 dark:brightness-100",
-                                                                    "mx-auto my-auto"
-                                                                )}
-                                                                src={membersInfo?.[member]?.characterBasic?.character_image || NullCharacterIcon}
-                                                                height={membersInfo?.[member]?.characterBasic?.character_image ? 96 : 72}
-                                                                width={membersInfo?.[member]?.characterBasic?.character_image ? 96 : 52}
-                                                                priority={memberIndex <= 20 ? true : false}
-                                                                alt="캐릭터 이미지"
-                                                            />
-                                                        </div>
+                                <Link key={memberIndex} href={`/char/${member}`} className="col-span-1">
+                                    <div className="bg-muted bg-opacity-20 flex justify-center py-5 relative rounded transition-all outline outline-0 hover:outline-4">
+                                        <div className="flex flex-1 gap-3">
+                                            <div className="min-h-[96px] min-w-[96px] flex items-center justify-center">
+                                                <div className="ps-2">
+                                                    <div className="relative">
+                                                        {
+                                                            member == guildBasic?.guild_master_name &&
+                                                            <div className="absolute -translate-y-[80%] translate-x-1/2 right-1/2">
+                                                                <Crown className="scale-100 scale-x-150 brightness-0 dark:brightness-100" stroke="yellow" />
+                                                            </div>
+                                                        }
+                                                        <Image
+                                                            className={cn(
+                                                                membersInfo?.[member]?.characterBasic?.character_image || "brightness-50 dark:brightness-100",
+                                                                "mx-auto my-auto"
+                                                            )}
+                                                            src={membersInfo?.[member]?.characterBasic?.character_image || NullCharacterIcon}
+                                                            height={membersInfo?.[member]?.characterBasic?.character_image ? 96 : 72}
+                                                            width={membersInfo?.[member]?.characterBasic?.character_image ? 96 : 52}
+                                                            priority={memberIndex <= 20 ? true : false}
+                                                            alt="캐릭터 이미지"
+                                                        />
                                                     </div>
                                                 </div>
-                                                <div className="flex-1">
-                                                    <div className="flex flex-col justify-between h-full">
-                                                        <div>
-                                                            <div className="text-lg font-semibold">
-                                                                <span>{member}</span>
-                                                            </div>
-                                                            <div className="text-sm opacity-75">
-                                                                <span className="text-xs">{membersInfo?.[member]?.characterBasic?.character_level ? `Lv.` : ""}</span>
-                                                                <span>{membersInfo?.[member]?.characterBasic?.character_level ? `${membersInfo?.[member]?.characterBasic?.character_level}` : ""}</span>
-                                                                <span>{membersInfo?.[member]?.characterBasic?.character_level ? ` | ` : ""}</span>
-                                                                <span>{membersInfo?.[member]?.characterBasic?.character_class ? membersInfo?.[member]?.characterBasic?.character_class : ""}</span>
-                                                            </div>
+                                            </div>
+                                            <div className="flex-1">
+                                                <div className="flex flex-col justify-between h-full">
+                                                    <div>
+                                                        <div className="text-lg font-semibold">
+                                                            <span>{member}</span>
                                                         </div>
-                                                        <div className="flex gap-2">
-                                                            {
-                                                                membersInfo?.[member]?.combat_power &&
-                                                                <>
-                                                                    <Swords />
-                                                                    <span className="h-full">{parseInt(membersInfo?.[member]?.combat_power).toLocaleString()}</span>
-                                                                </>
-                                                            }
+                                                        <div className="text-sm opacity-75">
+                                                            <span className="text-xs">{membersInfo?.[member]?.characterBasic?.character_level ? `Lv.` : ""}</span>
+                                                            <span>{membersInfo?.[member]?.characterBasic?.character_level ? `${membersInfo?.[member]?.characterBasic?.character_level}` : ""}</span>
+                                                            <span>{membersInfo?.[member]?.characterBasic?.character_level ? ` | ` : ""}</span>
+                                                            <span>{membersInfo?.[member]?.characterBasic?.character_class ? membersInfo?.[member]?.characterBasic?.character_class : ""}</span>
                                                         </div>
+                                                    </div>
+                                                    <div className="flex gap-2">
+                                                        {
+                                                            membersInfo?.[member]?.combat_power &&
+                                                            <>
+                                                                <Swords />
+                                                                <span className="h-full">{parseInt(membersInfo?.[member]?.combat_power).toLocaleString()}</span>
+                                                            </>
+                                                        }
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </Link>
-                                </div>
+                                    </div>
+                                </Link>
                             )
                         })
                     }

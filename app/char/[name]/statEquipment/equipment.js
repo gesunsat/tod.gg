@@ -3,7 +3,7 @@
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Image from "next/image";
-import { Fragment, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import StarforceIcon from "@/public/starforce.svg";
 import FlagIcon from "@/public/flag.svg";
 import { cn } from "@/lib/utils";
@@ -447,9 +447,9 @@ export default function Equipment(props) {
                                                                             <div className="w-4/5 mx-auto flex flex-wrap justify-center mb-1">
                                                                                 {
                                                                                     Array(Math.ceil(itemEquipments[slot].starforceMax / 5)).fill().map((_, index) => {
-                                                                                        if ((itemEquipments[slot].starforceMax - (5 * index)) <= 0) return (<Fragment key={index}></Fragment>);
+                                                                                        if ((itemEquipments[slot].starforceMax - (5 * index)) <= 0) return (<div key={index}></div>);
                                                                                         return (
-                                                                                            <Fragment key={index}>
+                                                                                            <div key={index}>
                                                                                                 {[15].includes((5 * index)) ? <div className="w-full mt-2"></div> : <></>}
                                                                                                 <div className="flex flex-grow-0 flex-shrink-0 justify-center items-center">
                                                                                                     {
@@ -473,7 +473,7 @@ export default function Equipment(props) {
                                                                                                     }
                                                                                                     {[0, 5, 15].includes((5 * index)) ? <div className="w-[10px]"></div> : <></>}
                                                                                                 </div>
-                                                                                            </Fragment>
+                                                                                            </div>
                                                                                         )
                                                                                     })
                                                                                 }
@@ -694,7 +694,7 @@ export default function Equipment(props) {
                                                                                                     ""
                                                                                             }
                                                                                         </div> :
-                                                                                        <Fragment key={index}></Fragment>
+                                                                                        <div key={index}></div>
                                                                                 )
                                                                             })
                                                                         }
@@ -1038,7 +1038,7 @@ export default function Equipment(props) {
                                     {
                                         (Object.keys(itemEquipments) || [0]).map((subItemSlot, subItemIndex) => {
                                             return (
-                                                <Fragment key={subItemIndex}>
+                                                <div key={subItemIndex}>
                                                     <div></div>
                                                     <div></div>
                                                     <div className="relative items-center aspect-square m-[2.5px] bg-background rounded">
@@ -1190,7 +1190,7 @@ export default function Equipment(props) {
                                                                                                 ""
                                                                                         }
                                                                                     </div> :
-                                                                                    <Fragment key={index}></Fragment>
+                                                                                    <div key={index}></div>
                                                                             )
                                                                         })
                                                                     }
@@ -1215,7 +1215,7 @@ export default function Equipment(props) {
                                                     </div>
                                                     <div></div>
                                                     <div></div>
-                                                </Fragment>
+                                                </div>
                                             )
                                         })
                                     }

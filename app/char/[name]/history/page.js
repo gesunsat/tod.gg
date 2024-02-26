@@ -12,7 +12,7 @@ import { updateCharacterHistory } from "@/lib/todAPI/updateCharacterHistory";
 import { cn } from "@/lib/utils";
 import { createChart } from "lightweight-charts";
 import { useTheme } from "next-themes";
-import { Fragment, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const themesData = {
     dark: {
