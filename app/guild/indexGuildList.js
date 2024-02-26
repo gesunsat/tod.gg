@@ -17,12 +17,10 @@ export default async function IndexGuildList(props) {
     promises.push((async () => {
       const OGUILD = (await getGuildID(server, guildName))?.oguild_id;
       if (!OGUILD) return;
-      guildBasics[server] = await getGuildBasic(OGUILD, getLastWeekRankingDate());
+      guildBasics[server] = await getGuildBasic(OGUILD);
     })());
   }
   await Promise.all(promises);
-
-  // console.log(guildBasics)
 
   return (
     <div>
