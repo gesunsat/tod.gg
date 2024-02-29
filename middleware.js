@@ -10,7 +10,7 @@ export async function middleware(request) {
         try {
             const logData = {
                 "method": request.method,
-                "url": (request.url).substring(":3000/" + 5, request.url.length),
+                "url": (request.url).substring((request.url).indexOf(":3000/") + 5, request.url.length),
                 "ip": requestHeaders.get("x-forwarded-for"),
                 "headers": JSON.stringify(Object.fromEntries(requestHeaders.entries())),
                 "query": JSON.stringify(Object.fromEntries(request.nextUrl.searchParams.entries()))
