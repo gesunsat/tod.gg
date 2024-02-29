@@ -4,7 +4,7 @@ export async function middleware(request) {
     const requestHeaders = new Headers(request.headers);
     requestHeaders.set('x-url', request.url);
 
-    if (!requestHeaders.get("x-amzn-trace-id")) {
+    if (requestHeaders.get("user-agent").indexOf("Amazon-Route53-Health-Check-Service") != 0) {
         try {
             const logData = {
                 "method": request.method,
