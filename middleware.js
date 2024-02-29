@@ -4,10 +4,7 @@ export async function middleware(request) {
     const requestHeaders = new Headers(request.headers);
     requestHeaders.set('x-url', request.url);
 
-    if (
-        requestHeaders.get("user-agent").indexOf("Amazon-Route53-Health-Check-Service") != 0 ||
-        requestHeaders.get("user-agent") == "ELB-HealthChecker/2.0"
-    ) {
+    if (requestHeaders.get("user-agent") != "ELB-HealthChecker/2.0") {
         try {
             const logData = {
                 "method": request.method,
