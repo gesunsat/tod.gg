@@ -4,7 +4,9 @@ export async function middleware(request) {
     const requestHeaders = new Headers(request.headers);
     requestHeaders.set('x-url', request.url);
 
-    if (requestHeaders.get("user-agent") != "ELB-HealthChecker/2.0") {
+    if (requestHeaders.get("user-agent") == "ELB-HealthChecker/2.0") return NextResponse.next({ request: { headers: requestHeaders } });
+    else if (requestHeaders.get("user-agent").indexOf("Amazon-Route53-Health-Check-Service") == 0) return NextResponse.next({ request: { headers: requestHeaders } });
+    else {
         try {
             const logData = {
                 "method": request.method,
@@ -23,13 +25,9 @@ export async function middleware(request) {
             };
             fetch(url, option);
         } catch (e) { console.log(e); }
-    }
 
-    return NextResponse.next({
-        request: {
-            headers: requestHeaders,
-        }
-    });
+        return NextResponse.next({ request: { headers: requestHeaders } });
+    }
 }
 
 export const config = {
