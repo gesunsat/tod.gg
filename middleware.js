@@ -8,8 +8,8 @@ export async function middleware(request) {
         const logData = {
             "method": request.method,
             "url": request.url,
-            "ip": request.ip,
-            "headers": JSON.stringify(requestHeaders),
+            "ip": requestHeaders.get("x-forwarded-for"),
+            "headers": JSON.stringify(Object.fromEntries(requestHeaders.entries())),
             "query": JSON.stringify(Object.fromEntries(request.nextUrl.searchParams.entries()))
         };
 
