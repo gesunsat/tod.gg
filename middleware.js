@@ -1,5 +1,4 @@
 import { NextResponse } from 'next/server';
-const sql = require("./lib/db.js");
 
 export async function middleware(request) {
     const requestHeaders = new Headers(request.headers);
