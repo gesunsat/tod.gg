@@ -4,11 +4,14 @@ export async function middleware(request) {
     const requestHeaders = new Headers(request.headers);
     requestHeaders.set('x-url', request.url);
 
-    if (requestHeaders.get("user-agent").indexOf("Amazon-Route53-Health-Check-Service") != 0) {
+    if (
+        requestHeaders.get("user-agent").indexOf("Amazon-Route53-Health-Check-Service") != 0 ||
+        requestHeaders.get("user-agent") == "ELB-HealthChecker/2.0"
+    ) {
         try {
             const logData = {
                 "method": request.method,
-                "url": (request.url).replace("https://ip-10-0-7-134.ap-northeast-2.compute.internal:3000", ""),
+                "url": (request.url).substring(":3000/" + 5, request.url.length),
                 "ip": requestHeaders.get("x-forwarded-for"),
                 "headers": JSON.stringify(Object.fromEntries(requestHeaders.entries())),
                 "query": JSON.stringify(Object.fromEntries(request.nextUrl.searchParams.entries()))
