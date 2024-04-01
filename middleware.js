@@ -4,30 +4,30 @@ export async function middleware(request) {
     const requestHeaders = new Headers(request.headers);
     requestHeaders.set('x-url', request.url);
 
+    if (process.env.NODE_ENV === "development") NextResponse.next({ request: { headers: requestHeaders } });
     if (requestHeaders.get("user-agent") == "ELB-HealthChecker/2.0") return NextResponse.next({ request: { headers: requestHeaders } });
-    else if (requestHeaders.get("user-agent").indexOf("Amazon-Route53-Health-Check-Service") == 0) return NextResponse.next({ request: { headers: requestHeaders } });
-    else {
-        try {
-            const logData = {
-                "method": request.method,
-                "url": (request.url).substring((request.url).indexOf(":3000/") + 5, request.url.length),
-                "ip": requestHeaders.get("x-forwarded-for"),
-                "headers": JSON.stringify(Object.fromEntries(requestHeaders.entries())),
-                "query": JSON.stringify(Object.fromEntries(request.nextUrl.searchParams.entries()))
-            };
+    if (requestHeaders.get("user-agent").indexOf("Amazon-Route53-Health-Check-Service") == 0) return NextResponse.next({ request: { headers: requestHeaders } });
 
-            const url = new URL(`${process.env.NEXT_PUBLIC_TOD_API_HOST}/scr/logging`);
-            const params = { "log": JSON.stringify(logData) };
-            url.search = new URLSearchParams(params).toString();
-            const option = {
-                method: "POST",
-                headers: { "accept": "application/json" }
-            };
-            fetch(url, option);
-        } catch (e) { console.log(e); }
+    try {
+        const logData = {
+            "method": request.method,
+            "url": (request.url).substring((request.url).indexOf(":3000/") + 5, request.url.length),
+            "ip": requestHeaders.get("x-forwarded-for"),
+            "headers": JSON.stringify(Object.fromEntries(requestHeaders.entries())),
+            "query": JSON.stringify(Object.fromEntries(request.nextUrl.searchParams.entries()))
+        };
 
-        return NextResponse.next({ request: { headers: requestHeaders } });
-    }
+        const url = new URL(`${process.env.NEXT_PUBLIC_TOD_API_HOST}/scr/logging`);
+        const params = { "log": JSON.stringify(logData) };
+        url.search = new URLSearchParams(params).toString();
+        const option = {
+            method: "POST",
+            headers: { "accept": "application/json" }
+        };
+        fetch(url, option);
+    } catch (e) { console.log(e); }
+
+    return NextResponse.next({ request: { headers: requestHeaders } });
 }
 
 export const config = {
