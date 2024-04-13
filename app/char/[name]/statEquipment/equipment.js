@@ -450,7 +450,7 @@ export default function Equipment(props) {
                                                                                         if ((itemEquipments[slot].starforceMax - (5 * index)) <= 0) return (<div key={index}></div>);
                                                                                         return (
                                                                                             <div key={index}>
-                                                                                                {[15].includes((5 * index)) ? <div className="w-full mt-2"></div> : <></>}
+                                                                                                {[15, 20].includes((5 * index)) ? <div className="w-full mt-2"></div> : <></>}
                                                                                                 <div className="flex flex-grow-0 flex-shrink-0 justify-center items-center">
                                                                                                     {
                                                                                                         Array(itemEquipments[slot].starforceMax - (5 * index) >= 5 ?
