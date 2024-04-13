@@ -8,6 +8,8 @@ import { Toaster } from '@/components/ui/toaster';
 import GoogleAnalytics from '@/components/GoogleAnalytics';
 import MicrosoftClarity from '@/components/MicrosoftClarity';
 import GoogleADSense from '@/components/GoogleADSense';
+import { SpeedInsights } from "@vercel/speed-insights/next"
+import { VercelAnalytics } from "@vercel/analytics/react"
 
 const interNotoSansKR = Noto_Sans_KR({ subsets: ["latin"] });
 
@@ -28,6 +30,8 @@ export default function RootLayout({ children }) {
   return (
     <html lang="ko-KR" className="flex w-full min-h-full">
       <GoogleADSense />
+      <VercelAnalytics />
+      <SpeedInsights />
       <GoogleAnalytics />
       <MicrosoftClarity />
 
