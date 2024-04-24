@@ -58,11 +58,11 @@ export default async function LeaderboardsTableUser({ params, searchParams }) {
         "아델",
         "구닌",
         "식초",
-        "냥들",
+        "낭들",
         "후니",
         "반로",
         "세븐",
-        "버프가부족햠",
+        "버프가부족햄",
         "휴씨엔버",
         "고딩",
         "페이커",
@@ -107,7 +107,7 @@ export default async function LeaderboardsTableUser({ params, searchParams }) {
         "포던",
         "곤봉",
         "을가",
-        "코토",
+        "커터",
         "51새",
         "교황",
         "치임",
@@ -127,108 +127,108 @@ export default async function LeaderboardsTableUser({ params, searchParams }) {
         "토하",
         "의뢰장"
     ]
-    // const clearTime = {
-    //     "조선우" : 1800-,
-    //     "르헤솔" : ,
-    //     "맑음" : ,
-    //     "겨울" : ,
-    //     "수호" : ,
-    //     "토니" : ,
-    //     "렌조" : ,
-    //     "진격캐넌" : ,
-    //     "YouTube피엘" : ,
-    //     "으찌" : ,
-    //     "토르" : ,
-    //     "불행" : ,
-    //     "도끼" : ,
-    //     "초코빵내꺼야" : ,
-    //     "냉은" : ,
-    //     "아크" : ,
-    //     "건물주" : ,
-    //     "박세웅" : ,
-    //     "시프" : ,
-    //     "아침보름" : ,
-    //     "천원" : ,
-    //     "꿈달" : ,
-    //     "세계" : ,
-    //     "독사" : ,
-    //     "성배" : ,
-    //     "뚱달콤" : ,
-    //     "포츈베이요넷" : ,
-    //     "끼토" : ,
-    //     "응급" : ,
-    //     "아델" : ,
-    //     "구닌" : ,
-    //     "식초" : ,
-    //     "냥들" : ,
-    //     "후니" : ,
-    //     "반로" : ,
-    //     "세븐" : ,
-    //     "버프가부족햠" : ,
-    //     "휴씨엔버" : ,
-    //     "고딩" : ,
-    //     "페이커" : ,
-    //     "개사기" : ,
-    //     "티레사" : ,
-    //     "무토" : ,
-    //     "양주" : ,
-    //     "반반" : ,
-    //     "반민우" : ,
-    //     "zl존" : ,
-    //     "리트" : ,
-    //     "알티" : ,
-    //     "비올팬" : ,
-    //     "토햐" : ,
-    //     "혈점" : ,
-    //     "타일런트" : ,
-    //     "메구루루" : ,
-    //     "동정녀" : ,
-    //     "남준" : ,
-    //     "자유" : ,
-    //     "영원" : ,
-    //     "테러비터" : ,
-    //     "에휴" : ,
-    //     "공주" : ,
-    //     "Mr자비" : ,
-    //     "Rudolf" : ,
-    //     "오두현" : ,
-    //     "신의아이제로" : ,
-    //     "햄톨" : ,
-    //     "글죠" : ,
-    //     "솔라" : ,
-    //     "영왕" : ,
-    //     "퍼리" : ,
-    //     "이국주" : ,
-    //     "맹쿠" : ,
-    //     "대갈텀" : ,
-    //     "연놈" : ,
-    //     "축일추풍" : ,
-    //     "카라" : ,
-    //     "석현" : ,
-    //     "뜬궁" : ,
-    //     "포던" : ,
-    //     "곤봉" : ,
-    //     "을가" : ,
-    //     "코토" : ,
-    //     "51새" : ,
-    //     "교황" : ,
-    //     "치임" : ,
-    //     "탄환님" : ,
-    //     "에브" : ,
-    //     "TheKing" : ,
-    //     "놈현" : ,
-    //     "단소" : ,
-    //     "리터" : ,
-    //     "피글렛" : ,
-    //     "데덩" : ,
-    //     "청순해" : ,
-    //     "작반" : ,
-    //     "잊쉭" : ,
-    //     "장브로" : ,
-    //     "승수" : ,
-    //     "토하" : ,
-    //     "의뢰장" : ,
-    // }
+    const clearTime = {
+        "조선우": 835,
+        "르헤솔": 861,
+        "맑음": 951,
+        "겨울": 1048,
+        "수호": 1061,
+        "토니": 1072,
+        "렌조": 1072,
+        "진격캐넌": 1085,
+        "YouTube피엘": 1085,
+        "으찌": 1094,
+        "토르": 1094,
+        "불행": 1114,
+        "도끼": 1133,
+        "초코빵내꺼야": 1133,
+        "냉은": 1133,
+        "아크": 1145,
+        "건물주": 1145,
+        "박세웅": 1158,
+        "시프": 1165,
+        "아침보름": 1177,
+        "천원": 1185,
+        "꿈달": 1189,
+        "세계": 1190,
+        "독사": 1197,
+        "성배": 1204,
+        "뚱달콤": 1215,
+        "포츈베이요넷": 1223,
+        "끼토": 1237,
+        "응급": 1246,
+        "아델": 1247,
+        "구닌": 1251,
+        "식초": 1256,
+        "낭들": 1257,
+        "후니": 1281,
+        "반로": 1299,
+        "세븐": 1299,
+        "버프가부족햄": 1299,
+        "휴씨엔버": 1299,
+        "고딩": 1303,
+        "페이커": 1310,
+        "개사기": 1313,
+        "티레사": 1314,
+        "무토": 1314,
+        "양주": 1317,
+        "반반": 1318,
+        "박민우": 1322,
+        "zl존": 1325,
+        "리트": 1326,
+        "알티": 1334,
+        "비올팬": 1346,
+        "토햐": 1347,
+        "혈점": 1352,
+        "타일런트": 1353,
+        "메구루루": 1354,
+        "동정녀": 1358,
+        "남준": 1363,
+        "자유": 1370,
+        "영원": 1380,
+        "테러비터": 1383,
+        "에휴": 1384,
+        "공주": 1388,
+        "Mr자비": 1392,
+        "Rudolf": 1394,
+        "오두현": 1403,
+        "신의아이제로": 1406,
+        "햄톨": 1406,
+        "글죠": 1409,
+        "솔라": 1419,
+        "영왕": 1424,
+        "퍼리": 1428,
+        "이국주": 1431,
+        "맹쿠": 1433,
+        "대갈텀": 1436,
+        "연놈": 1439,
+        "축일추풍": 1447,
+        "카라": 1448,
+        "석현": 1456,
+        "뜬궁": 1461,
+        "포던": 1462,
+        "곤봉": 1464,
+        "을가": 1466,
+        "커터": 1469,
+        "51새": 1472,
+        "교황": 1478,
+        "치임": 1480,
+        "탄환님": 1481,
+        "에브": 1482,
+        "TheKing": 1492,
+        "놈현": 1492,
+        "단소": 1493,
+        "리터": 1496,
+        "피글렛": 1500,
+        "데덩": 1501,
+        "청순해": 1504,
+        "작반": 1520,
+        "잊쉭": 1521,
+        "장브로": 1524,
+        "승수": 1526,
+        "토하": 1529,
+        "의뢰장": 1535,
+    }
 
     const characterBasics = {};
     const promises = [];
@@ -253,29 +253,7 @@ export default async function LeaderboardsTableUser({ params, searchParams }) {
                         <TableHead className="w-[45px] md:w-[100px] text-center">#</TableHead>
                         <TableHead>캐릭터</TableHead>
                         <TableHead className="w-[130px] hidden sm:table-cell">길드</TableHead>
-                        {
-                            params.category == "overall" &&
-                            <TableHead className="w-[100px] hidden sm:table-cell">경험치</TableHead>
-                        }
-                        {
-                            params.category == "union" &&
-                            <>
-                                <TableHead className="w-[100px] hidden sm:table-cell text-center">레벨</TableHead>
-                                <TableHead className="w-[130px] hidden sm:table-cell">전투력</TableHead>
-                            </>
-                        }
-                        {
-                            params.category == "dojang" &&
-                            <TableHead className="w-[150px] hidden sm:table-cell text-center">기록</TableHead>
-                        }
-                        {
-                            params.category == "achievement" &&
-                            <TableHead className="w-[150px] hidden sm:table-cell text-center">점수</TableHead>
-                        }
-                        {
-                            params.category == "theseed" &&
-                            <TableHead className="w-[110px] hidden sm:table-cell text-center">기록</TableHead>
-                        }
+                        <TableHead className="w-[150px] hidden sm:table-cell">클리어 시간(00시)</TableHead>
                     </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -363,70 +341,7 @@ export default async function LeaderboardsTableUser({ params, searchParams }) {
                                             }
                                         </Link>
                                     </TableCell>
-                                    {
-                                        params.category == "overall" &&
-                                        <TableCell className="hidden sm:table-cell">{characterBasics[row]?.character_exp_rate || "0.000"}%</TableCell>
-                                    }
-                                    {
-                                        params.category == "union" &&
-                                        <>
-                                            <TableCell className="hidden sm:table-cell py-2">
-                                                <div className="relative flex flex-col place-items-center">
-                                                    <Image
-                                                        alt="유니온 심볼"
-                                                        src={`/union/${unionGradeImage[getUnionGradeName(row.union_level)]}.png`}
-                                                        width={50}
-                                                        height={50}
-                                                        className="w-auto h-[50px]"
-                                                        priority
-                                                    />
-                                                    <span>{(row.union_level).toLocaleString()}</span>
-                                                </div>
-                                            </TableCell>
-                                            <TableCell className="hidden sm:table-cell">{(row.union_power).toLocaleString()}</TableCell>
-                                        </>
-                                    }
-                                    {
-                                        params.category == "dojang" &&
-                                        <TableCell className="hidden sm:table-cell py-2">
-                                            <div className="relative flex flex-col place-items-center">
-                                                <Image
-                                                    alt={`${row.dojang_floor}층 몬스터`}
-                                                    src={`/dojang/${row.dojang_floor}.png`}
-                                                    width={50}
-                                                    height={50}
-                                                    className="w-auto h-[50px]"
-                                                    priority
-                                                />
-                                                <span>{row.dojang_floor}층 ({`${parseInt(row.dojang_time_record / 60)}분 ${row.dojang_time_record % 60}초`})</span>
-                                            </div>
-                                        </TableCell>
-                                    }
-                                    {
-                                        params.category == "achievement" &&
-                                        <TableCell className="hidden sm:table-cell py-2">
-                                            <div className="relative flex flex-col place-items-center">
-                                                <Image
-                                                    alt={`${row.trophy_grade}`}
-                                                    src={`/achievement/${achievementGradeImage[row.trophy_grade]}.png`}
-                                                    width={50}
-                                                    height={50}
-                                                    className="w-auto h-[50px]"
-                                                    priority
-                                                />
-                                                <span>{(row.trophy_score).toLocaleString()}점</span>
-                                            </div>
-                                        </TableCell>
-                                    }
-                                    {
-                                        params.category == "theseed" &&
-                                        <TableCell className="hidden sm:table-cell">
-                                            <div className="flex flex-col items-center">
-                                                <span>{row.theseed_floor}층</span>
-                                                <span>({`${parseInt(row.theseed_time_record / 60)}분 ${row.theseed_time_record % 60}초`})</span>
-                                            </div>
-                                        </TableCell>
-                                    }
+                                    <TableCell className="hidden sm:table-cell">{parseInt(clearTime[row] / 60)}분 {String(clearTime[row] % 60).padStart(2, "0")}초</TableCell>
                                 </TableRow>
                             )
                         })
