@@ -132,10 +132,8 @@ export default async function LeaderboardsTableUser({ params, searchParams }) {
     const promises = [];
     for (const character of top100) {
         promises.push((async () => {
-            console.log(character);
             const OCID = await getCharOCID(character);
             const basic = await getCharBasic(OCID.ocid);
-            console.log(basic)
             characterBasics[character] = basic;
         })());
     }

@@ -25,16 +25,13 @@ const guildRankingTypeKorean = {
 export async function generateMetadata({ params, searchParams }) {
     const headersList = headers();
     const header_url = headersList.get("x-url") || "";
-    const server = decodeURI(searchQueryParams({ query: "server", fullUrl: header_url }) || "전섭").replace("+", " ");
-    const job = decodeURI(searchQueryParams({ query: "job", fullUrl: header_url }) || "");
-    const type = decodeURI(searchQueryParams({ query: "type", fullUrl: header_url }) || "suro");
 
     return {
-        title: `${server != "전섭" ? `${server} 서버` : server}${job ? ` ${job}` : ""} ${categoryKorean[params.category]}${params.category == "guild" && type ? ` ${guildRankingTypeKorean[type]}` : ""} 랭킹 | TOD.GG 토드지지`,
+        title: `스우 TOP100 | TOD.GG 토드지지`,
         openGraph: {
             images: "https://tod.gg/tode_hammer.png",
-            url: `https://tod.gg/leaderboards/${params.category}`,
-            title: `${server != "전섭" ? `${server} 서버` : server}${job ? ` ${job}` : ""} ${categoryKorean[params.category]}${params.category == "guild" && type ? ` ${guildRankingTypeKorean[type]}` : ""} 랭킹 | TOD.GG 토드지지`,
+            url: `https://tod.gg/siuTop100`,
+            title: `스우 TOP100 | TOD.GG 토드지지`,
         }
     }
 }
