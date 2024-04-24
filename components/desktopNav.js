@@ -22,6 +22,11 @@ export default function DesktopNav() {
               <div className="flex text-center leading-5 p-3 text-black dark:text-white box-border whitespace-nowrap">랭킹</div>
             </Link>
           </li>
+          <li className={cn("block relative border-black dark:border-white hover:border-b-4", pathname == "/siuTop100" ? "border-b-4" : "")}>
+            <Link href={"/siuTop100"}>
+              <div className="flex text-center leading-5 p-3 text-black dark:text-white box-border whitespace-nowrap">스우TOP100</div>
+            </Link>
+          </li>
           {/* <li className={cn("block relative border-black dark:border-white hover:border-b-4", pathname == "/util" ? "border-b-4" : "")}>
             <Link href={"/"}>
               <div className="flex text-center leading-5 py-3 text-black dark:text-white box-border whitespace-nowrap">도구</div>
