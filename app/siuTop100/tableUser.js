@@ -323,6 +323,11 @@ export default async function LeaderboardsTableUser({ params, searchParams }) {
                                                     }
                                                 </Link>
                                             </div>
+                                            <div className="flex sm:hidden space-x-1">
+                                                <span className="font-bold">클리어 시간</span>
+                                                <span>:</span>
+                                                <span>00시 {parseInt(clearTime[row] / 60)}분 {String(clearTime[row] % 60).padStart(2, "0")}초</span>
+                                            </div>
                                         </div>
                                     </TableCell>
                                     <TableCell className="hidden sm:table-cell">
