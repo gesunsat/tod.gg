@@ -31,7 +31,7 @@ export default function Home() {
     <>
       <div className="grid grid-cols-2 gap-2">
         <div className="rounded-lg border bg-card text-card-foreground shadow-sm p-5 flex justify-center">
-          <Link target="_blank" href="https://discord.gg/kGpvfKynwC">
+          <Link target="_blank" href="https://discord.gg/2p85XNddVS">
             <DiscordIcon
               className="fill-black dark:fill-white"
               width={50}
