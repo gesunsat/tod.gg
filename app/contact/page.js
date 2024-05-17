@@ -11,7 +11,7 @@ export default function Contact() {
                 </div>
                 <div>
                     <span>디스코드 : </span>
-                    <Link href="https://discord.gg/97wVfmM574">https://discord.gg/97wVfmM574</Link>
+                    <Link href="https://discord.gg/2p85XNddVS">https://discord.gg/2p85XNddVS</Link>
                 </div>
             </div>
         </>
