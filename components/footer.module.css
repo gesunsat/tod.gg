@@ -1,8 +1,0 @@
-ul > li + li.itemSeparator:before {
-  content: "";
-  display: block;
-  width: 2px;
-  height: 11px;
-  background: #c7c7c7;
-  margin: 0 4px;
-}
